@@ -2,6 +2,8 @@ package api
 
 import (
 	"fmt"
+	// "encoding/json"
+	"io"
 	"net/http"
 	// "os"
 	"golang.org/x/net/html"
@@ -11,6 +13,10 @@ import (
 
 // Query URL
 const qurl = "https://google.com/search?&q=%s"
+
+// Suggestions URL
+// xssi = t seems to be necessary for application/json output
+const surl = "https://www.google.com/complete/search?q=%s&client=gws-wiz&xssi=t"
 
 type Result struct {
 	URL  string
@@ -37,6 +43,8 @@ func (rs Results) sanitize() {
 		v.sanitize()
 	}
 }
+
+type Suggestions []string
 
 func findURLs(n *html.Node) Results {
 	rs := make(Results, 0)
@@ -80,7 +88,7 @@ func Search(term string) (Results, error) {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
-		return nil, fmt.Errorf("http.Get returned non-200 status code: %v", resp.StatusCode)
+		return nil, fmt.Errorf("Search: http.Get returned non-200 status code: %v", resp.StatusCode)
 	}
 	n, err := html.Parse(resp.Body)
 	if err != nil {
@@ -89,4 +97,23 @@ func Search(term string) (Results, error) {
 	rs := findURLs(n)
 	rs.sanitize()
 	return rs, nil
+}
+
+func Suggest(term string) (Suggestions, error) {
+	term = url.QueryEscape(term)
+	resp, err := http.Get(fmt.Sprintf(surl, term))
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("Suggest: http.Get returned non-200 status code: %v", resp.StatusCode)
+	}
+	b, err := io.ReadAll(resp.Body)
+	b = b[4:] // )]}' is needlessly prefixed to the response
+	fmt.Println(string(b))
+	if err != nil {
+		return nil, err
+	}
+	return nil, nil
 }

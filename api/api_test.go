@@ -12,4 +12,5 @@ func TestSearch(t *testing.T) {
 	for _, v := range rs {
 		t.Logf("URL: %q Description: %q\n", v.URL, v.Desc)
 	}
+	Suggest("gol")
 }
