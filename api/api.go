@@ -78,6 +78,10 @@ func Search(term string) (Results, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("http.Get returned non-200 status code: %v", resp.StatusCode)
+	}
 	n, err := html.Parse(resp.Body)
 	if err != nil {
 		return nil, err
