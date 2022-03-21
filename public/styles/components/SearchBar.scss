@@ -1,0 +1,43 @@
+$height: 44px;
+$radius: 0.25rem;
+
+.search-bar {
+	height: $height;
+	background-color: var(--ui);
+	color: var(--text-color);
+	font-size: 1rem;
+	border-radius: $radius;
+	padding: 0.75rem 1rem;
+	border: none;
+	box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.12);
+	width: 100%;
+	transition: var(--d-m-2) var(--e-s);
+
+	&:hover {
+		box-shadow: 0 0.5rem 0.75rem rgba(0, 0, 0, 0.12);
+	}
+
+	&:focus {
+		// box-shadow: 0 0 0 2px var(--accent-500), 0 0.25rem 0.5rem rgba(0, 0, 0, 0.12);
+		outline: none;
+	}
+
+	html.dark & {
+		background-color: var(--ui-1);
+	}
+}
+
+.search-icon {
+	position: absolute;
+	right: 0;
+	padding: 0 0.75rem;
+	height: $height;
+	appearance: none;
+	background-color: transparent;
+	border: none;
+	box-shadow: none;
+	outline: none;
+	cursor: pointer;
+	border-top-right-radius: $radius;
+	border-bottom-right-radius: $radius;
+}

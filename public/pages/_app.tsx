@@ -1,10 +1,12 @@
 import dynamic from 'next/dynamic';
+import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 
 import SettingsProvider from '../providers/SettingsProvider';
 
 import type { ChildrenOnly } from '../types/util';
 
+import '../styles/jupiterui.css';
 import '../styles/global.scss';
 
 //////////
@@ -23,21 +25,23 @@ const View = dynamic(
 const App = ({ Component, pageProps }: AppProps) => {
 
 	// We can ignore this error here because we are
-	// manually defining the view within each component.
+	// manually defining the layout within each component.
 	// The Component type comes from NextJS and obviously
 	// doesn't have the .view value. We probably could
 	// merge a type here, but that is overkill for this.
 	//
 	// @ts-ignore
-	const RootView = Component.view || (({ children }: ChildrenOnly) => <>{children}</>);
+	const RootLayout = Component.layout || (({ children }: ChildrenOnly) => <>{children}</>);
 
 	return (
 		<SettingsProvider>
-			<RootView>
-				<View>
-					<Component {...pageProps} />
-				</View>
-			</RootView>
+			<ThemeProvider attribute='class'>
+				<RootLayout>
+					<View>
+						<Component {...pageProps} />
+					</View>
+				</RootLayout>
+			</ThemeProvider>
 		</SettingsProvider>
 	)
 }
