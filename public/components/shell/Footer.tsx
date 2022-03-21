@@ -1,7 +1,7 @@
-import ExternalLink from "./ExternalLink";
-import InternalLink from "./InternalLink";
+import ExternalLink from "../ExternalLink";
+import InternalLink from "../InternalLink";
 
-import { icons } from '../data/icons';
+import { icons } from '../../data/icons';
 
 
 interface Link {
