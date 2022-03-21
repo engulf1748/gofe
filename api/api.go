@@ -1,21 +1,26 @@
-package main
+package api
 
 import (
 	"fmt"
 	"net/http"
-	"os"
-	"strings"
-	// "net/url"
+	// "os"
 	"golang.org/x/net/html"
+	"net/url"
+	"strings"
 )
+
+// Query URL
+const qurl = "https://google.com/search?&q=%s"
 
 type Result struct {
 	URL  string
 	Desc string
 }
 
-func (r *Result) pruneURL() {
+// Remove's Google's claws
+func (r *Result) sanitize() {
 	v := r.URL
+	// TODO: Something less kludgy, perhaps?
 	if strings.HasPrefix(v, "/url?q=") {
 		v = strings.Replace(v, "/url?q=", "", 1)
 		v = strings.Split(v, "&sa")[0]
@@ -25,26 +30,18 @@ func (r *Result) pruneURL() {
 	r.URL = v
 }
 
-const qurl = "https://google.com/search?&q=%s"
+type Results []*Result
 
-func pS(s []string) {
-	for _, v := range s {
-		fmt.Println(v)
+func (rs Results) sanitize() {
+	for _, v := range rs {
+		v.sanitize()
 	}
 }
 
-func main() {
-	query := os.Args[1]
-	resp, err := http.Get(fmt.Sprintf(qurl, query))
-	if err != nil {
-		panic(err)
-	}
-	n, err := html.Parse(resp.Body)
-	if err != nil {
-		panic(err)
-	}
-	results := make([]*Result, 0)
-	var f func(n *html.Node, main bool)
+func findURLs(n *html.Node) Results {
+	rs := make(Results, 0)
+	// main ensures we're only considering links inside <div id="main">
+	var f func(*html.Node, bool)
 	f = func(n *html.Node, main bool) {
 		if main && n.Type == html.ElementNode && n.Data == "a" {
 			fc := n.FirstChild
@@ -55,12 +52,12 @@ func main() {
 				}
 				for _, v := range n.Attr {
 					if v.Key == "href" {
-						results = append(results, &Result{v.Val, desc})
+						rs = append(rs, &Result{v.Val, desc})
 					}
 				}
 			}
 		}
-		if !main {
+		if !main && n.Data == "div" {
 			for _, v := range n.Attr {
 				if v.Key == "id" && v.Val == "main" {
 					main = true
@@ -72,8 +69,20 @@ func main() {
 		}
 	}
 	f(n, false)
-	for _, v := range results {
-		v.pruneURL()
-		fmt.Println(*v)
+	return rs
+}
+
+func Search(term string) (Results, error) {
+	term = url.QueryEscape(term)
+	resp, err := http.Get(fmt.Sprintf(qurl, term))
+	if err != nil {
+		return nil, err
 	}
+	n, err := html.Parse(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	rs := findURLs(n)
+	rs.sanitize()
+	return rs, nil
 }
