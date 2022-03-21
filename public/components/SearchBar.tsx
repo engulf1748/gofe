@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { SearchIcon } from '@heroicons/react/outline';
+
+import { icons } from '../data/icons';
 
 const SearchBar = () => {
 	const [query, setQuery] = useState('');
@@ -48,9 +49,7 @@ const SearchBar = () => {
 			/>
 
 			<button className='search-icon flex-c' onClick={onSearchButtonClick}>
-				<i className='j-icon'>
-					<SearchIcon />
-				</i>
+				<i className='j-icon'>{icons.search}</i>
 			</button>
 		</div>
 	);
