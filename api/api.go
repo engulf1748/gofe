@@ -1,8 +1,8 @@
 package api
 
 import (
+	"encoding/json"
 	"fmt"
-	// "encoding/json"
 	"io"
 	"net/http"
 	// "os"
@@ -16,7 +16,7 @@ const qurl = "https://google.com/search?&q=%s"
 
 // Suggestions URL
 // xssi = t seems to be necessary for application/json output
-const surl = "https://www.google.com/complete/search?q=%s&client=gws-wiz&xssi=t"
+const surl = "https://www.google.com/complete/search?q=%s&client=firefox&xssi=t"
 
 type Result struct {
 	URL  string
@@ -45,6 +45,9 @@ func (rs Results) sanitize() {
 }
 
 type Suggestions []string
+
+// WOAH!
+type suggestResponse []interface{}
 
 func findURLs(n *html.Node) Results {
 	rs := make(Results, 0)
@@ -111,9 +114,22 @@ func Suggest(term string) (Suggestions, error) {
 	}
 	b, err := io.ReadAll(resp.Body)
 	b = b[4:] // )]}' is needlessly prefixed to the response
-	fmt.Println(string(b))
+	var sr suggestResponse
+	err = json.Unmarshal(b, &sr)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Suggest: couldn't unmarshal: %v", err)
 	}
-	return nil, nil
+	s := make(Suggestions, 0)
+	srs, ok := sr[1].([]interface{})
+	if !ok {
+		return nil, fmt.Errorf("Suggest: couldn't understand response")
+	}
+	for _, v := range srs {
+		_, ok := v.(string)
+		if !ok {
+			return nil, fmt.Errorf("Suggest: couldn't understand response")
+		}
+		s = append(s, v.(string))
+	}
+	return s, nil
 }
