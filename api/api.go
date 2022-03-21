@@ -119,17 +119,20 @@ func Suggest(term string) (Suggestions, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Suggest: couldn't unmarshal: %v", err)
 	}
-	s := make(Suggestions, 0)
-	srs, ok := sr[1].([]interface{})
+	if len(sr) < 2 {
+		return nil, fmt.Errorf("Suggest: couldn't understand response")
+	}
+	r, ok := sr[1].([]interface{})
 	if !ok {
 		return nil, fmt.Errorf("Suggest: couldn't understand response")
 	}
-	for _, v := range srs {
-		_, ok := v.(string)
+	rs := make(Suggestions, len(r))
+	for i, v := range r {
+		vs, ok := v.(string)
 		if !ok {
 			return nil, fmt.Errorf("Suggest: couldn't understand response")
 		}
-		s = append(s, v.(string))
+		rs[i] = vs
 	}
-	return s, nil
+	return rs, nil
 }
