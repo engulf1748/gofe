@@ -1,4 +1,4 @@
-module codeberg.org/ar324/gofe
+module codeberg.org/ar324/gofe/api
 
 go 1.17
 
