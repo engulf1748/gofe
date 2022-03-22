@@ -12,7 +12,7 @@ const Navigation = ({  }: Props) => {
 				<div className='w-100p h-100p grid grid-3 gap-0 landscape-grid-2'>
 					<div className='grid-block justify-s align-c flex-row'>
 						<Logo />
-						<div className="ml-1r w-100p mw-20r">
+						<div className="w-100p mw-20r">
 							<SearchBar />
 						</div>
 					</div>

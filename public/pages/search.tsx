@@ -2,22 +2,27 @@ import classNames from 'classnames';
 
 import Layout from '../components/layout/Layout';
 import PageTitle from '../components/util/PageTitle';
+import TextResult from '../components/search/TextResult';
 
-import styles from '../styles/modules/Home.module.scss';
+import type { Result } from '../types/Search';
+
+import { results as STATIC_RESULTS } from '../data/results.tmp';
 
 
 interface Props {
-	query: string | undefined;
+	results: Result[];
 }
 
-const SearchPage = ({ query }: Props) => {
-	console.log({query});
+const SearchPage = ({ results }: Props) => {
+	console.log({results});
 
 	return (
-		<div className={classNames(styles.wrapper, 'flex align-c dark-ui')}>
+		<div className={classNames('flex align-c dark-ui')}>
 			<PageTitle>Gofë - Search</PageTitle>
 
-			<h1 className={styles.header}>Search results will go here</h1>
+			<div className="results">
+				{results.map(result => <TextResult key={result.href} {...result} />)}
+			</div>
 		</div>
 	);
 };
@@ -29,9 +34,13 @@ const getServerSideProps = (context: any) => {
 
 	if (!query || !Boolean(query)) return { props: { query: undefined } };
 
+	// This is where we'll query the Go API and fetch
+	// an array of results from the query. For now, it
+	// returns static data.
+
 	return {
 		props: {
-			query,
+			results: STATIC_RESULTS,
 		},
 	};
 }

@@ -1,0 +1,59 @@
+$gutter: 0.6rem;
+
+.text-result {
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	flex-direction: column;
+	margin-bottom: 2rem;
+
+	& .link-area:hover .description {
+		text-decoration: underline;
+	}
+
+	& .link, & .description {
+		line-height: 1;
+	}
+
+	& .link, & .context {
+		color: var(--text-color);
+	}
+
+	& .link {
+		font-size: 0.875rem;
+		opacity: 0.8;
+		margin-bottom: $gutter;
+		color: var(--green-800);
+
+		html.dark & {
+			color: var(--green-400);
+		}
+	}
+
+	& .description {
+		color: var(--blue-700);
+		font-weight: 400;
+		font-size: 1.15rem;
+		margin-bottom: $gutter;
+
+		html.dark & {
+			color: var(--blue-400);
+		}
+	}
+
+	& .context {
+		font-size: 0.875rem;
+		opacity: 0.75;
+		margin-bottom: 0;
+	}
+}
+
+.results {
+	width: 100%;
+	padding: 4rem 11rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
