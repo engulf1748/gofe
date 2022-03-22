@@ -1,0 +1,28 @@
+nav {
+	width: 100%;
+	height: 4rem;
+	background-color: var(--ui);
+	border-bottom: 1px solid var(--ui-2);
+
+	& .wrapper {
+		width: 100%;
+		height: 100%;
+		padding: 0 2rem;
+	}
+
+	& .logo {
+		height: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: var(--text-color);
+		padding-right: 1rem;
+
+		& p {
+			margin-bottom: 0;
+			line-height: 1;
+			font-family: monospace;
+			font-weight: 500;
+		}
+	}
+}

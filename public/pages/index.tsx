@@ -1,10 +1,12 @@
 import classNames from 'classnames';
 
-import Layout from '../components/layout/Layout';
 import PageTitle from '../components/util/PageTitle';
 import SearchBar from '../components/SearchBar';
 
+import type { ChildrenOnly } from '../types/util';
+
 import styles from '../styles/modules/Home.module.scss';
+import Footer from '../components/shell/Footer';
 
 const Home = () => {
 	return (
@@ -17,6 +19,15 @@ const Home = () => {
 	);
 };
 
-Home.layout = Layout;
+// The <Navigation /> component is in the Layout
+// component. Since we don't want the primary nav
+// to show up on the home page, we'll mock the 
+// Layout object here, on this one page.
+Home.layout = ({ children }: ChildrenOnly) => (
+	<div className='layout'>
+		{children}
+		<Footer />
+	</div>
+);
 
 export default Home;
