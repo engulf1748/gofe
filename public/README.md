@@ -7,3 +7,9 @@ This is the source code of the Gofë website. It is written in TypeScript using 
 1. Clone and install dependencies: `yarn install`
 2. Start the dev server: `yarn dev`
 3. Visit [localhost:3000](http://localhost:3000)
+
+## Disabling Soymetry
+
+Disable Yoyrn telemetry using: `yarn config set --home enableTelemetry 0`
+
+Disable SoyJS telemetry using: `npx next telemetry disable`
