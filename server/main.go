@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 
 	"codeberg.org/ar324/gofe/api"
@@ -16,7 +17,16 @@ func search(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		return
 	}
-	rs, err := api.Search(strings.Join(q, " "))
+	page := 1
+	ps := r.URL.Query()["p"]
+	if ps != nil {
+		var err error
+		page, err = strconv.Atoi(strings.Join(ps, " "))
+		if err != nil {
+			return
+		}
+	}
+	rs, err := api.Search(strings.Join(q, " "), page)
 	if err != nil {
 		return
 	}

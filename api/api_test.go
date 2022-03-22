@@ -5,7 +5,7 @@ import (
 )
 
 func TestSearch(t *testing.T) {
-	rs, err := Search("golang is the best")
+	rs, err := Search("golang is the best", 1)
 	if err != nil {
 		t.Fatalf("err: %v", err)
 	}

@@ -12,7 +12,7 @@ import (
 )
 
 // Query URL
-const qurl = "https://google.com/search?&q=%s"
+const qurl = "https://google.com/search?&q=%s&start=%d"
 
 // Suggestions URL
 // xssi = t seems to be necessary for application/json output
@@ -83,9 +83,10 @@ func findURLs(n *html.Node) Results {
 	return rs
 }
 
-func Search(term string) (Results, error) {
+func Search(term string, page int) (Results, error) {
+	page *= 10 // I do not know why—ask Google
 	term = url.QueryEscape(term)
-	resp, err := http.Get(fmt.Sprintf(qurl, term))
+	resp, err := http.Get(fmt.Sprintf(qurl, term, page))
 	if err != nil {
 		return nil, err
 	}
