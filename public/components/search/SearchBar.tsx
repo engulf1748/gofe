@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/router";
 
-import Keyboard from "./Keyboard";
+import Keyboard from "../Keyboard";
 
-import { icons } from '../data/icons';
+import { icons } from '../../data/icons';
 
 const SearchBar = () => {
 	const [query, setQuery] = useState('');
+	const { push } = useRouter();
 	const inputRef = useRef();
 
 	useEffect(() => {
@@ -36,7 +38,10 @@ const SearchBar = () => {
 	const onSearchButtonClick = () => {
 		if (query === '') {
 			focus();
+			return;
 		}
+
+		push(`/search?q=${query}`);
 	}
 
 	return (
@@ -66,6 +71,15 @@ const SearchBar = () => {
 					ev.preventDefault();
 					focus();
 				}}
+			/>
+
+			<Keyboard
+				keys={['enter']}
+				callback={(key, ev) => {
+					ev.preventDefault();
+					onSearchButtonClick();
+				}}
+				handleFocusableElements
 			/>
 		</>
 	);

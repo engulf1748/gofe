@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
 import PageTitle from '../components/util/PageTitle';
-import SearchBar from '../components/SearchBar';
+import SearchBar from '../components/search/SearchBar';
 
 import type { ChildrenOnly } from '../types/util';
 
