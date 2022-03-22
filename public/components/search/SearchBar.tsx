@@ -1,12 +1,14 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useRouter } from "next/router";
+
+import { useQuery } from "../../providers/QueryProvider";
 
 import Keyboard from "../Keyboard";
 
 import { icons } from '../../data/icons';
 
 const SearchBar = () => {
-	const [query, setQuery] = useState('');
+	const [query, setQuery] = useQuery();
 	const { push } = useRouter();
 	const inputRef = useRef();
 
@@ -57,6 +59,7 @@ const SearchBar = () => {
 					type='text'
 					placeholder='Search privately...'
 					onChange={onChange}
+					defaultValue={query}
 					className='search-bar shadow-sm'
 				/>
 

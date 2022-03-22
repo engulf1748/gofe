@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 
 import SettingsProvider from '../providers/SettingsProvider';
+import QueryProvider from '../providers/QueryProvider';
 
 import type { ChildrenOnly } from '../types/util';
 
@@ -36,11 +37,13 @@ const App = ({ Component, pageProps }: AppProps) => {
 	return (
 		<SettingsProvider>
 			<ThemeProvider attribute='class'>
-				<RootLayout>
-					<View>
-						<Component {...pageProps} />
-					</View>
-				</RootLayout>
+				<QueryProvider>
+					<RootLayout>
+						<View>
+							<Component {...pageProps} />
+						</View>
+					</RootLayout>
+				</QueryProvider>
 			</ThemeProvider>
 		</SettingsProvider>
 	)
