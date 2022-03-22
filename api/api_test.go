@@ -5,20 +5,24 @@ import (
 )
 
 func TestSearch(t *testing.T) {
-	rs, err := Search("golang is the best", 1)
+	q := "golang is the best"
+	rs, err := Search(q, 1)
 	if err != nil {
 		t.Fatalf("err: %v", err)
 	}
+	t.Logf("Query: %q\n", q)
 	for _, v := range rs {
-		t.Logf("URL: %q Description: %q\n", v.URL, v.Desc)
+		t.Logf("URL: %q\nDescription: %q\nContext: %q\n\n", v.URL, v.Desc, v.Context)
 	}
 }
 
 func TestSuggest(t *testing.T) {
-	rs, err := Suggest("soy ")
+	q := "soy"
+	rs, err := Suggest(q)
 	if err != nil {
 		t.Fatalf("err: %v", err)
 	}
+	t.Logf("Query: %q\n", q)
 	for _, v := range rs {
 		t.Logf("suggestion: %s\n", v)
 	}

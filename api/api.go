@@ -19,8 +19,9 @@ const qurl = "https://google.com/search?&q=%s&start=%d"
 const surl = "https://www.google.com/complete/search?q=%s&client=firefox&xssi=t"
 
 type Result struct {
-	URL  string
-	Desc string
+	URL     string
+	Desc    string
+	Context string
 }
 
 // Remove's Google's claws
@@ -49,6 +50,27 @@ type Suggestions []string
 // WOAH!
 type suggestResponse []interface{}
 
+func getContent(n *html.Node) string {
+	var b strings.Builder
+	var gc func(n *html.Node)
+	gc = func(n *html.Node) {
+		if n == nil {
+			return
+		}
+		if n.Type == html.TextNode {
+			b.WriteString(n.Data)
+			b.WriteString(" ")
+			return
+		}
+		// depth first
+		for n = n.FirstChild; n != nil; n = n.NextSibling {
+			gc(n)
+		}
+	}
+	gc(n)
+	return b.String()
+}
+
 func findURLs(n *html.Node) Results {
 	rs := make(Results, 0)
 	// main ensures we're only considering links inside <div id="main">
@@ -58,13 +80,26 @@ func findURLs(n *html.Node) Results {
 			fc := n.FirstChild
 			var desc string
 			if fc != nil && fc.Data == "h3" {
+				var result Result
 				if fc.FirstChild != nil {
 					desc = fc.FirstChild.FirstChild.Data
 				}
 				for _, v := range n.Attr {
 					if v.Key == "href" {
-						rs = append(rs, &Result{v.Val, desc})
+						result.URL = v.Val
+						result.Desc = desc
+						break
 					}
+				}
+				// "context"
+				if p := n.Parent; p.NextSibling != nil {
+					p = p.NextSibling
+					s := getContent(p)
+					result.Context = s
+				}
+				// Apologies
+				if result.URL != "" {
+					rs = append(rs, &result)
 				}
 			}
 		}
