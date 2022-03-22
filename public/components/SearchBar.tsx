@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import Keyboard from "./Keyboard";
+
 import { icons } from '../data/icons';
 
 const SearchBar = () => {
@@ -17,6 +19,14 @@ const SearchBar = () => {
 		// if we're doing the onChange event).
 	}, [query]);
 
+	const focus = () => {
+		// We can ignore this because React ensures
+		// that the current object will point to the
+		// target DOM node.
+		// @ts-ignore
+		inputRef.current.focus();
+	}
+
 	const onChange = (ev: any) => {
 		if (ev.target) {
 			setQuery(ev.target.value);
@@ -25,33 +35,39 @@ const SearchBar = () => {
 
 	const onSearchButtonClick = () => {
 		if (query === '') {
-			// We can ignore this because React ensures
-			// that the current object will point to the
-			// target DOM node.
-			// @ts-ignore
-			inputRef.current.focus();
+			focus();
 		}
 	}
 
 	return (
-		<div className='w-100p flex align-c justify-c flex-row relative mw-20r'>
-			<input
-				// At this point, TS is just being
-				// annoying here. We can ignore this
-				// because useRef generated this value
-				// directly.
-				// @ts-ignore
-				ref={inputRef}
-				type='text'
-				placeholder='Search privately...'
-				onChange={onChange}
-				className='search-bar shadow-sm'
-			/>
+		<>
+			<div className='w-100p flex align-c justify-c flex-row relative mw-20r'>
+				<input
+					// At this point, TS is just being
+					// annoying here. We can ignore this
+					// because useRef generated this value
+					// directly.
+					// @ts-ignore
+					ref={inputRef}
+					type='text'
+					placeholder='Search privately...'
+					onChange={onChange}
+					className='search-bar shadow-sm'
+				/>
 
-			<button className='search-icon flex-c' onClick={onSearchButtonClick}>
-				<i className='j-icon'>{icons.search}</i>
-			</button>
-		</div>
+				<button className='search-icon flex-c' onClick={onSearchButtonClick}>
+					<i className='j-icon'>{icons.search}</i>
+				</button>
+			</div>
+
+			<Keyboard
+				keys={['/']}
+				callback={(key, ev) => {
+					ev.preventDefault();
+					focus();
+				}}
+			/>
+		</>
 	);
 }
 

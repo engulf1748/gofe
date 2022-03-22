@@ -35,11 +35,11 @@ const Footer = () => {
 					{links.map((link, i) => {
 						const LinkElem = () => (
 							link.to ? (
-								<InternalLink key={link.href} href={link.href || ''}>
-									<div className='link'>{link.label}</div>
+								<InternalLink href={link.href || ''}>
+									<a className='link'>{link.label}</a>
 								</InternalLink>
 							) : (
-								<ExternalLink key={link.href} href={link.href || ''} className='link'>
+								<ExternalLink href={link.href || ''} className='link'>
 									{link.label}
 								</ExternalLink>
 							)
@@ -49,7 +49,7 @@ const Footer = () => {
 
 						return (
 							<>
-								<LinkElem />
+								<LinkElem key={link.href} />
 								{!isLast && <p className="mb-0 mx-1r text-dynamic-04">|</p>}
 							</>
 						)

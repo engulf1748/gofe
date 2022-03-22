@@ -1,15 +1,22 @@
 interface Props {
 	href: string;
 	className?: string;
+	newTab?: boolean;
 	children: React.ReactNode;
 }
 
-const ExternalLink = ({ href, className, children, ...props }: Props) => {
+const ExternalLink = ({
+	href,
+	className,
+	newTab = true,
+	children,
+	...props
+}: Props) => {
 	return (
 		<a
 			href={href}
 			rel='nofollow noreferrer noopener'
-			target='_blank'
+			target={newTab ? '_blank' : '_self'}
 			className={className}
 			{...props}
 		>
