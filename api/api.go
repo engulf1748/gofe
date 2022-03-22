@@ -129,11 +129,12 @@ func Suggest(term string) (Suggestions, error) {
 	}
 	rs := make(Suggestions, len(r))
 	for i, v := range r {
-		vs, ok := v.(string)
-		if !ok {
+		switch vs := v.(type) {
+		case string:
+			rs[i] = vs
+		default:
 			return nil, fmt.Errorf("Suggest: couldn't understand response")
 		}
-		rs[i] = vs
 	}
 	return rs, nil
 }
