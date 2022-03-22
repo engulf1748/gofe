@@ -4,56 +4,22 @@ import InternalLink from "../InternalLink";
 import { icons } from '../../data/icons';
 
 
-interface Link {
-	label: string | React.ReactNode;
-	href?: string;
-	to?: string;
-}
-
-// href is for external links,
-// to is for internal links.
-const links: Link[] = [
-	{
-		label: 'Privacy Policy',
-		to: '/privacy',
-	},
-	{
-		label: 'Source Code',
-		href: 'https://codeberg.org/ar324/gofe',
-	},
-	{
-		label: (<p className='flex align-c justify-c flex-row lh-1 fs-sm mb-0'>Backed with <i className="j-icon sm mx-0-25r"><span className="text-red-500">{icons.heart}</span></i> by Infinium</p>),
-		href: 'https://infinium.earth',
-	},
-];
+const Divider = () => <p className="mb-0 mx-1r text-dynamic-04">|</p>;
 
 const Footer = () => {
 	return (
 		<div className='footer'>
 			<div className="container h-100p">
 				<div className="flex align-c justify-c flex-row h-100p">
-					{links.map((link, i) => {
-						const LinkElem = () => (
-							link.to ? (
-								<InternalLink href={link.href || ''}>
-									<a className='link'>{link.label}</a>
-								</InternalLink>
-							) : (
-								<ExternalLink href={link.href || ''} className='link'>
-									{link.label}
-								</ExternalLink>
-							)
-						);
-
-						const isLast = i === links.length - 1;
-
-						return (
-							<>
-								<LinkElem key={link.href} />
-								{!isLast && <p className="mb-0 mx-1r text-dynamic-04">|</p>}
-							</>
-						)
-					})}
+					<InternalLink href='/privacy'><a className='link'>Privacy Policy</a></InternalLink>
+					<Divider />
+					<ExternalLink href='https://codeberg.org/ar324/gofe' className='link'>Source code</ExternalLink>
+					<Divider />
+					<ExternalLink href='https://infinium.earth' className='link'>
+						<p className='flex align-c justify-c flex-row lh-1 fs-sm mb-0'>
+							Backed with <i className="j-icon sm mx-0-25r"><span className="text-red-500">{icons.heart}</span></i> by Infinium
+						</p>
+					</ExternalLink>
 				</div>
 			</div>
 		</div>
