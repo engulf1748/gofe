@@ -16,6 +16,14 @@ interface Props {
 const SearchPage = ({ results }: Props) => {
 	console.log({results});
 
+	if (!results) {
+		return (
+			<div className="results">
+				<div><p>Loading...</p></div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={classNames('flex align-c dark-ui')}>
 			<PageTitle>Gofë - Search</PageTitle>
@@ -32,7 +40,7 @@ const getServerSideProps = (context: any) => {
 	// the query here.
 	const query = context?.query?.q;
 
-	if (!query || !Boolean(query)) return { props: { query: undefined } };
+	if (!query || !Boolean(query)) return { props: { query: null } };
 
 	// This is where we'll query the Go API and fetch
 	// an array of results from the query. For now, it
