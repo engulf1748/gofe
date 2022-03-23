@@ -21,7 +21,7 @@ func sendJSON(w http.ResponseWriter, i interface{}) error {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
-	
+
 	_, err = w.Write(b)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
@@ -55,7 +55,7 @@ func search(w http.ResponseWriter, r *http.Request) {
 	sendJSON(w, rs)
 }
 
-func suggest(w http.ResponseWriter, r *http.Request) {
+func openSuggest(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query().Get("q") // suggestion query
 
 	rs, err := api.Suggest(q)
@@ -64,12 +64,21 @@ func suggest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	sendJSON(w, rs)
+	var s []interface{}
+	s = append(s, q)
+	s = append(s, rs)
+
+	sendJSON(w, s)
 }
 
 func main() {
 	port := os.Args[1]
 	http.HandleFunc("/search", search)
-	http.HandleFunc("/suggest", suggest)
+	// I deduced the format by sending requests to these links (assume 'test' is the query):
+	// https://www.startpage.com/suggestions?q=test&format=opensearch
+	// https://searx.xyz/autocompleter?q=test
+	// https://duckduckgo.com/ac/?q=test&type=list
+	// ["test",["testbook","testbook login","test speed","testzone","test internet speed","testing","test microphone","testosterone"]]
+	http.HandleFunc("/opensuggest", openSuggest)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf("localhost:%s", port), nil))
 }
