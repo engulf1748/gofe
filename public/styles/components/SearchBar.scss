@@ -55,9 +55,9 @@ $max-width: 25rem;
 
 .search-icon {
 	position: absolute;
-	right: 0;
+	right: 1px;
 	padding: 0 0.75rem;
-	height: $height-sm;
+	height: calc($height-sm - 2px);
 	appearance: none;
 	background-color: var(--ui);
 	border: none;
