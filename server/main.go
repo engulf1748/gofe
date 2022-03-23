@@ -11,17 +11,21 @@ import (
 	"codeberg.org/ar324/gofe/api"
 )
 
-// Accepts any type `rs` and converts it to a
-// JSON string. This is then outputted directly
-// to the response via the ResponseWriter.
-func writeJSONOutput(w http.ResponseWriter, rs interface{}) error {
-	d, err := json.Marshal(rs)
-
+// Marshals 'i' and writes to ResponseWriter
+func sendJSON(w http.ResponseWriter, i interface{}) error {
+	b, err := json.Marshal(i)
 	if err != nil {
-		return fmt.Errorf("writeOutput: error parsing to JSON: %v", err)
+		w.WriteHeader(http.StatusInternalServerError)
+		return fmt.Errorf("sendJSON: error parsing to JSON: %v", err)
 	}
 
-	fmt.Fprintf(w, string(d))
+	w.Header().Set("Content-Type", "application/json")
+	_, err = w.Write(b)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return fmt.Errorf("sendJSON: couldn't write to ResponseWriter: %v", err)
+	}
+
 	return nil
 }
 
@@ -35,16 +39,18 @@ func search(w http.ResponseWriter, r *http.Request) {
 		var err error
 		page, err = strconv.Atoi(p)
 		if err != nil {
+			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
 	}
 
 	rs, err := api.Search(q, page)
 	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
-	writeJSONOutput(w, rs)
+	sendJSON(w, rs)
 }
 
 func suggest(w http.ResponseWriter, r *http.Request) {
@@ -52,10 +58,11 @@ func suggest(w http.ResponseWriter, r *http.Request) {
 
 	rs, err := api.Suggest(q)
 	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
 
-	writeJSONOutput(w, rs)
+	sendJSON(w, rs)
 }
 
 func main() {
