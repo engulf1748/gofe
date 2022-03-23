@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	// "os"
-	"golang.org/x/net/html"
 	"net/url"
 	"strings"
+	"time"
+
+	"golang.org/x/net/html"
 )
 
 // Query URL
@@ -118,10 +119,17 @@ func findURLs(n *html.Node) Results {
 	return rs
 }
 
+func timeoutClient() *http.Client {
+	return &http.Client{
+		Timeout: 5 * time.Second,
+	}
+}
+
 func Search(term string, page int) (Results, error) {
 	page *= 10 // I do not know why—ask Google
 	term = url.QueryEscape(term)
-	resp, err := http.Get(fmt.Sprintf(qurl, term, page))
+	client := timeoutClient()
+	resp, err := client.Get(fmt.Sprintf(qurl, term, page))
 	if err != nil {
 		return nil, err
 	}
@@ -140,7 +148,8 @@ func Search(term string, page int) (Results, error) {
 
 func Suggest(term string) (Suggestions, error) {
 	term = url.QueryEscape(term)
-	resp, err := http.Get(fmt.Sprintf(surl, term))
+	client := timeoutClient()
+	resp, err := client.Get(fmt.Sprintf(surl, term))
 	if err != nil {
 		return nil, err
 	}
