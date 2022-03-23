@@ -57,15 +57,19 @@ $max-width: 25rem;
 	position: absolute;
 	right: 0;
 	padding: 0 0.75rem;
-	height: $height;
+	height: $height-sm;
 	appearance: none;
-	background-color: transparent;
+	background-color: var(--ui);
 	border: none;
 	box-shadow: none;
 	outline: none;
 	cursor: pointer;
 	border-top-right-radius: $radius;
 	border-bottom-right-radius: $radius;
+
+	html.dark & {
+		background-color: var(--ui-1);
+	}
 }
 
 .search-suggestions {

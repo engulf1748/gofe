@@ -98,3 +98,11 @@ $gutter: 0.6rem;
 	align-items: center;
 	flex-direction: column;
 }
+
+.s-query {
+	font-weight: 500;
+	max-width: 10rem;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}

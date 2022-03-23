@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import Layout from '../components/layout/Layout';
 import PageTitle from '../components/util/PageTitle';
 import TextResult from '../components/search/TextResult';
-import TextResultSkeleton from '../components/search/TextResultSkeleton';
+import NoSearchResults from '../components/search/states/NoSearchResults';
+import ResultsLoading from '../components/search/states/ResultsLoading';
 
 import searchAPI from '../services/search';
 
@@ -17,6 +18,10 @@ interface Props {
 
 const SearchPage = ({ query }: Props) => {
 	const [results, setResults] = useState<Result[] | undefined>(undefined);
+
+	// TODO:
+	// We need to check the validity of the query
+	// here and show an error if it's null.
 
 	useEffect(() => {
 		searchAPI
@@ -34,33 +39,11 @@ const SearchPage = ({ query }: Props) => {
 	}, [query]);
 
 	if (!results) {
-		return (
-			<div className={classNames('flex align-c dark-ui')}>
-				<PageTitle>Gofë - Fetching results...</PageTitle>
-
-				<div className="results">
-					{[1, 2, 3, 4, 5, 6].map(e => (
-						<TextResultSkeleton key={e} />
-					))}
-				</div>
-			</div>
-		);
+		return <ResultsLoading />;
 	}
 
-	// TODO: Add SoySS classes
 	if (results.length === 0) {
-		return (
-			<div>
-				<span>{query}</span> did not yield any results.
-				<div>
-					Suggestions:
-					<ul>
-						<li>Search for something more general.</li>
-						<li>Try something tangential: you might get lucky.</li>
-					</ul>
-				</div>
-			</div>
-		)
+		return <NoSearchResults query={query} />;
 	}
 
 	return (
