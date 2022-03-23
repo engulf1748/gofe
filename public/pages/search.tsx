@@ -33,9 +33,6 @@ const SearchPage = ({ query }: Props) => {
 		});
 	}, [query]);
 
-	// TODO:
-	// Add check here for no results from a query.
-
 	if (!results) {
 		return (
 			<div className={classNames('flex align-c dark-ui')}>
@@ -48,6 +45,22 @@ const SearchPage = ({ query }: Props) => {
 				</div>
 			</div>
 		);
+	}
+
+	// TODO: Add SoySS classes
+	if (results.length === 0) {
+		return (
+			<div>
+				<span>{query}</span> did not yield any results.
+				<div>
+					Suggestions:
+					<ul>
+						<li>Search for something more general.</li>
+						<li>Try something tangential: you might get lucky.</li>
+					</ul>
+				</div>
+			</div>
+		)
 	}
 
 	return (
