@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import Layout from '../components/layout/Layout';
 import PageTitle from '../components/util/PageTitle';
 import TextResult from '../components/search/TextResult';
+import TextResultSkeleton from '../components/search/TextResultSkeleton';
 
 import type { Result } from '../types/Search';
 
@@ -14,12 +15,16 @@ interface Props {
 }
 
 const SearchPage = ({ results }: Props) => {
-	console.log({results});
-
 	if (!results) {
 		return (
-			<div className="results">
-				<div><p>Loading...</p></div>
+			<div className={classNames('flex align-c dark-ui')}>
+				<PageTitle>Gofë - Fetching results...</PageTitle>
+
+				<div className="results">
+					{[1, 2, 3, 4, 5, 6].map(e => (
+						<TextResultSkeleton key={e} />
+					))}
+				</div>
 			</div>
 		);
 	}
@@ -36,8 +41,6 @@ const SearchPage = ({ results }: Props) => {
 };
 
 const getServerSideProps = (context: any) => {
-	// We'll need to do better checks against
-	// the query here.
 	const query = context?.query?.q;
 
 	if (!query || !Boolean(query)) return { props: { query: null } };

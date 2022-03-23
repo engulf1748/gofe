@@ -49,6 +49,47 @@ $gutter: 0.6rem;
 	}
 }
 
+.text-result .is-skeleton {
+	& .skeleton {
+		padding: 0 !important;
+	}
+
+	& .s-link {
+		height: 0.875rem !important;
+		width: 5rem;
+		margin-bottom: 0.5rem;
+		background-color: var(--green-200);
+
+		html.dark & {
+			background-color: var(--green-400);
+		}
+	}
+
+	& .s-description {
+		height: 1.15rem;
+		width: 10rem;
+		background-color: var(--blue-200);
+
+		html.dark & {
+			background-color: var(--blue-400);
+		}
+	}
+
+	& .s-context {
+		height: 1rem;
+		width: 100%;
+
+		&.two {
+			width: 80%;
+			margin: 0.35rem 0;
+		}
+
+		&.three {
+			width: 60%;
+		}
+	}
+}
+
 .results {
 	width: 100%;
 	padding: 4rem 11rem;
