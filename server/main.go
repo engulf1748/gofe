@@ -79,6 +79,8 @@ func main() {
 	// https://searx.xyz/autocompleter?q=test
 	// https://duckduckgo.com/ac/?q=test&type=list
 	// ["test",["testbook","testbook login","test speed","testzone","test internet speed","testing","test microphone","testosterone"]]
+	// Update:
+	// https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki
 	http.HandleFunc("/opensuggest", openSuggest)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf("localhost:%s", port), nil))
 }
