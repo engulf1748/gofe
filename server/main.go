@@ -7,19 +7,9 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
 
 	"codeberg.org/ar324/gofe/api"
 )
-
-// Gets the query parameter `p` from the URL.
-// If there's an issue, an error is thrown.
-// If not, the one-item array is joined into
-// a string and returned.
-func getURLParameter(r *http.Request, p string) (string, bool) {
-	query, ok := r.URL.Query()[p]
-	return strings.Join(query, " "), ok
-}
 
 // Accepts any type `rs` and converts it to a
 // JSON string. This is then outputted directly
@@ -35,21 +25,15 @@ func writeJSONOutput(w http.ResponseWriter, rs interface{}) error {
 	return nil
 }
 
-
-
 func search(w http.ResponseWriter, r *http.Request) {
-	q, qOk := getURLParameter(r, "q")
-	ps, pOk := getURLParameter(r, "p")
-
-	if !qOk {
-		return
-	}
+	q := r.URL.Query().Get("q") // search query
+	p := r.URL.Query().Get("p") // page number
 
 	page := 1
 
-	if pOk {
+	if p != "" {
 		var err error
-		page, err = strconv.Atoi(ps)
+		page, err = strconv.Atoi(p)
 		if err != nil {
 			return
 		}
@@ -64,11 +48,7 @@ func search(w http.ResponseWriter, r *http.Request) {
 }
 
 func suggest(w http.ResponseWriter, r *http.Request) {
-	q, qOk := getURLParameter(r, "q")
-
-	if !qOk {
-		return
-	}
+	q := r.URL.Query().Get("q") // suggestion query
 
 	rs, err := api.Suggest(q)
 	if err != nil {
