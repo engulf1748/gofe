@@ -1,7 +1,7 @@
 interface TextResult {
-	href: string;
-	description: string;
-	context: string;
+	URL: string;
+	Desc: string;
+	Context: string;
 }
 
 // In the future, we can add other result

@@ -43,12 +43,18 @@ const Suggestions = ({ suggestions }: SuggestionsProps) => {
 
 const SearchBar = () => {
 	const { query, setQuery, suggestions } = useQuery();
-	const { push } = useRouter();
+	const { push, query: routerQuery } = useRouter();
 	const inputRef = useRef();
 
 	const [shouldShowSuggestions, setShouldShowSuggestions] = useState(false);
 
 	const close = () => setShouldShowSuggestions(false);
+
+	useEffect(() => {
+		if (routerQuery.q) {
+			setQuery(routerQuery.q);
+		}
+	}, []);
 
 	useEffect(() => {
 		if (shouldShowSuggestions) {
@@ -126,9 +132,9 @@ const SearchBar = () => {
 					if (key === 'enter') {
 						ev.preventDefault();
 						onSearchButtonClick();
-					} else if (key === 'esc') {
-						setShouldShowSuggestions(false);
 					}
+
+					setShouldShowSuggestions(false);
 				}}
 				handleFocusableElements
 			/>

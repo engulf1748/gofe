@@ -77,7 +77,6 @@ $max-width: 25rem;
 	justify-content: flex-start;
 	align-items: center;
 	flex-direction: column;
-	background: var(--ui);
 	position: absolute;
 	z-index: 2;
 	border-bottom-left-radius: $radius;
@@ -85,6 +84,10 @@ $max-width: 25rem;
 	top: $height;
 	border: 1px solid var(--ui-2);
 	border-top: none;
+
+	html.dark & {
+		background-color: var(--ui-1);
+	}
 
 	nav & {
 		top: $height-sm;
@@ -96,7 +99,7 @@ $max-width: 25rem;
 	height: $height-sm;
 	padding: 0 1rem;
 	text-align: left;
-	color: black;
+	color: var(--text-color);
 	font-size: 0.875rem;
 	background-color: transparent;
 	box-shadow: none;
@@ -109,5 +112,9 @@ $max-width: 25rem;
 
 	&:hover {
 		background-color: var(--ui-1);
+
+		html.dark & {
+			background-color: var(--ui-2);
+		}
 	}
 }
