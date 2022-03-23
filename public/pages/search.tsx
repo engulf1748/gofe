@@ -10,6 +10,7 @@ import ResultsLoading from '../components/search/states/ResultsLoading';
 import searchAPI from '../services/search';
 
 import type { Result } from '../types/Search';
+import { usePrevious } from '../hooks/usePrevious';
 
 
 interface Props {
@@ -18,24 +19,29 @@ interface Props {
 
 const SearchPage = ({ query }: Props) => {
 	const [results, setResults] = useState<Result[] | undefined>(undefined);
+	const previousQuery = usePrevious(query);
 
 	// TODO:
 	// We need to check the validity of the query
 	// here and show an error if it's null.
 
 	useEffect(() => {
-		searchAPI
-		.getSearchResults(query)
-		.then(data => data)
-		.catch(err => {
-			console.error(err);
-			setResults([]);
-		})
-		.then(data => {
-			if (data) {
-				setResults(data);
-			}
-		});
+		if (query !== previousQuery) {
+			setResults(undefined);
+
+			searchAPI
+				.getSearchResults(query)
+				.then(data => data)
+				.catch(err => {
+					console.error(err);
+					setResults([]);
+				})
+				.then(data => {
+					if (data) {
+						setResults(data);
+					}
+				});
+		}
 	}, [query]);
 
 	if (!results) {
