@@ -54,7 +54,7 @@ const SearchPage = ({ query }: Props) => {
 
 	return (
 		<div className={classNames('flex align-c dark-ui')}>
-			<PageTitle>Gofë - Search</PageTitle>
+			<PageTitle>{query} - Gofë</PageTitle>
 
 			<div className="results">
 				{results.map(result => <TextResult key={result.URL} {...result} />)}

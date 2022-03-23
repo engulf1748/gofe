@@ -6,6 +6,8 @@ import { useQuery } from "../../providers/QueryProvider";
 
 import Keyboard from "../Keyboard";
 
+import { getSearchPageURL } from '../../logic/query';
+
 import { icons } from '../../data/icons';
 
 
@@ -23,7 +25,7 @@ const Suggestion = ({ suggestion }: SuggestionProps) => {
 
 	const onClick = () => {
 		setQuery(suggestion);
-		push(`/search?q=${suggestion}`);
+		push(getSearchPageURL(suggestion));
 	}
 
 	return (
@@ -84,7 +86,7 @@ const SearchBar = () => {
 			return;
 		}
 
-		push(`/search?q=${query}`);
+		push(getSearchPageURL(query));
 	}
 
 	return (
