@@ -1,15 +1,34 @@
 $height: 44px;
 $height-sm: 38px;
-$radius: 0.25rem;
+$radius: 0.5rem;
+$max-width: 25rem;
+
+.search-wrapper {
+	width: 100%;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	max-width: $max-width;
+
+	&.showing-suggestions .search-bar {
+		box-shadow: none !important;
+		border-color: var(--ui-2) !important;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+	}
+}
 
 .search-bar {
 	height: $height;
 	background-color: var(--ui);
 	color: var(--text-color);
-	font-size: 1rem;
+	// font-size: 1rem;
+	font-size: 0.875rem;
 	border-radius: $radius;
 	padding: 0.75rem 1rem;
-	border: none;
+	border: 1px solid var(--ui);
 	box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.12);
 	width: 100%;
 	transition: var(--d-m-2) var(--e-s);
@@ -47,4 +66,48 @@ $radius: 0.25rem;
 	cursor: pointer;
 	border-top-right-radius: $radius;
 	border-bottom-right-radius: $radius;
+}
+
+.search-suggestions {
+	width: 100%;
+	background-color: var(--ui);
+	max-height: 30rem;
+	overflow-y: scroll;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	flex-direction: column;
+	background: var(--ui);
+	position: absolute;
+	z-index: 2;
+	border-bottom-left-radius: $radius;
+	border-bottom-right-radius: $radius;
+	top: $height;
+	border: 1px solid var(--ui-2);
+	border-top: none;
+
+	nav & {
+		top: $height-sm;
+	}
+}
+
+.search-suggestion {
+	width: 100%;
+	height: $height-sm;
+	padding: 0 1rem;
+	text-align: left;
+	color: black;
+	font-size: 0.875rem;
+	background-color: transparent;
+	box-shadow: none;
+	border: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+	transition: var(--d-f-1) var(--e-s);
+
+	&:hover {
+		background-color: var(--ui-1);
+	}
 }

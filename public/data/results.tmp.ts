@@ -19,6 +19,20 @@ const results: Result[] = [
 	nr('blockheadtechnologies.com', 'Zero-knowledge proofs - a powerful addition to blockchain', `Jun 1, 2021 — Zero-knowledge proof is an encryption scheme whereby one party (the prover) can prove the truth of specific information to another party ...`),
 ];
 
+const suggestions = [
+	'zero knowledge proof',
+	'zero knowledge',
+	'zero knowledge rollups',
+	'zero knowledge proof example',
+	'zero knowledge proof blockchain',
+	'zero knowledge encryption',
+	'zero knowledge podcast',
+	'zero knowledge proof crypto',
+	'zero knowledge cloud storage',
+	'zero knowledge proof coins',
+];
+
 export {
 	results,
+	suggestions,
 }

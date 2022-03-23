@@ -3,46 +3,10 @@
 	min-height: 100vh;
 	background-color: var(--ui-1);
 	position: relative;
-	padding-top: 20rem;
+	padding-top: 20vh;
 }
 
 .header {
 	font-family: monospace !important;
 	font-size: 2rem;
 }
-
-@media only screen and (max-width: 1200px) {
-	.wrapper {
-		padding-top: 18rem;
-	}
-}
-
-@media only screen and (max-width: 1000px) {
-	.wrapper {
-		padding-top: 16rem;
-	}
-}
-
-@media only screen and (max-width: 800px) {
-	.wrapper {
-		padding-top: 14rem;
-	}
-}
-
-@media only screen and (max-width: 600px) {
-	.wrapper {
-		padding-top: 12rem;
-	}
-}
-
-// @media only screen and (max-width: 800px) {
-// 	.wrapper {
-// 		padding-top: 10rem;
-// 	}
-// }
-
-// @media only screen and (max-width: 500px) {
-// 	.wrapper {
-// 		padding-top: 8rem;
-// 	}
-// }
