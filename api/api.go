@@ -88,7 +88,7 @@ func findURLs(n *html.Node) Results {
 				for _, v := range n.Attr {
 					if v.Key == "href" {
 						result.URL = v.Val
-						result.Desc = desc
+						result.Desc = strings.ToValidUTF8(desc, "")
 						break
 					}
 				}
@@ -96,7 +96,7 @@ func findURLs(n *html.Node) Results {
 				if p := n.Parent; p.NextSibling != nil {
 					p = p.NextSibling
 					s := getContent(p)
-					result.Context = s
+					result.Context = strings.ToValidUTF8(s, "")
 				}
 				// Apologies
 				if result.URL != "" {
