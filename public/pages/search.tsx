@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import Layout from '../components/layout/Layout';
@@ -5,16 +6,36 @@ import PageTitle from '../components/util/PageTitle';
 import TextResult from '../components/search/TextResult';
 import TextResultSkeleton from '../components/search/TextResultSkeleton';
 
-import type { Result } from '../types/Search';
+import searchAPI from '../services/search';
 
-import { results as STATIC_RESULTS } from '../data/results.tmp';
+import type { Result } from '../types/Search';
 
 
 interface Props {
-	results: Result[];
+	query: string;
 }
 
-const SearchPage = ({ results }: Props) => {
+const SearchPage = ({ query }: Props) => {
+	const [results, setResults] = useState<Result[] | undefined>(undefined);
+
+	useEffect(() => {
+		searchAPI
+		.getSearchResults(query)
+		.then(data => data)
+		.catch(err => {
+			console.error(err);
+			setResults([]);
+		})
+		.then(data => {
+			if (data) {
+				setResults(data);
+			}
+		});
+	}, [query]);
+
+	// TODO:
+	// Add check here for no results from a query.
+
 	if (!results) {
 		return (
 			<div className={classNames('flex align-c dark-ui')}>
@@ -34,26 +55,22 @@ const SearchPage = ({ results }: Props) => {
 			<PageTitle>Gofë - Search</PageTitle>
 
 			<div className="results">
-				{results.map(result => <TextResult key={result.href} {...result} />)}
+				{results.map(result => <TextResult key={result.URL} {...result} />)}
 			</div>
 		</div>
 	);
 };
 
-const getServerSideProps = (context: any) => {
+const getServerSideProps = async (context: any) => {
 	const query = context?.query?.q;
 
 	if (!query || !Boolean(query)) return { props: { query: null } };
 
-	// This is where we'll query the Go API and fetch
-	// an array of results from the query. For now, it
-	// returns static data.
-
 	return {
 		props: {
-			results: STATIC_RESULTS,
-		},
-	};
+			query,
+		}
+	}
 }
 
 SearchPage.layout = Layout;

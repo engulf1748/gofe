@@ -3,17 +3,18 @@ import ExternalLink from "../ExternalLink";
 import type { Result } from "../../types/Search";
 
 
-const TextResult = ({ href, description, context }: Result) => {
+const TextResult = ({ URL, Desc, Context }: Result) => {
 	return (
 		<div className='text-result'>
 			<div className="w-100p mw-35r">
-				<ExternalLink href={href}>
+				<ExternalLink href={URL}>
 					<div className="link-area">
-						<p className="link">{href}</p>
-						<h4 className='description'>{description}</h4>
+						{/* TODO: Separate URL parts and display them better. */}
+						<p className="link">{URL?.substring(0, 30)}...</p>
+						<h4 className='description'>{Desc}</h4>
 					</div>
 				</ExternalLink>
-				<p className='context'>{context}</p>
+				<p className='context'>{Context}</p>
 			</div>
 		</div>
 	);

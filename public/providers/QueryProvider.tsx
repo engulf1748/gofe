@@ -9,7 +9,7 @@ import React, {
 
 import type { ChildrenOnly } from '../types/util';
 
-import { suggestions as STATIC_SUGGESTIONS } from '../data/results.tmp';
+import { suggestions as STATIC_SUGGESTIONS } from '../data/suggestions.tmp';
 
 interface TQueryContext {
 	query: string;
@@ -24,9 +24,7 @@ const QueryProvider = ({ children }: ChildrenOnly) => {
 	const [suggestions, setSuggestions] = useState(STATIC_SUGGESTIONS);
 
 	useEffect(() => {
-		// Whenever the query changes, we'll send a 
-		// request to the API's /suggest endpoint and
-		// set the suggestions here.
+		
 	}, [query]);
 
 	const value: TQueryContext = {

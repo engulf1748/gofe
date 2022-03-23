@@ -20,6 +20,8 @@ func sendJSON(w http.ResponseWriter, i interface{}) error {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	
 	_, err = w.Write(b)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
