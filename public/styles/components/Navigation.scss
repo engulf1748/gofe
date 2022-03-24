@@ -23,11 +23,14 @@ nav {
 		color: var(--text-color);
 		padding: 0 2rem;
 
+		& > div, & p {
+			transition: var(--d-m-2) var(--e-s);
+		}
+
 		& > div {
 			border-radius: 0.25rem;
 			background-color: transparent;
 			padding: 0.5rem 0.75rem;
-			transition: var(--d-m-2) var(--e-s);
 		}
 
 		&:focus, &:hover {
@@ -35,6 +38,10 @@ nav {
 
 			& > div {
 				background-color: var(--blue-600);
+			}
+
+			& p {
+				color: white;
 			}
 		}
 
@@ -44,6 +51,20 @@ nav {
 			line-height: 1;
 			font-family: monospace;
 			font-weight: 500;
+		}
+	}
+
+	& .action {
+		padding: 0.5rem;
+		border-radius: 0.5rem;
+		background-color: transparent;
+		cursor: pointer;
+		color: var(--text-color-07);
+		transition: var(--d-m-2) var(--e-s);
+
+		&:hover {
+			background-color: var(--ui-1);
+			color: var(--text-color);
 		}
 	}
 }
