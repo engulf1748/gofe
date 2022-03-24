@@ -31,7 +31,6 @@ func sendJSON(w http.ResponseWriter, i interface{}) error {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", config.NextDomain)
 
 	_, err = w.Write(b)
 	if err != nil {
@@ -87,7 +86,6 @@ func openSuggest(w http.ResponseWriter, r *http.Request) {
 }
 
 func serveOpenSearchXML(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", config.NextDomain)
 	w.Header().Set("Content-Type", "application/opensearchdescription+xml")
 	fmt.Fprintf(w, openSearchXML)
 }
@@ -108,16 +106,18 @@ func main() {
 	}
 	openSearchXML = fmt.Sprintf(string(b), config.NextDomain, config.NextDomain, config.APIDomain)
 
-	http.HandleFunc("/search", search)
-	// I deduced the format by sending requests to these links (assume 'test' is the query):
-	// https://www.startpage.com/suggestions?q=test&format=opensearch
-	// https://searx.xyz/autocompleter?q=test
-	// https://duckduckgo.com/ac/?q=test&type=list
-	// ["test",["testbook","testbook login","test speed","testzone","test internet speed","testing","test microphone","testosterone"]]
-	// Update:
-	// https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki
-	http.HandleFunc("/opensuggest", openSuggest)
-	http.HandleFunc("/opensearch.xml", serveOpenSearchXML)
-	// TODO: Handle this better
-	log.Fatal(http.ListenAndServe(strings.Replace(config.APIDomain, "http://", "", 1), nil))
+	mux := http.NewServeMux()
+	m := map[string]func(http.ResponseWriter, *http.Request){
+		"/search": search,
+		// https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki
+		"/opensuggest":    openSuggest,
+		"/opensearch.xml": serveOpenSearchXML,
+	}
+	for k, v := range m {
+		mux.Handle(k, loggingHandler(nil, corsHandler(http.HandlerFunc(v))))
+	}
+
+	addr := strings.TrimPrefix(config.APIDomain, "http://")
+	addr = strings.TrimPrefix(addr, "https://")
+	log.Fatal(http.ListenAndServe(addr, mux))
 }
