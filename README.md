@@ -1,5 +1,7 @@
 # Gofë
 
+![License: AGPL](https://img.shields.io/badge/license-AGPL-%233897f0)
+
 Gofë is a front-end for Google Search. It currently supports textual search.
 
 The back-end is written in Go, and the front-end is written in TypeScript.
