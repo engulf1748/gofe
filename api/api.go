@@ -125,6 +125,7 @@ func timeoutClient() *http.Client {
 	}
 }
 
+// `page` is 0-indexed
 func Search(term string, page int) (Results, error) {
 	page *= 10 // I do not know why—ask Google
 	term = url.QueryEscape(term)
