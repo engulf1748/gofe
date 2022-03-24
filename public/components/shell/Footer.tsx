@@ -4,13 +4,13 @@ import InternalLink from "../InternalLink";
 import { icons } from '../../data/icons';
 
 
-const Divider = () => <p className="mb-0 mx-1r text-dynamic-04">|</p>;
+const Divider = () => <p className="mb-0 mx-1r text-dynamic-04 landscape-hide">|</p>;
 
 const Footer = () => {
 	return (
 		<div className='footer'>
 			<div className="container h-100p">
-				<div className="flex align-c justify-c flex-row h-100p">
+				<div className="flex align-c justify-c flex-row landscape-flex-c h-100p">
 					<InternalLink href='/privacy'><a className='link'>Privacy Policy</a></InternalLink>
 					<Divider />
 					<ExternalLink href='https://codeberg.org/ar324/gofe' className='link'>Source code</ExternalLink>

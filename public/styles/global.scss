@@ -1,6 +1,9 @@
 @use './components/Footer';
 @use './components/Layout';
-@use './components/Navigation';
+
+// This must go above Navigation because it
+// depends on some CSS vars.
 @use './components/Search';
+@use './components/Navigation';
 @use './components/SearchBar';
 @use './components/View';

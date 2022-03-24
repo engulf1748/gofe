@@ -35,6 +35,7 @@ $gutter: 0.6rem;
 		color: var(--blue-700);
 		font-weight: 400;
 		font-size: 1.15rem;
+		line-height: 1.3;
 		margin-bottom: $gutter;
 
 		html.dark & {
@@ -46,6 +47,15 @@ $gutter: 0.6rem;
 		font-size: 0.875rem;
 		opacity: 0.75;
 		margin-bottom: 0;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+	.text-result {
+		& .description {
+			font-size: 1rem;
+			line-height: 1.4;
+		}
 	}
 }
 
@@ -86,13 +96,41 @@ $gutter: 0.6rem;
 	}
 }
 
+:root {
+	--result-gutter: 11rem;
+}
+
 .results {
 	width: 100%;
-	padding: 4rem 11rem;
+	padding: 4rem var(--result-gutter);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
+}
+
+@media only screen and (max-width: 1600px) {
+	:root {
+		--result-gutter: 9rem;
+	}
+}
+
+@media only screen and (max-width: 1200px) {
+	:root {
+		--result-gutter: 7rem;
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	.results {
+		padding: 4rem;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.results {
+		padding: 2rem 2rem;
+	}
 }
 
 .s-query {
@@ -105,6 +143,8 @@ $gutter: 0.6rem;
 
 .pagination-link {
 	color: var(--blue-700);
+	font-size: 0.875rem;
+	font-weight: 500;
 	display: flex;
 	justify-content: center;
 	align-items: center;

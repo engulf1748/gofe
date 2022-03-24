@@ -1,9 +1,15 @@
 .wrapper {
 	width: 100%;
-	min-height: 100vh;
+	min-height: calc(100vh - 3rem);
 	background-color: var(--ui-1);
 	position: relative;
 	padding-top: 20vh;
+}
+
+@media only screen and (max-width: 767px) {
+	.wrapper {
+		min-height: 85vh;
+	}
 }
 
 .header {

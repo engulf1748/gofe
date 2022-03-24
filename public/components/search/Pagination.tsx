@@ -30,8 +30,8 @@ const PaginationLink = ({ goesToPage, children }: PaginationLinkProps) => {
 const Pagination = ({ query, page }: Props) => {
 	return (
 		<div className="w-100p mt-3r">
-			<div className="w-100p mw-35r flex-sb">
-				<div>
+			<div className="w-100p mw-35r grid grid-3">
+				<div className="grid-block">
 					{page !== 1 && (
 						<PaginationLink goesToPage={String(Math.max(page - 1, 1))}>
 							<i className="j-icon mr-0-25r previous">{icons.arrowSmLeft}</i>
@@ -40,14 +40,16 @@ const Pagination = ({ query, page }: Props) => {
 					)}
 				</div>
 
-				<div>
+				<div className="grid-block flex-c">
 					<p className='mb-0 lh-1 fs-sm text-dynamic-06 fw-500'>Page {page}</p>
 				</div>
 
-				<PaginationLink goesToPage={String(page + 1)}>
-					<span>Next</span>
-					<i className="j-icon ml-0-25r">{icons.arrowSmRight}</i>
-				</PaginationLink>
+				<div className="grid-block align-e">
+					<PaginationLink goesToPage={String(page + 1)}>
+						<span>Next</span>
+						<i className="j-icon ml-0-25r">{icons.arrowSmRight}</i>
+					</PaginationLink>
+				</div>
 			</div>
 		</div>
 	);

@@ -14,7 +14,10 @@ const Home = () => {
 			<PageTitle>Gofë - Home</PageTitle>
 
 			<h1 className={styles.header}>Gofë Search</h1>
-			<SearchBar />
+			
+			<div className="w-100p flex-c mw-25r px-2r">
+				<SearchBar />
+			</div>
 		</div>
 	);
 };
