@@ -61,7 +61,7 @@ $max-width: 25rem;
 .search-icon {
 	position: absolute;
 	right: 1px;
-	padding: 0 0.75rem;
+	padding: 0 0.5rem;
 	height: calc($height - 2px);
 	appearance: none;
 	background-color: var(--ui);
@@ -74,6 +74,11 @@ $max-width: 25rem;
 
 	nav & {
 		height: calc($height-sm - 2px);
+
+		& > i, & > i > svg {
+			height: 1.15rem !important;
+			width: 1.15rem !important;
+		}
 	}
 
 	&:focus {
