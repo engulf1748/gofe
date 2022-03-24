@@ -11,6 +11,16 @@ import (
 	"codeberg.org/ar324/gofe/api"
 )
 
+type Config struct {
+	APIDomain  string `json:"api_domain"`
+	NextDomain string `json:"next_domain"`
+}
+
+var config Config
+
+// Initialized when server starts
+var openSearchXML string
+
 // Marshals 'i' and writes to ResponseWriter
 func sendJSON(w http.ResponseWriter, i interface{}) error {
 	b, err := json.Marshal(i)
@@ -20,7 +30,7 @@ func sendJSON(w http.ResponseWriter, i interface{}) error {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Origin", config.NextDomain)
 
 	_, err = w.Write(b)
 	if err != nil {
@@ -75,8 +85,28 @@ func openSuggest(w http.ResponseWriter, r *http.Request) {
 	sendJSON(w, s)
 }
 
+func serveOpenSearchXML(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", config.NextDomain)
+	w.Header().Set("Content-Type", "application/opensearchdescription+xml")
+	fmt.Fprintf(w, openSearchXML)
+}
+
 func main() {
-	port := os.Args[1]
+	b, err := os.ReadFile("../config.json")
+	if err != nil {
+		panic(fmt.Errorf("main: couldn't read config.json: %v", err))
+	}
+	err = json.Unmarshal(b, &config)
+	if err != nil {
+		panic(fmt.Errorf("main: couldn't parse config.json: %v", err))
+	}
+
+	b, err = os.ReadFile("opensearch-template")
+	if err != nil {
+		panic(fmt.Errorf("main: couldn't read OpenSearch XML template: %v", err))
+	}
+	openSearchXML = fmt.Sprintf(string(b), config.NextDomain, config.APIDomain, config.APIDomain)
+
 	http.HandleFunc("/search", search)
 	// I deduced the format by sending requests to these links (assume 'test' is the query):
 	// https://www.startpage.com/suggestions?q=test&format=opensearch
@@ -86,5 +116,6 @@ func main() {
 	// Update:
 	// https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki
 	http.HandleFunc("/opensuggest", openSuggest)
-	log.Fatal(http.ListenAndServe(fmt.Sprintf("localhost:%s", port), nil))
+	http.HandleFunc("/opensearch.xml", serveOpenSearchXML)
+	log.Fatal(http.ListenAndServe(config.APIDomain, nil))
 }
