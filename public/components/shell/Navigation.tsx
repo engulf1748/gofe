@@ -1,8 +1,9 @@
 import { useTheme } from "next-themes";
-import { icons } from "../../data/icons";
 
 import Logo from "../Logo";
 import SearchBar from "../search/SearchBar";
+
+import { icons } from "../../data/icons";
 
 
 const Navigation = () => {
@@ -22,7 +23,7 @@ const Navigation = () => {
 			<div className="wrapper flex-c">
 				<div className='w-100p h-100p grid grid-3 gap-0 tablet-grid-2 landscape-grid-1'>
 					<div className='primary-grid-block grid-block justify-s align-c flex-row'>
-						<Logo />
+						<Logo clearQueryOnClick />
 						<div className="w-100p mw-20r landscape-mw-none">
 							<SearchBar inNav />
 						</div>
