@@ -8,7 +8,7 @@ const Logo = ({  }: Props) => {
 	return (
 		<InternalLink href='/'>
 			<a className='logo'>
-				<p>Gofë</p>
+				<div><p>Gofë</p></div>
 			</a>
 		</InternalLink>
 	);

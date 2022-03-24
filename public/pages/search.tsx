@@ -12,6 +12,7 @@ import searchAPI from '../services/search';
 
 import type { Result } from '../types/Search';
 import { usePrevious } from '../hooks/usePrevious';
+import { useQuery } from '../providers/QueryProvider';
 
 
 interface Props {
@@ -23,10 +24,20 @@ const SearchPage = ({ query, page }: Props) => {
 	const [results, setResults] = useState<Result[] | undefined>(undefined);
 	const previousQuery = usePrevious(query);
 	const previousPage = usePrevious(page);
+const { query: savedQuery, setQuery } = useQuery();
 
 	// TODO:
 	// We need to check the validity of the query
 	// here and show an error if it's null.
+
+	useEffect(() => {
+		// Manually update the query state interally
+		// so that all nested components have up-to-date
+		// data.
+		if (query && query !== savedQuery) {
+			setQuery(query);
+		}
+	}, []);
 
 	useEffect(() => {
 		if (query !== previousQuery || page !== previousPage) {
@@ -61,8 +72,7 @@ const SearchPage = ({ query, page }: Props) => {
 
 			<div className="results">
 				{results.map(result => <TextResult key={result.URL} {...result} />)}
-
-				<Pagination query={query} page={Number(page) || 1} />
+				<Pagination page={Number(page) || 1} />
 			</div>
 		</div>
 	);

@@ -1,12 +1,12 @@
 import InternalLink from "../InternalLink";
 
-import { getSearchPageURL } from "../../logic/query";
 import { useQuery } from "../../providers/QueryProvider";
-import { useCallback } from "react";
+
+import { getSearchPageURL } from "../../logic/query";
+
 import { icons } from "../../data/icons";
 
 interface Props {
-	query: string;
 	page: number;
 }
 
@@ -27,7 +27,7 @@ const PaginationLink = ({ goesToPage, children }: PaginationLinkProps) => {
 	);
 }
 
-const Pagination = ({ query, page }: Props) => {
+const Pagination = ({ page }: Props) => {
 	return (
 		<div className="w-100p mt-3r">
 			<div className="w-100p mw-35r grid grid-3">

@@ -62,7 +62,7 @@ $max-width: 25rem;
 	position: absolute;
 	right: 1px;
 	padding: 0 0.75rem;
-	height: calc($height-sm - 2px);
+	height: calc($height - 2px);
 	appearance: none;
 	background-color: var(--ui);
 	border: none;
@@ -71,6 +71,18 @@ $max-width: 25rem;
 	cursor: pointer;
 	border-top-right-radius: $radius;
 	border-bottom-right-radius: $radius;
+
+	nav & {
+		height: calc($height-sm - 2px);
+	}
+
+	&:focus {
+		background-color: var(--ui-1);
+
+		html.dark & {
+			background-color: var(--ui-2);
+		}
+	}
 
 	html.dark & {
 		background-color: var(--ui-1);
