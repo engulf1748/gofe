@@ -1,6 +1,6 @@
 # Gofë
 
-Gofë is a front-end for Google Search.
+Gofë is a front-end for Google Search. It currently supports textual search.
 
 The back-end is written in Go, and the front-end is written in TypeScript.
 
