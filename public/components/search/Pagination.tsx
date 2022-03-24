@@ -33,7 +33,7 @@ const Pagination = ({ page }: Props) => {
 			<div className="w-100p mw-35r grid grid-3">
 				<div className="grid-block">
 					{page !== 1 && (
-						<PaginationLink goesToPage={Math.max(page - 1, 0)}>
+						<PaginationLink goesToPage={Math.max(page - 1, 1)}>
 							<i className="j-icon mr-0-25r previous">{icons.arrowSmLeft}</i>
 							<span>Previous</span>
 						</PaginationLink>
