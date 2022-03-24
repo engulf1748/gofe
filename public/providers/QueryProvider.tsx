@@ -11,7 +11,6 @@ import { usePrevious } from '../hooks/usePrevious';
 
 import type { ChildrenOnly } from '../types/util';
 
-// import { suggestions as STATIC_SUGGESTIONS } from '../data/suggestions.tmp';
 import suggestionAPI from '../services/suggestions';
 
 interface TQueryContext {
@@ -46,6 +45,12 @@ const QueryProvider = ({ children }: ChildrenOnly) => {
 				})
 		}
 	}, [query, previousQuery]);
+
+	useEffect(() => {
+		if (query.trim() === '') {
+			setSuggestions([]);
+		}
+	}, [query]);
 
 	const value: TQueryContext = {
 		query,

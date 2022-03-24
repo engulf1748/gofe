@@ -88,6 +88,8 @@ const SearchBar = ({ inNav }: Props) => {
 	useEffect(() => {
 		if (query.trim() !== '' && query !== previousQuery) {
 			setShowSuggestions(suggestions.length !== 0);
+		} else {
+			setShowSuggestions(false);
 		}
 	}, [query]);
 
@@ -97,7 +99,10 @@ const SearchBar = ({ inNav }: Props) => {
 		// target DOM node.
 		// @ts-ignore
 		inputRef.current.focus();
-		setShowSuggestions(true);
+		
+		if (query.trim() !== '') {
+			setShowSuggestions(true);
+		}
 	}
 
 	const onChange = (ev: any) => {
@@ -171,6 +176,12 @@ const SearchBar = ({ inNav }: Props) => {
 					if (key === 'enter') {
 						ev.preventDefault();
 						onSearchButtonClick();
+					}
+
+					if (key === 'esc') {
+						// See focus() method for why we ignore this
+						// @ts-ignore
+						inputRef?.current?.blur();
 					}
 
 					setShowSuggestions(false);
