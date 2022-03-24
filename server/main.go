@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 
 	"codeberg.org/ar324/gofe/api"
 )
@@ -105,7 +106,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Errorf("main: couldn't read OpenSearch XML template: %v", err))
 	}
-	openSearchXML = fmt.Sprintf(string(b), config.NextDomain, config.APIDomain, config.APIDomain)
+	openSearchXML = fmt.Sprintf(string(b), config.NextDomain, config.NextDomain, config.APIDomain)
 
 	http.HandleFunc("/search", search)
 	// I deduced the format by sending requests to these links (assume 'test' is the query):
@@ -117,5 +118,6 @@ func main() {
 	// https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki
 	http.HandleFunc("/opensuggest", openSuggest)
 	http.HandleFunc("/opensearch.xml", serveOpenSearchXML)
-	log.Fatal(http.ListenAndServe(config.APIDomain, nil))
+	// TODO: Handle this better
+	log.Fatal(http.ListenAndServe(strings.Replace(config.APIDomain, "http://", "", 1), nil))
 }
