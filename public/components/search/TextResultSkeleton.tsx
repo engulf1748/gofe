@@ -10,7 +10,6 @@ const TextResultSkeleton = () => {
 				</div>
 				<div className="s-context one skeleton"></div>
 				<div className="s-context two skeleton"></div>
-				<div className="s-context three skeleton"></div>
 			</div>
 		</div>
 	);
