@@ -6,6 +6,7 @@ import PageTitle from '../components/util/PageTitle';
 import TextResult from '../components/search/TextResult';
 import NoSearchResults from '../components/search/states/NoSearchResults';
 import ResultsLoading from '../components/search/states/ResultsLoading';
+import Pagination from '../components/search/Pagination';
 
 import searchAPI from '../services/search';
 
@@ -15,22 +16,24 @@ import { usePrevious } from '../hooks/usePrevious';
 
 interface Props {
 	query: string;
+	page: string;
 }
 
-const SearchPage = ({ query }: Props) => {
+const SearchPage = ({ query, page }: Props) => {
 	const [results, setResults] = useState<Result[] | undefined>(undefined);
 	const previousQuery = usePrevious(query);
+	const previousPage = usePrevious(page);
 
 	// TODO:
 	// We need to check the validity of the query
 	// here and show an error if it's null.
 
 	useEffect(() => {
-		if (query !== previousQuery) {
+		if (query !== previousQuery || page !== previousPage) {
 			setResults(undefined);
 
 			searchAPI
-				.getSearchResults(query)
+				.getSearchResults(query, page)
 				.then(data => data)
 				.catch(err => {
 					console.error(err);
@@ -42,7 +45,7 @@ const SearchPage = ({ query }: Props) => {
 					}
 				});
 		}
-	}, [query]);
+	}, [query, page, previousQuery, previousPage]);
 
 	if (!results) {
 		return <ResultsLoading />;
@@ -58,6 +61,8 @@ const SearchPage = ({ query }: Props) => {
 
 			<div className="results">
 				{results.map(result => <TextResult key={result.URL} {...result} />)}
+
+				<Pagination query={query} page={Number(page) || 1} />
 			</div>
 		</div>
 	);
@@ -65,12 +70,14 @@ const SearchPage = ({ query }: Props) => {
 
 const getServerSideProps = async (context: any) => {
 	const query = context?.query?.q;
+	const page = context?.query?.p || null;
 
-	if (!query || !Boolean(query)) return { props: { query: null } };
+	if (!query || !Boolean(query)) return { props: { query: null, page: 1 } };
 
 	return {
 		props: {
 			query,
+			page,
 		}
 	}
 }

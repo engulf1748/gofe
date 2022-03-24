@@ -4,8 +4,8 @@ import { getSearchPageURL } from '../logic/query';
 
 import config from '../data/config';
 
-const getSearchResults = async (query: string) => {
-	return axios.get(`${config.apiURL}${getSearchPageURL(query)}`)
+const getSearchResults = async (query: string, page: string | null) => {
+	return axios.get(`${config.apiURL}${getSearchPageURL(query, page)}`)
 		.then(res => res.data)
 		.catch(err => {
 			console.error(err);
