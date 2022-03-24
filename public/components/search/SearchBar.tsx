@@ -25,7 +25,7 @@ const Suggestion = ({ suggestion }: SuggestionProps) => {
 
 	const onClick = () => {
 		setQuery(suggestion);
-		push(getSearchPageURL(suggestion));
+		push(getSearchPageURL(suggestion, 1));
 	}
 
 	return (
@@ -86,7 +86,7 @@ const SearchBar = () => {
 			return;
 		}
 
-		push(getSearchPageURL(query));
+		push(getSearchPageURL(query, 1));
 	}
 
 	return (

@@ -17,14 +17,14 @@ import { useQuery } from '../providers/QueryProvider';
 
 interface Props {
 	query: string;
-	page: string;
+	page: number;
 }
 
 const SearchPage = ({ query, page }: Props) => {
 	const [results, setResults] = useState<Result[] | undefined>(undefined);
 	const previousQuery = usePrevious(query);
 	const previousPage = usePrevious(page);
-const { query: savedQuery, setQuery } = useQuery();
+	const { query: savedQuery, setQuery } = useQuery();
 
 	// TODO:
 	// We need to check the validity of the query
@@ -44,7 +44,7 @@ const { query: savedQuery, setQuery } = useQuery();
 			setResults(undefined);
 
 			searchAPI
-				.getSearchResults(query, page)
+				.getSearchResults(query, page || 1)
 				.then(data => data)
 				.catch(err => {
 					console.error(err);
@@ -80,14 +80,14 @@ const { query: savedQuery, setQuery } = useQuery();
 
 const getServerSideProps = async (context: any) => {
 	const query = context?.query?.q;
-	const page = context?.query?.p || null;
+	const page = context?.query?.p || 1;
 
 	if (!query || !Boolean(query)) return { props: { query: null, page: 1 } };
 
 	return {
 		props: {
 			query,
-			page,
+			page: Number(page) || 1,
 		}
 	}
 }

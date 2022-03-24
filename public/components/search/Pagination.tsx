@@ -11,7 +11,7 @@ interface Props {
 }
 
 interface PaginationLinkProps {
-	goesToPage: string;
+	goesToPage: number;
 	children: React.ReactNode;
 }
 
@@ -33,7 +33,7 @@ const Pagination = ({ page }: Props) => {
 			<div className="w-100p mw-35r grid grid-3">
 				<div className="grid-block">
 					{page !== 1 && (
-						<PaginationLink goesToPage={String(Math.max(page - 1, 1))}>
+						<PaginationLink goesToPage={Math.max(page - 1, 0)}>
 							<i className="j-icon mr-0-25r previous">{icons.arrowSmLeft}</i>
 							<span>Previous</span>
 						</PaginationLink>
@@ -45,7 +45,7 @@ const Pagination = ({ page }: Props) => {
 				</div>
 
 				<div className="grid-block align-e">
-					<PaginationLink goesToPage={String(page + 1)}>
+					<PaginationLink goesToPage={page + 1}>
 						<span>Next</span>
 						<i className="j-icon ml-0-25r">{icons.arrowSmRight}</i>
 					</PaginationLink>
