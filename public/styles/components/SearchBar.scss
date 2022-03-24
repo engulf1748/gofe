@@ -98,7 +98,7 @@ $max-width: 25rem;
 	width: 100%;
 	background-color: var(--ui);
 	max-height: 30rem;
-	overflow-y: scroll;
+	overflow-y: auto;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import classNames from "classnames";
 
@@ -11,46 +11,65 @@ import { getSearchPageURL } from '../../logic/query';
 import { icons } from '../../data/icons';
 
 
+interface Props {
+	inNav?: boolean;
+}
+
 interface SuggestionsProps {
 	suggestions: string[];
+	setShowSuggestions(v: boolean): void;
 }
 
 interface SuggestionProps {
 	suggestion: string;
+	setShowSuggestions(v: boolean): void;
 }
 
-const Suggestion = ({ suggestion }: SuggestionProps) => {
+const Suggestion = ({ suggestion, setShowSuggestions }: SuggestionProps) => {
 	const { setQuery } = useQuery();
 	const { push } = useRouter();
 
-	const onClick = () => {
+	const onClick = useCallback(() => {
 		setQuery(suggestion);
 		push(getSearchPageURL(suggestion, 1));
-	}
+
+		// Due to the way updates flow through React,
+		// arbitrary timeouts are sometimes necessary
+		// for more complicated UI views.
+		setTimeout(() => setShowSuggestions(false), 30);
+	}, [suggestion]);
 
 	return (
 		<button className="search-suggestion" onClick={onClick}>{suggestion}</button>
 	);
 }
 
-const Suggestions = ({ suggestions }: SuggestionsProps) => {
+const Suggestions = ({ suggestions, setShowSuggestions }: SuggestionsProps) => {
 	return (
-		<div className="search-suggestions shadow-sm">
-			{suggestions.map(suggestion => (
-				<Suggestion key={suggestion} suggestion={suggestion} />
-			))}
+		<div className='search-suggestions shadow-sm'>
+			{suggestions ? (
+				suggestions.map(suggestion => (
+					<Suggestion
+						key={suggestion}
+						suggestion={suggestion}
+						setShowSuggestions={setShowSuggestions}
+					/>
+				))
+			) : (
+				<p className='my-0-5r fs-sm text-dynamic-08'>Unable to fetch suggestions.</p>
+			)}
 		</div>
 	);
 }
 
-const SearchBar = () => {
-	const { query, setQuery, suggestions } = useQuery();
+const SearchBar = ({ inNav }: Props) => {
+	const { query, setQuery, previousQuery, suggestions } = useQuery();
 	const { push, query: routerQuery } = useRouter();
 	const inputRef = useRef();
 
-	const [shouldShowSuggestions, setShouldShowSuggestions] = useState(false);
+	const [showSuggestions, setShowSuggestions] = useState(false);
 
-	const close = () => setShouldShowSuggestions(false);
+	const close = () => setShowSuggestions(false);
 
 	useEffect(() => {
 		if (routerQuery.q) {
@@ -59,12 +78,18 @@ const SearchBar = () => {
 	}, []);
 
 	useEffect(() => {
-		if (shouldShowSuggestions) {
+		if (showSuggestions) {
 			document.addEventListener('click', close);
 		}
 
 		return () => document.removeEventListener('click', close);
-	}, [shouldShowSuggestions]);
+	}, [showSuggestions]);
+
+	useEffect(() => {
+		if (query.trim() !== '' && query !== previousQuery) {
+			setShowSuggestions(suggestions.length !== 0);
+		}
+	}, [query]);
 
 	const focus = () => {
 		// We can ignore this because React ensures
@@ -72,6 +97,7 @@ const SearchBar = () => {
 		// target DOM node.
 		// @ts-ignore
 		inputRef.current.focus();
+		setShowSuggestions(true);
 	}
 
 	const onChange = (ev: any) => {
@@ -79,6 +105,12 @@ const SearchBar = () => {
 			setQuery(ev.target.value);
 		}
 	}
+
+	const onInputClick = useCallback(() => {
+		if (suggestions && suggestions.length !== 0) {
+			setShowSuggestions(true);
+		}
+	}, [suggestions]);
 
 	const onSearchButtonClick = () => {
 		if (query === '') {
@@ -93,7 +125,7 @@ const SearchBar = () => {
 		<>
 			<div className={classNames([
 				'search-wrapper',
-				shouldShowSuggestions && 'showing-suggestions shadow-sm'
+				showSuggestions && 'showing-suggestions shadow-sm'
 			])}>
 				<div className='search-bar-wrapper w-100p flex align-c justify-c flex-row relative'>
 					<input
@@ -105,18 +137,23 @@ const SearchBar = () => {
 						ref={inputRef}
 						type='text'
 						placeholder='Search privately...'
+						value={query}
 						onChange={onChange}
 						defaultValue={query}
 						className='search-bar shadow-sm'
-						onClick={() => setShouldShowSuggestions(true)}
+						onClick={onInputClick}
+						autoFocus={!inNav}
 					/>
 
 					<button className='search-icon flex-c' onClick={onSearchButtonClick}>
 						<i className='j-icon'>{icons.search}</i>
 					</button>
 				</div>
-				{shouldShowSuggestions && (
-					<Suggestions suggestions={suggestions} />
+				{showSuggestions && suggestions && suggestions.length !== 0 && (
+					<Suggestions
+						suggestions={suggestions}
+						setShowSuggestions={setShowSuggestions}
+					/>
 				)}
 			</div>
 
@@ -136,7 +173,7 @@ const SearchBar = () => {
 						onSearchButtonClick();
 					}
 
-					setShouldShowSuggestions(false);
+					setShowSuggestions(false);
 				}}
 				handleFocusableElements
 			/>

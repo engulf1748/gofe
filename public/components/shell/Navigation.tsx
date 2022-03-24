@@ -24,7 +24,7 @@ const Navigation = () => {
 					<div className='primary-grid-block grid-block justify-s align-c flex-row'>
 						<Logo />
 						<div className="w-100p mw-20r landscape-mw-none">
-							<SearchBar />
+							<SearchBar inNav />
 						</div>
 					</div>
 					<div className="grid-block tablet-hide"></div>

@@ -6,7 +6,7 @@ const Document = () => {
 	return (
 		<Html>
 			<Head>
-				<link rel="preconnect" href={config.apiURL} />
+				<link rel="preconnect" href={config.api_domain} />
 				<link
 					rel="search"
 					type="application/opensearchdescription+xml"

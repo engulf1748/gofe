@@ -7,29 +7,50 @@ import React, {
 	SetStateAction,
 } from 'react';
 
+import { usePrevious } from '../hooks/usePrevious';
+
 import type { ChildrenOnly } from '../types/util';
 
-import { suggestions as STATIC_SUGGESTIONS } from '../data/suggestions.tmp';
+// import { suggestions as STATIC_SUGGESTIONS } from '../data/suggestions.tmp';
+import suggestionAPI from '../services/suggestions';
 
 interface TQueryContext {
 	query: string;
 	setQuery: Dispatch<SetStateAction<string>>;
-	suggestions: string[];
+	previousQuery: string;
+	suggestions: string[] | undefined;
 }
 
 const QueryContext = createContext<any>({});
 
 const QueryProvider = ({ children }: ChildrenOnly) => {
 	const [query, setQuery] = useState('');
-	const [suggestions, setSuggestions] = useState(STATIC_SUGGESTIONS);
+	const previousQuery = usePrevious(query);
+	const [suggestions, setSuggestions] = useState<string[] | undefined>([]);
 
 	useEffect(() => {
-		
-	}, [query]);
+		if (query.trim() && query !== previousQuery) {
+			suggestionAPI
+				.getSuggestions(query)
+				.then(data => data)
+				.catch(err => {
+					console.error(err);
+					return err;
+				})
+				.then(data => {
+					if (!data || data.length !== 2) {
+						setSuggestions(undefined);
+					}
+
+					setSuggestions(data[1]);
+				})
+		}
+	}, [query, previousQuery]);
 
 	const value: TQueryContext = {
 		query,
 		setQuery,
+		previousQuery,
 		suggestions,
 	};
 

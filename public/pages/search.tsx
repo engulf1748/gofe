@@ -37,7 +37,7 @@ const SearchPage = ({ query, page }: Props) => {
 		if (query && query !== savedQuery) {
 			setQuery(query);
 		}
-	}, []);
+	}, [query]);
 
 	useEffect(() => {
 		if (query !== previousQuery || page !== previousPage) {
