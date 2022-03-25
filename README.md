@@ -4,6 +4,10 @@
 
 Gofë is a front-end for Google Search. It currently supports textual search.
 
+The official instance (the one that we, the primary developers, run) is
+https://gofe.app. You can find a list of third-party instances
+[here](INSTANCES.md).
+
 ## Why?
 
 Gofë prevents Google's IP- and browser-fingerprinting by acting as a
