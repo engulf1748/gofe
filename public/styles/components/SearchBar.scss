@@ -135,7 +135,7 @@ $max-width: 25rem;
 	cursor: pointer;
 	transition: var(--d-f-1) var(--e-s);
 
-	&:hover {
+	&:hover, &:focus {
 		background-color: var(--ui-1);
 
 		html.dark & {
