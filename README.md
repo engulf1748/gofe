@@ -4,7 +4,22 @@
 
 Gofë is a front-end for Google Search. It currently supports textual search.
 
-The back-end is written in Go, and the front-end is written in TypeScript.
+## Why?
+
+Gofë prevents Google's IP- and browser-fingerprinting by acting as a
+middleperson between you and Google Search. This gives you better privacy.
+
+## Other Forms of Search
+
+We may add image-, video-, and news-search in the future. We may also add
+'Instant Answer's.
+
+## Technical Details
+
+The API that fetches data from Google Search is written in Go and can be found
+in `api/`. The Go server that utilizes this API to handle client requests can be
+found in `server/`. The front-end is written in TypeScript, using NextJS: the
+relevant source code can be found in `public/`.
 
 ## Screenshots
 
