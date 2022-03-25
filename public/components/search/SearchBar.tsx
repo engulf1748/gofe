@@ -144,7 +144,6 @@ const SearchBar = ({ inNav }: Props) => {
 						placeholder='Search privately...'
 						value={query}
 						onChange={onChange}
-						defaultValue={query}
 						className='search-bar shadow-sm'
 						onClick={onInputClick}
 						autoFocus={!inNav}
