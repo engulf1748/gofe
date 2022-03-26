@@ -1,0 +1,71 @@
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("font-files/Inter-Regular.woff2?{{font_v}}") format("woff2"),
+    url("font-files/Inter-Regular.woff?{{font_v}}") format("woff");
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+    src: url("font-files/Inter-Italic.woff2?{{font_v}}") format("woff2"),
+    url("font-files/Inter-Italic.woff?{{font_v}}") format("woff");
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("font-files/Inter-Medium.woff2?{{font_v}}") format("woff2"),
+    url("font-files/Inter-Medium.woff?{{font_v}}") format("woff");
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 500;
+    font-display: swap;
+    src: url("font-files/Inter-MediumItalic.woff2?{{font_v}}") format("woff2"),
+    url("font-files/Inter-MediumItalic.woff?{{font_v}}") format("woff");
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("font-files/Inter-SemiBold.woff2?{{font_v}}") format("woff2"),
+    url("font-files/Inter-SemiBold.woff?{{font_v}}") format("woff");
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 600;
+    font-display: swap;
+    src: url("font-files/Inter-SemiBoldItalic.woff2?{{font_v}}") format("woff2"),
+    url("font-files/Inter-SemiBoldItalic.woff?{{font_v}}") format("woff");
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("font-files/Inter-Bold.woff2?{{font_v}}") format("woff2"),
+    url("font-files/Inter-Bold.woff?{{font_v}}") format("woff");
+}
+
+@font-face {
+    font-family: 'Inter';
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("font-files/Inter-BoldItalic.woff2?{{font_v}}") format("woff2"),
+    url("font-files/Inter-BoldItalic.woff?{{font_v}}") format("woff");
+}

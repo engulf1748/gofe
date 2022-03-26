@@ -7,3 +7,18 @@
 @use './components/Navigation';
 @use './components/SearchBar';
 @use './components/View';
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+a,
+button {
+	font-family: 'Inter', 'Roboto', 'Open Sans', Arial, Helvetica, sans-serif;
+}

@@ -9,6 +9,7 @@ import type { ChildrenOnly } from '../types/util';
 
 import '../styles/jupiterui.css';
 import '../styles/global.scss';
+import '../assets/fonts/inter.css';
 
 //////////
 
