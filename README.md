@@ -21,9 +21,9 @@ We may add image-, video-, and news-search in the future. We may also add
 ## Technical Details
 
 The API that fetches data from Google Search is written in Go and can be found
-in `api/`. The Go server that utilizes this API to handle client requests can be
-found in `server/`. The front-end is written in TypeScript, using NextJS: the
-relevant source code can be found in `public/`.
+in `api/`. The root folder contains the Go server that utilizes this API to
+handle client requests. The front-end is written in TypeScript, using NextJS:
+the relevant source code can be found in `public/`.
 
 ## Screenshots
 
