@@ -180,3 +180,29 @@ $gutter: 0.6rem;
 		border-color: currentColor;
 	}
 }
+
+.suggestion-pills {
+	width: 100%;
+	max-width: 40rem;
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-wrap: wrap;
+
+	& .suggestion-pill {
+		appearance: none;
+		background-color: var(--ui-1);
+		border-radius: 90px;
+		padding: 0.5rem 1rem;
+		color: var(--text-color);
+		font-size: 0.875rem;
+		font-weight: 500;
+		margin: 0 0.5rem 0.5rem 0;
+		cursor: pointer;
+		transition: var(--d-m-2) var(--e-s);
+
+		&:hover {
+			background-color: var(--ui-2);
+		}
+	}
+}

@@ -13,6 +13,7 @@ import searchAPI from '../services/search';
 import type { Result } from '../types/Search';
 import { usePrevious } from '../hooks/usePrevious';
 import { useQuery } from '../providers/QueryProvider';
+import RelatedSearches from '../components/search/RelatedSearches';
 
 
 interface Props {
@@ -72,6 +73,7 @@ const SearchPage = ({ query, page }: Props) => {
 
 			<div className="results">
 				{results.map(result => <TextResult key={result.URL} {...result} />)}
+				<RelatedSearches />
 				<Pagination page={Number(page) || 1} />
 			</div>
 		</div>
