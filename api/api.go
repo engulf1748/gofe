@@ -12,23 +12,24 @@ import (
 	"golang.org/x/net/html"
 )
 
-// Query URL
+// query URL
 const qurl = "https://google.com/search?&q=%s&start=%d"
 
-// Suggestions URL
+// suggestions URL
 // xssi = t seems to be necessary for application/json output
 const surl = "https://www.google.com/complete/search?q=%s&client=firefox&xssi=t"
 
+// Represents a single search result.
 type Result struct {
 	URL     string
 	Desc    string
 	Context string
 }
 
-// Remove's Google's claws
+// remove's Google's claws
 func (r *Result) sanitize() {
 	v := r.URL
-	// TODO: Something less kludgy, perhaps?
+	// TODO: something less kludgy, perhaps?
 	if strings.HasPrefix(v, "/url?q=") {
 		v = strings.Replace(v, "/url?q=", "", 1)
 		v = strings.Split(v, "&sa")[0]
@@ -38,6 +39,7 @@ func (r *Result) sanitize() {
 	r.URL = v
 }
 
+// A slice of Result pointers.
 type Results []*Result
 
 func (rs Results) sanitize() {
@@ -46,6 +48,7 @@ func (rs Results) sanitize() {
 	}
 }
 
+// A slice of strings to store suggestions in, essentially.
 type Suggestions []string
 
 // WOAH!
@@ -63,7 +66,7 @@ func getContent(n *html.Node) string {
 			b.WriteString(" ")
 			return
 		}
-		// depth first
+		// depth-first search
 		for n = n.FirstChild; n != nil; n = n.NextSibling {
 			gc(n)
 		}
@@ -98,7 +101,7 @@ func findURLs(n *html.Node) Results {
 					s := getContent(p)
 					result.Context = strings.ToValidUTF8(s, "")
 				}
-				// Apologies
+				// my sincerest apologies
 				if result.URL != "" {
 					rs = append(rs, &result)
 				}
@@ -119,18 +122,21 @@ func findURLs(n *html.Node) Results {
 	return rs
 }
 
+// we don't want to wait on a request forever, do we?
 func timeoutClient() *http.Client {
 	return &http.Client{
 		Timeout: 5 * time.Second,
 	}
 }
 
-// `page` is 0-indexed
-func Search(term string, page int) (Results, error) {
+// Queries Google Search for `query` and returns a `Results`. Note that `page`
+// is 0-indexed. There might be an error, so do check for it before using the
+// returned `Results`.
+func Search(query string, page int) (Results, error) {
 	page *= 10 // I do not know why—ask Google
-	term = url.QueryEscape(term)
+	query = url.QueryEscape(query)
 	client := timeoutClient()
-	resp, err := client.Get(fmt.Sprintf(qurl, term, page))
+	resp, err := client.Get(fmt.Sprintf(qurl, query, page))
 	if err != nil {
 		return nil, err
 	}
@@ -147,10 +153,12 @@ func Search(term string, page int) (Results, error) {
 	return rs, nil
 }
 
-func Suggest(term string) (Suggestions, error) {
-	term = url.QueryEscape(term)
+// Suggests queries based on `query` and returns a `Suggestions`. There might be
+// an error, so do check for it before using the returned `Suggestions`.
+func Suggest(query string) (Suggestions, error) {
+	query = url.QueryEscape(query)
 	client := timeoutClient()
-	resp, err := client.Get(fmt.Sprintf(surl, term))
+	resp, err := client.Get(fmt.Sprintf(surl, query))
 	if err != nil {
 		return nil, err
 	}
@@ -159,7 +167,7 @@ func Suggest(term string) (Suggestions, error) {
 		return nil, fmt.Errorf("Suggest: http.Get returned non-200 status code: %v", resp.StatusCode)
 	}
 	b, err := io.ReadAll(resp.Body)
-	b = b[4:] // )]}' is needlessly prefixed to the response
+	b = b[4:] // )]}' is needlessly prefixed to the response. any idea why?
 	var sr suggestResponse
 	err = json.Unmarshal(b, &sr)
 	if err != nil {
