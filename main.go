@@ -91,7 +91,7 @@ func serveOpenSearchXML(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	b, err := os.ReadFile("../config.json")
+	b, err := os.ReadFile("config.json")
 	if err != nil {
 		panic(fmt.Errorf("main: couldn't read config.json: %v", err))
 	}
