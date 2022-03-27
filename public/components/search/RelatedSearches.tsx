@@ -10,7 +10,7 @@ const RelatedSearches = () => {
 		push(`/search?q=${suggestion}`);
 	}
 
-	if (!suggestions) return <></>;
+	if (!suggestions || suggestions.length === 0) return <></>;
 
 	return (
 		<div className="w-100p mt-3r">
