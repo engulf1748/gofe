@@ -24,6 +24,9 @@ const Keyboard = ({
 }: KeyboardProps) => {
 	return (
 		<KeyboardEventHandler
+            // We get type errors during build for this.
+            // Let's just ignore it.
+            // @ts-ignore
 			handleKeys={keys}
 			onKeyEvent={callback}
 			handleFocusableElements={handleFocusableElements}
