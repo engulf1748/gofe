@@ -90,7 +90,12 @@ func serveOpenSearchXML(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, openSearchXML)
 }
 
+func catchAll(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusNotFound)
+}
+
 func main() {
+	// config
 	b, err := os.ReadFile("config.json")
 	if err != nil {
 		panic(fmt.Errorf("main: couldn't read config.json: %v", err))
@@ -100,21 +105,29 @@ func main() {
 		panic(fmt.Errorf("main: couldn't parse config.json: %v", err))
 	}
 
+	// OpenSearch
 	b, err = os.ReadFile("opensearch-template")
 	if err != nil {
 		panic(fmt.Errorf("main: couldn't read OpenSearch XML template: %v", err))
 	}
 	openSearchXML = fmt.Sprintf(string(b), config.NextDomain, config.NextDomain, config.APIDomain)
 
+	// log file
+	f, err := os.OpenFile("server.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0600)
+	if err != nil {
+		panic(fmt.Errorf("main: couldn't open server.log: %v", err))
+	}
+
 	mux := http.NewServeMux()
 	m := map[string]func(http.ResponseWriter, *http.Request){
+		"/":       catchAll,
 		"/search": search,
 		// https://github.com/dewitt/opensearch/blob/master/mediawiki/Specifications/OpenSearch/Extensions/Suggestions/1.1/Draft%201.wiki
 		"/opensuggest":    openSuggest,
 		"/opensearch.xml": serveOpenSearchXML,
 	}
 	for k, v := range m {
-		mux.Handle(k, loggingHandler(nil, corsHandler(http.HandlerFunc(v))))
+		mux.Handle(k, loggingHandler(f, corsHandler(http.HandlerFunc(v))))
 	}
 
 	addr := strings.TrimPrefix(config.APIDomain, "http://")
