@@ -125,7 +125,7 @@ func findURLs(n *html.Node) Results {
 // we don't want to wait on a request forever, do we?
 func timeoutClient() *http.Client {
 	return &http.Client{
-		Timeout: 5 * time.Second,
+		Timeout: 20 * time.Second,
 	}
 }
 
