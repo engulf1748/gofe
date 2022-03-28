@@ -9,11 +9,11 @@ import type { APIError } from '../../../services/err';
 
 
 const errorContent = {
-	NoResponse: {
+	BadResponse: {
 		title: 'Something went wrong',
 		description: 'We encountered an error fetching your search results. If you keep getting this error, please open an issue.'
 	},
-	BadResponse: {
+	NoResponse: {
 		title: 'Server not responding',
 		description: 'The search server is not responding. If you continue to have this problem, please open an issue.',
 	},
