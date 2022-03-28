@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
+import { usePrevious } from '../hooks/usePrevious';
+import { useQuery } from '../providers/QueryProvider';
+
 import Layout from '../components/layout/Layout';
 import PageTitle from '../components/util/PageTitle';
 import TextResult from '../components/search/TextResult';
 import NoSearchResults from '../components/search/states/NoSearchResults';
 import ResultsLoading from '../components/search/states/ResultsLoading';
 import Pagination from '../components/search/Pagination';
+import SearchError from '../components/search/states/SearchError';
+import RelatedSearches from '../components/search/RelatedSearches';
 
 import searchAPI from '../services/search';
 
 import type { Result } from '../types/Search';
-import { usePrevious } from '../hooks/usePrevious';
-import { useQuery } from '../providers/QueryProvider';
-import RelatedSearches from '../components/search/RelatedSearches';
+import { APIError } from '../services/err';
 
 
 interface Props {
@@ -23,13 +26,11 @@ interface Props {
 
 const SearchPage = ({ query, page }: Props) => {
 	const [results, setResults] = useState<Result[] | undefined>(undefined);
+	const [err, setErr] = useState<APIError | false>(false);
+
 	const previousQuery = usePrevious(query);
 	const previousPage = usePrevious(page);
 	const { query: savedQuery, setQuery } = useQuery();
-
-	// TODO:
-	// We need to check the validity of the query
-	// here and show an error if it's null.
 
 	useEffect(() => {
 		// Manually update the query state interally
@@ -46,18 +47,21 @@ const SearchPage = ({ query, page }: Props) => {
 
 			searchAPI
 				.getSearchResults(query, page || 1)
-				.then(data => data)
-				.catch(err => {
-					console.error(err);
-					setResults([]);
-				})
 				.then(data => {
-					if (data) {
-						setResults(data);
+					if (data.type === 'success' && data.data && Array.isArray(data.data)) {
+						setResults(data.data);
+					} else {
+						setResults([]);
+						console.log({data})
+						setErr(data.errorType);
 					}
 				});
 		}
 	}, [query, page, previousQuery, previousPage]);
+
+	if (err) {
+		return <SearchError err={err} />;
+	}
 
 	if (!results) {
 		return <ResultsLoading />;

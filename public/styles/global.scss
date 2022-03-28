@@ -22,3 +22,20 @@ a,
 button {
 	font-family: 'Inter', 'Roboto', 'Open Sans', Arial, Helvetica, sans-serif;
 }
+
+.utility-panel {
+	min-height: calc(100vh - 7rem);
+}
+
+.link {
+	color: var(--text-color-07);
+	font-size: 0.875rem;
+
+	&:hover {
+		text-decoration: underline;
+	}
+
+	html.dark & {
+		color: var(--text-color-09);
+	}
+}

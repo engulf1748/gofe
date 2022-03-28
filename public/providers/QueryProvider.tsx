@@ -18,30 +18,40 @@ interface TQueryContext {
 	setQuery: Dispatch<SetStateAction<string>>;
 	previousQuery: string;
 	suggestions: string[] | undefined;
+	status: Status;
 }
+
+type Status = 'idle' | 'loading' | 'error' | 'noresults' | 'success';
 
 const QueryContext = createContext<any>({});
 
 const QueryProvider = ({ children }: ChildrenOnly) => {
 	const [query, setQuery] = useState('');
 	const previousQuery = usePrevious(query);
+
 	const [suggestions, setSuggestions] = useState<string[] | undefined>([]);
+	const [status, setStatus] = useState<Status>('idle');
 
 	useEffect(() => {
 		if (query.trim() && query !== previousQuery) {
+			setStatus('loading');
+
 			suggestionAPI
 				.getSuggestions(query)
-				.then(data => data)
-				.catch(err => {
-					console.error(err);
-					return err;
-				})
 				.then(data => {
-					if (!data || data.length !== 2) {
-						setSuggestions(undefined);
+					if (data.type === 'empty') {
+						setSuggestions([]);
+						setStatus('noresults');
+						return;
 					}
 
-					setSuggestions(data[1]);
+					if (data.type === 'success' && data.data && data.data.length  === 2) {
+						setSuggestions(data.data[1]);
+						setStatus('success');
+						return;
+					}
+
+					setSuggestions([]);
 				})
 		}
 	}, [query, previousQuery]);
@@ -57,6 +67,7 @@ const QueryProvider = ({ children }: ChildrenOnly) => {
 		setQuery,
 		previousQuery,
 		suggestions,
+		status,
 	};
 
 	return (
