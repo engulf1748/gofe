@@ -153,6 +153,15 @@ func Search(query string, page int) (Results, error) {
 	return rs, nil
 }
 
+// Converts an ISO-8859-1 encoded byte slice to a UTF-8 string
+func iso8859ToUTF8(b []byte) string {
+	buf := make([]rune, len(b))
+	for i, v := range b {
+		buf[i] = rune(v)
+	}
+	return string(buf)
+}
+
 // Suggests queries based on `query` and returns a `Suggestions`. There might be
 // an error, so do check for it before using the returned `Suggestions`.
 func Suggest(query string) (Suggestions, error) {
@@ -168,8 +177,13 @@ func Suggest(query string) (Suggestions, error) {
 	}
 	b, err := io.ReadAll(resp.Body)
 	b = b[4:] // )]}' is needlessly prefixed to the response. any idea why?
+	 // response is ISO-8859-1 encoded
+	// []byte -> []rune -> string -> []byte
+	// there is of course a better way, I'm just too lazy at the moment
+	rb := []byte(iso8859ToUTF8(b))
+
 	var sr suggestResponse
-	err = json.Unmarshal(b, &sr)
+	err = json.Unmarshal(rb, &sr)
 	if err != nil {
 		return nil, fmt.Errorf("Suggest: couldn't unmarshal: %v", err)
 	}
