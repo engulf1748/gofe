@@ -42,7 +42,7 @@ func loggingHandler(out io.Writer, next http.Handler) http.Handler {
 			// 2022/03/27 03:03:44 /opensuggest 500
 			// 2022/03/27 03:03:50 /invliad/path 404
 			// 2022/03/27 03:04:00 /search 200
-			logger.Printf("%s %d\n", r.URL.Path, lw.statusCode)
+			go logger.Printf("%s %d\n", r.URL.Path, lw.statusCode)
 		}
 	})
 }
