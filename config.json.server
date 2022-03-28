@@ -1,0 +1,9 @@
+{
+	"api_domain": "https://api.gofe.app",
+	"_COMMENT": "if using a reverse proxy, api_bind_addr will be different from api_domain",
+	"api_bind_addr": "http://localhost:8080",
+
+	"domain": "https://gofe.app",
+
+	"repository": "https://codeberg.org/ar324/gofe"
+}
