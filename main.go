@@ -13,8 +13,13 @@ import (
 )
 
 type Config struct {
-	APIDomain  string `json:"api_domain"`
-	NextDomain string `json:"next_domain"`
+	// if using a reverse proxy, this program will not bind to the real domain
+	// instead, it'll bind to APIBindAddr
+	APIDomain   string `json:"api_domain"`
+	APIBindAddr string `json:"api_bind_addr"`
+
+	// the front-end
+	Domain string `json:"domain"`
 }
 
 var config Config
@@ -110,7 +115,7 @@ func main() {
 	if err != nil {
 		panic(fmt.Errorf("main: couldn't read OpenSearch XML template: %v", err))
 	}
-	openSearchXML = fmt.Sprintf(string(b), config.NextDomain, config.NextDomain, config.APIDomain)
+	openSearchXML = fmt.Sprintf(string(b), config.Domain, config.Domain, config.APIDomain)
 
 	// log file
 	f, err := os.OpenFile("server.log", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0600)
@@ -130,7 +135,7 @@ func main() {
 		mux.Handle(k, loggingHandler(f, corsHandler(http.HandlerFunc(v))))
 	}
 
-	addr := strings.TrimPrefix(config.APIDomain, "http://")
+	addr := strings.TrimPrefix(config.APIBindAddr, "http://")
 	addr = strings.TrimPrefix(addr, "https://")
 	log.Fatal(http.ListenAndServe(addr, mux))
 }

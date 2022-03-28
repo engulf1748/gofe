@@ -49,7 +49,8 @@ func loggingHandler(out io.Writer, next http.Handler) http.Handler {
 
 func corsHandler(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", config.NextDomain)
+		// allow requests from config.Domain
+		w.Header().Set("Access-Control-Allow-Origin", config.Domain)
 		next.ServeHTTP(w, r)
 	})
 }
