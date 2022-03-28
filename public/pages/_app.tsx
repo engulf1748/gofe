@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { Notifications } from '@infinium/hydro';
 import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 
@@ -10,6 +11,7 @@ import type { ChildrenOnly } from '../types/util';
 import '../styles/jupiterui.css';
 import '../styles/global.scss';
 import '../assets/fonts/inter.css';
+import '@infinium/hydro/dist/style.css';
 
 //////////
 
@@ -40,9 +42,12 @@ const App = ({ Component, pageProps }: AppProps) => {
 			<ThemeProvider attribute='class'>
 				<QueryProvider>
 					<RootLayout>
+						<Notifications />
+
 						<View>
 							<Component {...pageProps} />
 						</View>
+						
 					</RootLayout>
 				</QueryProvider>
 			</ThemeProvider>

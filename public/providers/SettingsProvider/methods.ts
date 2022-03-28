@@ -1,5 +1,5 @@
 const initialSettings = {
-	audio: true,
+	
 };
 
 const _isEmpty = (v: any) => {

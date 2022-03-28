@@ -3,19 +3,6 @@
 	height: 3rem;
 	background-color: var(--ui);
 	border-top: 1px solid var(--ui-2);
-
-	& .link {
-		color: var(--text-color-07);
-		font-size: 0.875rem;
-
-		&:hover {
-			text-decoration: underline;
-		}
-
-		html.dark & {
-			color: var(--text-color-09);
-		}
-	}
 }
 
 @media only screen and (max-width: 767px) {
