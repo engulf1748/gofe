@@ -37,7 +37,14 @@ const getSavedSettings = () => {
 };
 
 const saveSettings = (v: any) => {
-	localStorage.setItem('settings', JSON.stringify(v));
+	try {
+		localStorage.setItem('settings', JSON.stringify(v));
+	} catch (err) {
+		// This usually happens when storage is disabled on the
+		// user's browser. It happens to me when I enable "Block
+		// all cookies" in the Safari preferences.
+		console.error(err);
+	}
 };
 
 export {
