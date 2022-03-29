@@ -1,6 +1,5 @@
 import dynamic from 'next/dynamic';
 import { Notifications } from '@infinium/hydro';
-import { ThemeProvider } from 'next-themes';
 import type { AppProps } from 'next/app';
 
 import SettingsProvider from '../providers/SettingsProvider';
@@ -39,18 +38,16 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 	return (
 		<SettingsProvider>
-			<ThemeProvider attribute='class'>
-				<QueryProvider>
-					<RootLayout>
-						<Notifications />
+			<QueryProvider>
+				<RootLayout>
+					<Notifications />
 
-						<View>
-							<Component {...pageProps} />
-						</View>
-						
-					</RootLayout>
-				</QueryProvider>
-			</ThemeProvider>
+					<View>
+						<Component {...pageProps} />
+					</View>
+					
+				</RootLayout>
+			</QueryProvider>
 		</SettingsProvider>
 	)
 }

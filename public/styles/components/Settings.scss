@@ -1,0 +1,12 @@
+.h-button.settings-button {
+	color: var(--foreground) !important;
+}
+
+.setting-row {
+	& .label {
+		text-transform: capitalize;
+		font-size: 0.875rem;
+		font-weight: 500;
+		opacity: 0.9;
+	}
+}

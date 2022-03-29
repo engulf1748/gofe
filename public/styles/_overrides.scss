@@ -1,0 +1,75 @@
+.h-button.primary-button,
+.h-button.secondary-button,
+.h-button.tertiary-button {
+	&:focus {
+		box-shadow: none !important;
+	}
+}
+
+.h-button.primary-button {
+	background-color: var(--accent-500) !important;
+
+	&:hover {
+		background-color: var(--accent-600) !important;
+	}
+}
+
+.h-button.secondary-button {
+	background-color: var(--secondary) !important;
+
+	&:hover {
+		background-color: var(--secondary) !important;
+		transform: translateY(-2px);
+	}
+}
+
+.h-button.tertiary-button {
+	background-color: var(--tertiary) !important;
+
+	&:hover {
+		background-color: var(--tertiary) !important;
+		transform: translateY(-2px);
+	}
+}
+
+.h-modal .inner-container {
+	background-color: var(--background) !important;
+}
+
+.h-modal .inner-container, .h-modal .inner {
+	width: 100%;
+	overflow: visible !important;
+}
+
+.h-modal .content-area {
+	width: 100%;
+}
+
+.h-modal.medium {
+	padding-top: 10rem;
+	align-items: flex-start !important;
+
+	.h-select-trigger {
+		background-color: var(--background-1) !important;
+	}
+	
+	& .h-button {
+		color: var(--foreground) !important;
+
+		&:last-child {
+			color: white !important;
+		}
+
+		&:focus {
+			box-shadow: none;
+		}
+
+		body.dracula &:last-child {
+			background-color: #ff79c6;
+
+			&:hover {
+				background-color: #ff47af;
+			}
+		}
+	}
+}

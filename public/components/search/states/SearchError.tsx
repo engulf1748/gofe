@@ -39,7 +39,7 @@ const SearchError = ({ err }: Props) => {
 	}
 
 	return (
-		<div className='w-100p px-3r py-10r flex-c utility-panel ui-1'>
+		<div className='w-100p px-3r py-10r flex-c utility-panel bg'>
 			<div className="mw-25r flex-c text-c">
 				<div className="bg-red-500 radius-90 p-0-5r flex-c d-inline-flex mb-0-75r">
 					<i className="j-icon text-white">{icons.x}</i>

@@ -1,5 +1,5 @@
 const initialSettings = {
-	
+	theme: 'auto',
 };
 
 const _isEmpty = (v: any) => {

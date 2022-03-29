@@ -1,0 +1,30 @@
+body.atlantis {
+	--background: rgb(0, 32, 32);
+	--background-1: rgb(0, 40, 40);
+	--background-2: rgb(0, 66, 66);
+	--background-3: rgb(1, 90, 90);
+	--foreground: rgb(177, 231, 177);
+
+	--input-background: rgb(0, 40, 40);
+	--input-complimentary: rgb(0, 66, 66);
+
+	--primary: rgb(31, 173, 166);
+	--primary-light: #{lighten(rgb(31, 173, 166), 20%)};
+
+	--secondary: rgb(255, 184, 77);
+	--secondary-light: #{lighten(rgb(255, 184, 77), 20%)};
+
+	--tertiary: rgb(229, 102, 151);
+	--tertiary-light: #{lighten(rgb(229, 102, 151), 20%)};
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: rgb(0, 32, 32);
+	--ui-1: rgb(0, 40, 40);
+	--ui-2: rgb(0, 66, 66);
+	--ui-3: rgb(1, 90, 90);
+	--text-color: rgb(177, 231, 177);
+	--accent: rgb(31, 173, 166);
+	--accent-500: rgb(31, 173, 166);
+	--accent-hover: rgb(22, 131, 125);
+	--accent-600: rgb(22, 131, 125);
+}

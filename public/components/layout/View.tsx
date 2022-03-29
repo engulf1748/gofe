@@ -1,4 +1,5 @@
 import { useLayoutEffect } from "react";
+import { themes } from "../../logic/themes";
 
 import { useSettings } from "../../providers/SettingsProvider";
 
@@ -7,6 +8,19 @@ import type { ChildrenOnly } from "../../types/util";
 const View = ({ children }: ChildrenOnly) => {
 	const settings = useSettings();
 
+	const onThemeChange = (ev: any) => {
+		removeAllThemesFromBody();
+		const mode = ev.matches ? 'dark' : 'light';
+		document.body.classList.add(`modern-${mode}`);
+	}
+
+	const getAutoTheme = () => {
+		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'modern-dark' : 'modern-light';
+	}
+
+	const removeAllThemesFromBody = () => {
+		themes.forEach(theme => document.body.classList.remove(theme));
+	}
 
 	// The following block adds the current theme class
 	// to the body when rendered. We use the useLayoutEffect
@@ -16,14 +30,24 @@ const View = ({ children }: ChildrenOnly) => {
 		if (!settings) return;
 
 		const body = document.querySelector('body');
-		const theme = settings.theme || 'modern';
+		const theme = settings.theme;
+		
+		if (!settings.theme) {
+			settings.set('theme', theme);
+		}
 		
 		if (settings) {
-			body?.classList.add(theme);
+			if (settings.theme === 'auto') {
+				window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', onThemeChange);
+				body?.classList.add(getAutoTheme());
+			} else {
+				body?.classList.add(theme);
+			}
 		}
 		
 		return () => {
-			body?.classList.remove(theme);
+			removeAllThemesFromBody();
+			window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', onThemeChange);
 		}
 	}, [settings]);
 
