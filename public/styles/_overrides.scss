@@ -124,3 +124,11 @@
 		background-color: var(--background-2) !important;
 	}
 }
+
+// Let's apply an overflow to this to make sure that
+// mobile users can see the whole modal, including
+// all overflowing elements within the .inner.
+.h-modal {
+	overflow-y: scroll;
+	padding-bottom: 4rem;
+}
