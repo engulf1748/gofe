@@ -12,13 +12,14 @@
 @use './overrides';
 
 // Themes
-@use './themes/dracula';
-@use './themes/modern-dark';
-@use './themes/modern-light';
+@use './themes/atlantis';
 @use './themes/brutal-dark';
 @use './themes/brutal-light';
-@use './themes/atlantis';
+@use './themes/dracula';
 @use './themes/joker';
+@use './themes/modern-dark';
+@use './themes/modern-light';
+@use './themes/monokai-sweet-dark';
 
 html,
 body,
