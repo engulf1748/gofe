@@ -1,0 +1,33 @@
+body.brutal-dark {
+	--background: #18181b;
+	--background-1: #27272a;
+	--background-2: #3f3f46;
+	--background-3: #52525b;
+	--foreground: #fbfbfb;
+
+	--input-background: #27272a;
+	--input-complimentary: #3f3f46;
+
+	--primary: #8ab4f8;
+	--primary-light: #{lighten(#8ab4f8, 20%)};
+
+	--button: #5992ec;
+	--button-hover: #437ddb;
+
+	--secondary: #E0DADC;
+	--secondary-light: #{lighten(#E0DADC, 20%)};
+
+	--tertiary: #c58af9;
+	--tertiary-light: #{lighten(#c58af9, 20%)};
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: #18181b;
+	--ui-1: #27272a;
+	--ui-2: #3f3f46;
+	--ui-2: #52525b;
+	--text-color: #fbfbfb;
+	--accent: #8ab4f8;
+	--accent-500: #8ab4f8;
+	--accent-hover: #3e84f4;
+	--accent-600: #3e84f4;
+}

@@ -1,0 +1,33 @@
+body.dracula {
+	--background: #282a36;
+	--background-1: #3D4052;
+	--background-2: #4E526A;
+	--background-3: #5F6481;
+	--foreground: #f8f8f2;
+
+	--input-background: #3D4052;
+	--input-complimentary: #4E526A;
+
+	--primary: #8be9fd;
+	--primary-light: #{lighten(#8be9fd, 5%)};
+
+	--button: #1ea1be;
+	--button-hover: #1688a1;
+
+	--secondary: #50fa7b;
+	--secondary-light: #{lighten(#50fa7b, 5%)};
+
+	--tertiary: #ff79c6;
+	--tertiary-light: #{lighten(#ff79c6, 5%)};
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: #282a36;
+	--ui-1: #44475a;
+	--ui-2: #252a49;
+	--ui-2: #44475a;
+	--text-color: #f8f8f2;
+	--accent: #8be9fd;
+	--accent-500: #8be9fd;
+	--accent-hover: #36d8fc;
+	--accent-600: #36d8fc;
+}

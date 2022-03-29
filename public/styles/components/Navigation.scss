@@ -2,8 +2,8 @@ nav {
 	width: 100%;
 	height: 4rem;
 	padding-left: var(--result-gutter);
-	background-color: var(--ui);
-	border-bottom: 1px solid var(--ui-2);
+	background-color: var(--background);
+	border-bottom: 1px solid var(--background-2);
 	position: relative;
 
 	& .wrapper {
@@ -20,7 +20,7 @@ nav {
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		color: var(--text-color);
+		color: var(--foreground);
 		padding: 0 2rem;
 
 		& > div, & p {
@@ -37,7 +37,7 @@ nav {
 			outline: none;
 
 			& > div {
-				background-color: var(--blue-600);
+				background-color: var(--button);
 			}
 
 			& p {
@@ -59,12 +59,13 @@ nav {
 		border-radius: 0.5rem;
 		background-color: transparent;
 		cursor: pointer;
-		color: var(--text-color-07);
+		color: var(--foreground);
+		opacity: 0.7;
 		transition: var(--d-m-2) var(--e-s);
 
 		&:hover {
-			background-color: var(--ui-1);
-			color: var(--text-color);
+			background-color: var(--background-1);
+			color: var(--foreground);
 		}
 	}
 }

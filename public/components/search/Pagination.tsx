@@ -41,7 +41,7 @@ const Pagination = ({ page }: Props) => {
 				</div>
 
 				<div className="grid-block flex-c">
-					<p className='mb-0 lh-1 fs-sm text-dynamic-06 fw-500'>Page {page}</p>
+					<p className='mb-0 lh-1 fs-sm opacity-6 fw-500'>Page {page}</p>
 				</div>
 
 				<div className="grid-block align-e">

@@ -1,0 +1,33 @@
+body.joker {
+	--background: rgb(22, 23, 29);
+	--background-1: rgb(33, 34, 44);
+	--background-2: rgb(44, 45, 63);
+	--background-3: rgb(55, 56, 83);
+	--foreground: rgb(221, 232, 238);
+
+	--input-background: rgb(33, 34, 44);
+	--input-complimentary: rgb(44, 45, 63);
+
+	--primary: rgb(51, 204, 51);
+	--primary-light: #{lighten(rgb(51, 204, 51), 20%)};
+
+	--button: rgb(49, 182, 49);
+	--button-hover: rgb(45, 163, 45);
+
+	--secondary: rgb(166, 77, 255);
+	--secondary-light: #{lighten(rgb(166, 77, 255), 20%)};
+
+	--tertiary: rgb(255, 219, 77);
+	--tertiary-light: #{lighten(rgb(255, 219, 77), 20%)};
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: rgb(22, 23, 29);
+	--ui-1: rgb(33, 34, 44);
+	--ui-2: rgb(44, 45, 63);
+	--ui-3: rgb(55, 56, 83);
+	--text-color: rgb(221, 232, 238);
+	--accent: rgb(51, 204, 51);
+	--accent-500: rgb(51, 204, 51);
+	--accent-hover: rgb(51, 168, 51);
+	--accent-600: rgb(51, 168, 51);
+}

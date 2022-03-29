@@ -14,7 +14,7 @@ $max-width: 25rem;
 
 	&.showing-suggestions .search-bar {
 		box-shadow: none !important;
-		border-color: var(--ui-2) !important;
+		border-color: var(--background-2) !important;
 		border-bottom-left-radius: 0;
 		border-bottom-right-radius: 0;
 	}
@@ -29,12 +29,12 @@ $max-width: 25rem;
 .search-bar {
 	width: 100%;
 	height: $height;
-	background-color: var(--ui);
-	color: var(--text-color);
+	background-color: var(--input-background);
+	color: var(--foreground);
 	font-size: 0.875rem;
 	border-radius: $radius;
 	padding: 0.75rem 1rem;
-	border: 1px solid var(--ui);
+	border: 1px solid var(--background);
 	box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.12);
 	transition: var(--d-m-2) var(--e-s);
 
@@ -43,18 +43,22 @@ $max-width: 25rem;
 	}
 
 	&:focus {
-		// box-shadow: 0 0 0 2px var(--accent-500), 0 0.25rem 0.5rem rgba(0, 0, 0, 0.12);
 		outline: none;
 	}
 
-	html.dark & {
-		background-color: var(--ui-1);
+	html.dark &, html.dracula & {
+		background-color: var(--background-1) !important;
 	}
 
 	nav & {
 		height: $height-sm;
 		font-size: 0.875rem;
 		padding: 0.65rem 0.75rem;
+	}
+
+	&::placeholder {
+		color: var(--foreground);
+		opacity: 0.6;
 	}
 }
 
@@ -64,7 +68,8 @@ $max-width: 25rem;
 	padding: 0 0.5rem;
 	height: calc($height - 2px);
 	appearance: none;
-	background-color: var(--ui);
+	background-color: var(--input-background);
+	color: var(--foreground);
 	border: none;
 	box-shadow: none;
 	outline: none;
@@ -82,21 +87,21 @@ $max-width: 25rem;
 	}
 
 	&:focus {
-		background-color: var(--ui-1);
+		background-color: var(--background-1);
 
-		html.dark & {
-			background-color: var(--ui-2);
+		html.dark &, html.dracula & {
+			background-color: var(--background-2);
 		}
 	}
 
-	html.dark & {
-		background-color: var(--ui-1);
+	html.dark &, html.dracula & {
+		background-color: var(--background-1);
 	}
 }
 
 .search-suggestions {
 	width: 100%;
-	background-color: var(--ui);
+	background-color: var(--input-background);
 	max-height: 30rem;
 	overflow-y: auto;
 	display: flex;
@@ -108,11 +113,11 @@ $max-width: 25rem;
 	border-bottom-left-radius: $radius;
 	border-bottom-right-radius: $radius;
 	top: $height;
-	border: 1px solid var(--ui-2);
+	border: 1px solid var(--background-2);
 	border-top: none;
 
-	html.dark & {
-		background-color: var(--ui-1);
+	html.dark &, html.dracula & {
+		background-color: var(--background-1) !important;
 	}
 
 	nav & {
@@ -124,7 +129,7 @@ $max-width: 25rem;
 	width: 100%;
 	padding: 0.75rem 1rem;
 	text-align: left;
-	color: var(--text-color);
+	color: var(--foreground);
 	font-size: 0.875rem;
 	background-color: transparent;
 	box-shadow: none;
@@ -136,10 +141,6 @@ $max-width: 25rem;
 	transition: var(--d-f-1) var(--e-s);
 
 	&:hover, &:focus {
-		background-color: var(--ui-1);
-
-		html.dark & {
-			background-color: var(--ui-2);
-		}
+		background-color: var(--input-complimentary);
 	}
 }

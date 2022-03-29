@@ -24,7 +24,7 @@ const RelatedSearches = () => {
 					if (query === suggestion) return <></>;
 
 					return (
-						<button className="suggestion-pill" onClick={() => onSuggestionClick(suggestion)}>
+						<button key={suggestion} className="suggestion-pill" onClick={() => onSuggestionClick(suggestion)}>
 							<span>{suggestion}</span>
 						</button>
 					);

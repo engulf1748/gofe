@@ -4,7 +4,7 @@ import InternalLink from "../InternalLink";
 import { icons } from '../../data/icons';
 
 
-const Divider = () => <p className="mb-0 mx-1r text-dynamic-04 landscape-hide">|</p>;
+const Divider = () => <p className="mb-0 mx-1r opacity-4 landscape-hide">|</p>;
 
 const Footer = () => {
 	return (

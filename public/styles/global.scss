@@ -6,7 +6,19 @@
 @use './components/Search';
 @use './components/Navigation';
 @use './components/SearchBar';
+@use './components/Settings';
 @use './components/View';
+
+@use './overrides';
+
+// Themes
+@use './themes/dracula';
+@use './themes/modern-dark';
+@use './themes/modern-light';
+@use './themes/brutal-dark';
+@use './themes/brutal-light';
+@use './themes/atlantis';
+@use './themes/joker';
 
 html,
 body,
@@ -23,12 +35,18 @@ button {
 	font-family: 'Inter', 'Roboto', 'Open Sans', Arial, Helvetica, sans-serif;
 }
 
+html, body {
+	background-color: var(--background);
+	color: var(--foreground);
+}
+
 .utility-panel {
 	min-height: calc(100vh - 7rem);
 }
 
 .link {
-	color: var(--text-color-07);
+	color: var(--foreground);
+	opacity: 0.75;
 	font-size: 0.875rem;
 
 	&:hover {
@@ -36,6 +54,50 @@ button {
 	}
 
 	html.dark & {
-		color: var(--text-color-09);
+		opacity: 0.9;
 	}
+}
+
+.dark-ui {
+	background-color: var(--background) !important;
+}
+
+.bg {
+	background-color: var(--background);
+}
+.bg-1 {
+	background-color: var(--background-1);
+}
+.bg-2 {
+	background-color: var(--background-2);
+}
+
+.bg-tertiary {
+	background-color: var(--tertiary);
+}
+
+.text-primary {
+	color: var(--primary);
+}
+.text-secondary {
+	color: var(--secondary);
+}
+.text-tertiary {
+	color: var(--tertiary);
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+.g-link {
+	color: var(--primary);
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+ul {
+	padding-inline-start: 1rem;
 }
