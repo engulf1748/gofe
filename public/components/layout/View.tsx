@@ -1,7 +1,8 @@
 import { useLayoutEffect } from "react";
-import { themes } from "../../logic/themes";
 
 import { useSettings } from "../../providers/SettingsProvider";
+
+import { themes } from "../../data/themes";
 
 import type { ChildrenOnly } from "../../types/util";
 

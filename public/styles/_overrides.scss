@@ -1,8 +1,23 @@
+@use './mixins';
+
+.h-button.accent-button,
 .h-button.primary-button,
 .h-button.secondary-button,
 .h-button.tertiary-button {
+	&:hover {
+		transform: translateY(-2px);
+	}
+
 	&:focus {
 		box-shadow: none !important;
+	}
+}
+
+.h-button.accent-button {
+	background-color: var(--button) !important;
+
+	&:hover {
+		background-color: var(--button-hover) !important;
 	}
 }
 
@@ -57,19 +72,24 @@
 		color: var(--foreground) !important;
 
 		&:last-child {
+			background-color: var(--button);
 			color: white !important;
-		}
-
-		&:focus {
-			box-shadow: none;
-		}
-
-		body.dracula &:last-child {
-			background-color: #ff79c6;
 
 			&:hover {
-				background-color: #ff47af;
+				background-color: var(--button-hover);
+			}
+
+			&:focus {
+				@include mixins.ring-shadow(var(--background-1), var(--button));
 			}
 		}
+
+		// body.dracula &:last-child {
+		// 	background-color: #ff79c6;
+
+		// 	&:hover {
+		// 		background-color: #ff47af;
+		// 	}
+		// }
 	}
 }

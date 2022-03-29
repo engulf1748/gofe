@@ -11,6 +11,9 @@ body.joker {
 	--primary: rgb(51, 204, 51);
 	--primary-light: #{lighten(rgb(51, 204, 51), 20%)};
 
+	--button: rgb(49, 182, 49);
+	--button-hover: rgb(45, 163, 45);
+
 	--secondary: rgb(166, 77, 255);
 	--secondary-light: #{lighten(rgb(166, 77, 255), 20%)};
 

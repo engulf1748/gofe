@@ -11,6 +11,9 @@ body.atlantis {
 	--primary: rgb(31, 173, 166);
 	--primary-light: #{lighten(rgb(31, 173, 166), 20%)};
 
+	--button: rgb(31, 173, 166);
+	--button-hover: rgb(26, 145, 139);
+
 	--secondary: rgb(255, 184, 77);
 	--secondary-light: #{lighten(rgb(255, 184, 77), 20%)};
 

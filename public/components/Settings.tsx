@@ -4,7 +4,7 @@ import { Button, Modal, Select } from "@infinium/hydro";
 import Keyboard from "./Keyboard";
 
 import { useSettings } from "../providers/SettingsProvider";
-import { themes } from "../logic/themes";
+import { themes } from "../data/themes";
 import { icons } from "../data/icons";
 
 

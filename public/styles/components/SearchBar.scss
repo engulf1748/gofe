@@ -43,7 +43,6 @@ $max-width: 25rem;
 	}
 
 	&:focus {
-		// box-shadow: 0 0 0 2px var(--accent-500), 0 0.25rem 0.5rem rgba(0, 0, 0, 0.12);
 		outline: none;
 	}
 
@@ -55,6 +54,11 @@ $max-width: 25rem;
 		height: $height-sm;
 		font-size: 0.875rem;
 		padding: 0.65rem 0.75rem;
+	}
+
+	&::placeholder {
+		color: var(--foreground);
+		opacity: 0.6;
 	}
 }
 

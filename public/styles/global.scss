@@ -75,10 +75,29 @@ html, body {
 .bg-tertiary {
 	background-color: var(--tertiary);
 }
+
+.text-primary {
+	color: var(--primary);
+}
+.text-secondary {
+	color: var(--secondary);
+}
 .text-tertiary {
 	color: var(--tertiary);
 }
 
 .capitalize {
 	text-transform: capitalize;
+}
+
+.g-link {
+	color: var(--primary);
+
+	&:hover {
+		text-decoration: underline;
+	}
+}
+
+ul {
+	padding-inline-start: 1rem;
 }

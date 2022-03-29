@@ -1,12 +1,12 @@
 const themes = [
 	'auto',
-	'modern-light',
-	'modern-dark',
+	'atlantis',
 	'brutal-dark',
 	'brutal-light',
-	'atlantis',
 	'dracula',
 	'joker',
+	'modern-dark',
+	'modern-light',
 ];
 
 export {
