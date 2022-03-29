@@ -10,27 +10,30 @@ const RelatedSearches = () => {
 		push(`/search?q=${suggestion}`);
 	}
 
-	if (!suggestions || suggestions.length === 0) return <></>;
+	if (!suggestions) {
+		return <></>;
+	}
+
+	suggestions = suggestions.filter((suggestion: string) => suggestion !== query);
 
 	return (
-		<div className="w-100p">
-			<h4>Related searches</h4>
-			<div className="suggestion-pills">
-				{suggestions.map((suggestion: string) => {
-					// It's not a _related_ query if it's the same
-					// query.
-					if (query === suggestion) return <></>;
+		(suggestions.length === 0) ? <></> : (
+			<div className="w-100p mt-3r">
+				<h4>Related searches</h4>
 
-					return (
-						<div>
-							<button key={suggestion} className="suggestion-pill" onClick={() => onSuggestionClick(suggestion)}>
-								<span>{suggestion}</span>
-							</button>
-						</div>
-					);
-				})}
+				<div className="suggestion-pills">
+					{suggestions.map((suggestion: string) => {
+						return (
+							<div>
+								<button className="suggestion-pill" onClick={() => onSuggestionClick(suggestion)}>
+									<span>{suggestion}</span>
+								</button>
+							</div>
+						);
+					})}
+				</div>
 			</div>
-		</div>
+		)
 	);
 }
 
