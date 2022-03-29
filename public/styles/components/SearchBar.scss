@@ -46,10 +46,6 @@ $max-width: 25rem;
 		outline: none;
 	}
 
-	html.dark &, html.dracula & {
-		background-color: var(--background-1) !important;
-	}
-
 	nav & {
 		height: $height-sm;
 		font-size: 0.875rem;
@@ -88,14 +84,6 @@ $max-width: 25rem;
 
 	&:focus {
 		background-color: var(--background-1);
-
-		html.dark &, html.dracula & {
-			background-color: var(--background-2);
-		}
-	}
-
-	html.dark &, html.dracula & {
-		background-color: var(--background-1);
 	}
 }
 
@@ -115,10 +103,6 @@ $max-width: 25rem;
 	top: $height;
 	border: 1px solid var(--background-2);
 	border-top: none;
-
-	html.dark &, html.dracula & {
-		background-color: var(--background-1) !important;
-	}
 
 	nav & {
 		top: $height-sm;

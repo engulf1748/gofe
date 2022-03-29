@@ -1,0 +1,33 @@
+body.hacker {
+	--background: #111;
+	--background-1: #163612;
+	--background-2: #1f4d19;
+	--background-3: rgb(1, 90, 90);
+	--foreground: #69ff55;
+
+	--input-background: #163612;
+	--input-complimentary: #1f4d19;
+
+	--primary: #51e74c;
+	--primary-light: #{lighten(#51e74c, 20%)};
+
+	--button: #008000;
+	--button-hover: #{lighten(#008000, 10%)};
+
+	--secondary: #51e74c;
+	--secondary-light: #{lighten(#51e74c, 20%)};
+
+	--tertiary: #51e74c;
+	--tertiary-light: #{lighten(#51e74c, 20%)};
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: #111;
+	--ui-1: #163612;
+	--ui-2: #1f4d19;
+	--ui-3: rgb(1, 90, 90);
+	--text-color: rgb(177, 231, 177);
+	--accent: #51e74c;
+	--accent-500: #51e74c;
+	--accent-hover: #008000;
+	--accent-600: #008000;
+}

@@ -1,0 +1,28 @@
+// It's probably better to have one central place
+// where overrides specific to certain themes
+// are placed.
+
+body.hacker {
+	& .text-result .context {
+		color: rgb(204, 204, 204) !important;
+	}
+
+	& .search-error-panel {
+		& .bg-red-500 {
+			background-color: var(--button) !important;
+		}
+	
+		& .h-button {
+			background-color: var(--button) !important;
+	
+			&:hover {
+				background-color: var(--button-hover) !important;
+			}
+		}
+	}
+}
+
+body.brutal-dark .suggestion-pills,
+body.brutal-light .suggestion-pills {
+	display: block;
+}

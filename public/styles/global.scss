@@ -10,12 +10,14 @@
 @use './components/View';
 
 @use './overrides';
+@use './theme_overrides';
 
 // Themes
 @use './themes/atlantis';
 @use './themes/brutal-dark';
 @use './themes/brutal-light';
 @use './themes/dracula';
+@use './themes/hacker';
 @use './themes/joker';
 @use './themes/modern-dark';
 @use './themes/modern-light';

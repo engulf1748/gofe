@@ -4,6 +4,7 @@ const themes = [
 	'brutal-dark',
 	'brutal-light',
 	'dracula',
+	'hacker',
 	'joker',
 	'modern-dark',
 	'modern-light',
