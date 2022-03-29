@@ -68,41 +68,41 @@ nav {
 			color: var(--foreground);
 		}
 	}
+
+	& .nav-mobile {
+		display: none;
+		visibility: hidden;
+		pointer-events: none;
+	}
 }
 
 @media only screen and (max-width: 550px) {
 	nav {
 		height: auto;
 		padding-left: 0;
-		padding: 0 0 1rem 0;
 
-		& .wrapper {
+		.wrapper {
 			padding: 0;
 		}
 
-		& .logo {
-			position: relative;
-			padding: 1rem;
+		& .nav-grid {
+			display: none !important;
+			visibility: hidden !important;
+			pointer-events: none !important;
 		}
 
-		& .primary-grid-block {
-			align-items: flex-start !important;
-			justify-content: center !important;
-			flex-direction: column !important;
-			padding: 0 2rem 0 0.25rem;
+		& .nav-mobile {
+			display: flex;
+			visibility: visible;
+			pointer-events: auto;
+
+			& .logo {
+				position: relative;
+				padding-left: 1.5rem;
+			}
 		}
 	}
-}
 
-@media only screen and (max-width: 550px) {
-	.nav-grid {
-		grid-template-columns: 1fr !important;
-	}
-	.settings-wrapper {
-		position: absolute;
-		top: 1rem;
-		right: 2rem;
-	}
 	.searchbar-container {
 		padding-left: 1.5rem;
 		max-width: none !important;

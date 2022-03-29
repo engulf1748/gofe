@@ -21,6 +21,20 @@ const Navigation = () => {
 						</div>
 					</div>
 				</div>
+
+				<div className="nav-mobile w-100p flex-c">
+					<div className="w-100p flex-c pt-0-5r">
+						<div className="w-100p flex-sb py-0-5r pr-2r">
+							<Logo clearQueryOnClick />
+							<div className="settings-wrapper">
+								<Settings />
+							</div>
+						</div>
+						<div className="w-100p flex-c px-2r pb-1r">
+							<SearchBar inNav />
+						</div>
+					</div>
+				</div>
 			</div>
 		</nav>
 	);
