@@ -7,7 +7,7 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 	return (
 		<div className='text-result'>
 			<div className="w-100p mw-35r">
-				<ExternalLink href={URL}>
+				<ExternalLink href={URL} newTab={false}>
 					<div className="link-area">
 						{/* TODO: Separate URL parts and display them better. */}
 						<p className="url">{URL?.substring(0, 30)}...</p>
