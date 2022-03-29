@@ -64,6 +64,10 @@
 	padding-top: 10rem;
 	align-items: flex-start !important;
 
+	& .content-area .grid-2 {
+		grid-template-columns: 1fr 1fr !important;
+	}
+
 	.h-select-trigger {
 		background-color: var(--background-1) !important;
 	}

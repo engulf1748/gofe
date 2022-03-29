@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Button } from "@infinium/hydro";
 
 import SettingsModal from "./SettingsModal";
-import Keyboard from "../Keyboard";
 
 import { icons } from "../../data/icons";
 
@@ -25,13 +24,6 @@ const Settings = () => {
 			<SettingsModal
 				modal={modal}
 				setModal={setModal}
-			/>
-
-			<Keyboard
-				keys={['s']}
-				callback={() => {
-					setModal(!modal);
-				}}
 			/>
 		</>
 	);
