@@ -22,9 +22,11 @@ const RelatedSearches = () => {
 					if (query === suggestion) return <></>;
 
 					return (
-						<button key={suggestion} className="suggestion-pill" onClick={() => onSuggestionClick(suggestion)}>
-							<span>{suggestion}</span>
-						</button>
+						<div>
+							<button key={suggestion} className="suggestion-pill" onClick={() => onSuggestionClick(suggestion)}>
+								<span>{suggestion}</span>
+							</button>
+						</div>
 					);
 				})}
 			</div>

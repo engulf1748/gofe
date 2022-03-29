@@ -182,10 +182,6 @@ $gutter: 0.6rem;
 .suggestion-pills {
 	width: 100%;
 	max-width: 40rem;
-	display: flex;
-	justify-content: flex-start;
-	align-items: flex-start;
-	flex-wrap: wrap;
 
 	& .suggestion-pill {
 		appearance: none;
