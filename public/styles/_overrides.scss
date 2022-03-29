@@ -93,3 +93,15 @@
 		// }
 	}
 }
+
+.h-label, .h-label span {
+	color: var(--foreground) !important;
+	opacity: 0.8;
+}
+
+.h-select-trigger {
+	min-width: 6rem;
+	display: flex !important;
+	justify-content: space-between !important;
+	align-items: center !important;
+}

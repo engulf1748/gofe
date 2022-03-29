@@ -13,10 +13,8 @@ const RelatedSearches = () => {
 	if (!suggestions || suggestions.length === 0) return <></>;
 
 	return (
-		<div className="w-100p mt-3r">
-
+		<div className="w-100p">
 			<h4>Related searches</h4>
-			
 			<div className="suggestion-pills">
 				{suggestions.map((suggestion: string) => {
 					// It's not a _related_ query if it's the same

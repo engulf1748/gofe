@@ -13,7 +13,7 @@ interface SettingRowProps {
 	options: string[];
 }
 
-const SettingRow = ({ id, options }: SettingRowProps) => {
+const SettingBlock = ({ id, options }: SettingRowProps) => {
 	const settings = useSettings();
 
 	const cap = (w: string) => w.charAt(0).toUpperCase() + w.slice(1);
@@ -41,13 +41,13 @@ const SettingRow = ({ id, options }: SettingRowProps) => {
 	}
 
 	return (
-		<div className="w-100p flex-sb setting-row">
-			<span className="label">{id}</span>
+		<div className="w-100p flex-sb setting-block">
 			<Select
 				options={getOptions()}
 				defaultSelected={options.indexOf(settings[id])}
 				onChange={onChange}
 				color='gray'
+				label={cap(id)}
 			/>
 		</div>
 	);
@@ -80,8 +80,8 @@ const Settings = () => {
 				background='medium'
 			>
 				<div className='w-100p mb-2r mt-1r'>
-					<div className="w-100p flex-sb">
-						<SettingRow id='theme' options={themes} />
+					<div className="w-100p grid grid-2">
+						<SettingBlock id='theme' options={themes} />
 					</div>
 				</div>
 			</Modal>

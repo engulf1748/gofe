@@ -75,10 +75,18 @@ const SearchPage = ({ query, page }: Props) => {
 		<div className={classNames('flex align-c dark-ui')}>
 			<PageTitle>{query} - Gofë</PageTitle>
 
-			<div className="results">
-				{results.map(result => <TextResult key={result.URL} {...result} />)}
-				<RelatedSearches />
-				<Pagination page={Number(page) || 1} />
+			<div className="search-panel">
+				<div className="results">
+					{results.map(result => <TextResult key={result.URL} {...result} />)}
+				</div>
+
+				<div className="grid-block">
+					<RelatedSearches />
+				</div>
+
+				<div className="grid-block">
+					<Pagination page={Number(page) || 1} />
+				</div>
 			</div>
 		</div>
 	);

@@ -2,11 +2,17 @@
 	color: var(--foreground) !important;
 }
 
-.setting-row {
+.setting-block {
 	& .label {
 		text-transform: capitalize;
 		font-size: 0.875rem;
 		font-weight: 500;
 		opacity: 0.9;
+	}
+}
+
+@media only screen and (max-width: 991px) {
+	.buttons.grid-2 {
+		grid-template-columns: 1fr 1fr !important;
 	}
 }

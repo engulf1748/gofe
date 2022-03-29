@@ -10,7 +10,7 @@ const SearchAreaWrapper = ({ pageTitle, children }: Props) => {
 		<div className={'flex align-c dark-ui'}>
 		<PageTitle>Gofë - {pageTitle}</PageTitle>
 
-			<div className="results">
+			<div className="search-panel no-grid">
 				{children}
 			</div>
 		</div>
