@@ -12,15 +12,15 @@ $gutter: 0.6rem;
 		text-decoration: underline;
 	}
 
-	& .link, & .description {
+	& .url, & .description {
 		line-height: 1;
 	}
 
-	& .link, & .context {
+	& .url, & .context {
 		color: var(--text-color);
 	}
 
-	& .link {
+	& .url {
 		font-size: 0.875rem;
 		opacity: 0.8;
 		margin-bottom: $gutter;

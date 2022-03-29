@@ -10,7 +10,7 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 				<ExternalLink href={URL}>
 					<div className="link-area">
 						{/* TODO: Separate URL parts and display them better. */}
-						<p className="link">{URL?.substring(0, 30)}...</p>
+						<p className="url">{URL?.substring(0, 30)}...</p>
 						<h4 className='description'>{Desc}</h4>
 					</div>
 				</ExternalLink>
