@@ -30,11 +30,7 @@ const View = ({ children }: ChildrenOnly) => {
 		if (!settings) return;
 
 		const body = document.querySelector('body');
-		const theme = settings.theme;
-		
-		if (!settings.theme) {
-			settings.set('theme', theme);
-		}
+		const theme = settings.theme || 'auto';
 		
 		if (settings) {
 			if (settings.theme === 'auto') {
