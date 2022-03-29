@@ -1,12 +1,17 @@
-const initialSettings = {
-	theme: 'auto',
-	openLinksInNewTab: false,
-};
+import { defaultSettings } from "./settings";
 
 const _isEmpty = (v: any) => {
 	return Object.keys(v).length === 0;
 }
 
+// We have to go this back-handed route to use
+// localStorage for a few reasons. Primarily,
+// we are using NextJS and therefore we have
+// to work with the client-side limitations of
+// the initial SSR. This causes things like
+// `window` and `localStorage` to be undefined.
+// Thus, we have this try-catch block that will
+// default to returning `null`.
 const _get = () => {
 	let v;
 
@@ -17,13 +22,17 @@ const _get = () => {
 	return v ? v : null;
 }
 
+// If the above function returns `null` or the
+// settings are empty, this will return the
+// `defaultSettings`. If not, this will parse
+// the settings object and return it.
 const getSavedSettings = () => {
 	let v = _get();
 
 	if (v !== null && !_isEmpty(v)) {
 		return JSON.parse(v);
 	} else {
-		return initialSettings;
+		return defaultSettings;
 	}
 };
 
@@ -33,5 +42,5 @@ const saveSettings = (v: any) => {
 
 export {
 	getSavedSettings,
-	saveSettings
+	saveSettings,
 }
