@@ -30,14 +30,17 @@ const View = ({ children }: ChildrenOnly) => {
 		if (!settings) return;
 
 		const body = document.querySelector('body');
-		const theme = settings.theme || 'auto';
+
+		if (!settings || !settings.theme) {
+			settings.set('theme', 'auto');
+		}
 		
 		if (settings) {
 			if (settings.theme === 'auto') {
 				window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', onThemeChange);
 				body?.classList.add(getAutoTheme());
 			} else {
-				body?.classList.add(theme);
+				body?.classList.add(settings.theme);
 			}
 		}
 		
