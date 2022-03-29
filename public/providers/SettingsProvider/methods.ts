@@ -1,5 +1,6 @@
 const initialSettings = {
 	theme: 'auto',
+	openLinksInNewTab: false,
 };
 
 const _isEmpty = (v: any) => {

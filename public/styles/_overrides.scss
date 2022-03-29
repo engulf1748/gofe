@@ -83,14 +83,29 @@
 				@include mixins.ring-shadow(var(--background-1), var(--button));
 			}
 		}
+	}
+}
 
-		// body.dracula &:last-child {
-		// 	background-color: #ff79c6;
+.h-modal .inner-container.sm {
+	max-width: 25rem !important;
 
-		// 	&:hover {
-		// 		background-color: #ff47af;
-		// 	}
-		// }
+	& .buttons {
+		grid-gap: 1rem !important;
+	}
+
+	& .h-dropdown-menu {
+		background-color: var(--background-1);
+
+		& button.gray {
+			&:hover, &:focus {
+				background-color: var(--button) !important;
+				color: white !important;
+			}
+
+			&.selected {
+				background-color: var(--background-2);
+			}
+		}
 	}
 }
 
@@ -104,4 +119,8 @@
 	display: flex !important;
 	justify-content: space-between !important;
 	align-items: center !important;
+
+	&:hover {
+		background-color: var(--background-2) !important;
+	}
 }
