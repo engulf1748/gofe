@@ -1,0 +1,18 @@
+{
+	"_COMMENT": "IGNORE this if you're running the API server stand-alone",
+	"_COMMENT": "api_domain is used by NextJS to make requests to the API server",
+	"_COMMENT": "replace with http://localhost:api_bind_addr if running locally",
+	"api_domain": "https://gofe.app:9000",
+
+	"api_bind_addr": ":9000",
+
+	"_COMMENT": "If you're not running the Go server behind a reverse-proxy, set the following three fields to create a HTTPS server",
+	"_COMMENT": "Change api_bind_addr too, to your liking. 443 isn't necessary. You can run as non-root on a port >= 1024",
+	"api_tls": true,
+	"cert_path": "fullchain.pem",
+	"key_path": "privkey.pem",
+
+	"domain": "https://gofe.app",
+
+	"repository": "https://codeberg.org/ar324/gofe"
+}

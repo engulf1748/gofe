@@ -1,9 +1,0 @@
-{
-	"api_domain": "http://localhost:8080",
-	"_COMMENT": "if using a reverse proxy, api_bind_addr will be different from api_domain",
-	"api_bind_addr": "http://localhost:8080",
-
-	"domain": "http://localhost:3000",
-
-	"repository": "https://codeberg.org/ar324/gofe"
-}

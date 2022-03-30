@@ -7,16 +7,17 @@ import (
 	"net/http"
 	"os"
 	"strconv"
-	"strings"
 
 	"codeberg.org/ar324/gofe/api"
 )
 
 type Config struct {
-	// if using a reverse proxy, this program will not bind to the real domain
-	// instead, it'll bind to APIBindAddr
 	APIDomain   string `json:"api_domain"`
 	APIBindAddr string `json:"api_bind_addr"`
+
+	APITLS   bool   `json:"api_tls"`
+	CertPath string `json:"cert_path"`
+	KeyPath  string `json:"key_path"`
 
 	// the front-end
 	Domain string `json:"domain"`
@@ -135,7 +136,9 @@ func main() {
 		mux.Handle(k, loggingHandler(f, corsHandler(http.HandlerFunc(v))))
 	}
 
-	addr := strings.TrimPrefix(config.APIBindAddr, "http://")
-	addr = strings.TrimPrefix(addr, "https://")
-	log.Fatal(http.ListenAndServe(addr, mux))
+	if config.APITLS {
+		log.Fatal(http.ListenAndServeTLS(config.APIBindAddr, config.CertPath, config.KeyPath, mux))
+	} else { // if TLS server exits
+		log.Fatal(http.ListenAndServe(config.APIBindAddr, mux))
+	}
 }
