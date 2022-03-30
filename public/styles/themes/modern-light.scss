@@ -11,8 +11,8 @@ body.modern-light {
 	--primary: #1d4ed8;
 	--primary-light: #{lighten(#1d4ed8, 30%)};
 
-	--button: #1d4ed8;
-	--button-hover: #1c45b8;
+	--button: var(--blue-600);
+	--button-hover: var(--blue-700);
 
 	--secondary: #166534;
 	--secondary-light: #{lighten(#166534, 60%)};
@@ -26,8 +26,8 @@ body.modern-light {
 	--ui-2: #e4e4e7;
 	--ui-2: #d4d4d8;
 	--text-color: #161616;
-	--accent: #1d4ed8;
-	--accent-500: #1d4ed8;
-	--accent-hover: #1e40af;
-	--accent-600: #1e40af;
+	--accent: var(--blue-600);
+	--accent-500: var(--blue-600);
+	--accent-hover: var(--blue-700);
+	--accent-600: var(--blue-700);
 }
