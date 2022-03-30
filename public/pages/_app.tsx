@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import { Notifications } from '@infinium/hydro';
 import type { AppProps } from 'next/app';
 
@@ -26,7 +27,6 @@ const View = dynamic(
 //////////
 
 const App = ({ Component, pageProps }: AppProps) => {
-
 	// We can ignore this error here because we are
 	// manually defining the layout within each component.
 	// The Component type comes from NextJS and obviously
@@ -37,19 +37,29 @@ const App = ({ Component, pageProps }: AppProps) => {
 	const RootLayout = Component.layout || (({ children }: ChildrenOnly) => <>{children}</>);
 
 	return (
-		<SettingsProvider>
-			<QueryProvider>
-				<RootLayout>
-					<Notifications />
+		<>
+			<Head>
+				{/*
+					user-scalable=no prevents automatic zooming on mobile
+					devices after focusing the input.
+				*/}
+				<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+				<meta name="description" content="Gofë is a front-end for Google Search. We act as a middleperson between you and Google to deliver the best results privately to you." />
+			</Head>
 
-					<View>
-						<Component {...pageProps} />
-					</View>
-					
-				</RootLayout>
-			</QueryProvider>
-		</SettingsProvider>
-	)
-}
+			<SettingsProvider>
+				<QueryProvider>
+					<RootLayout>
+						<Notifications />
+
+						<View>
+							<Component {...pageProps} />
+						</View>
+					</RootLayout>
+				</QueryProvider>
+			</SettingsProvider>
+		</>
+	);
+};
 
 export default App;

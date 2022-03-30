@@ -149,8 +149,9 @@ const SearchBar = ({ inNav }: Props) => {
 						autoFocus={!inNav}
 					/>
 
-					<button className='search-icon flex-c' onClick={onSearchButtonClick}>
+					<button className='search-icon flex-c' onClick={onSearchButtonClick} name='Search'>
 						<i className='j-icon'>{icons.search}</i>
+						<span className="sr-only">Click to search</span>
 					</button>
 				</div>
 				{showSuggestions && suggestions && suggestions.length !== 0 && (

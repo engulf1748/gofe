@@ -4,14 +4,8 @@ import config from '../../config.json';
 
 const Document = () => {
 	return (
-		<Html>
+		<Html lang='en'>
 			<Head>
-				{/*
-					user-scalable=no prevents automatic zooming on mobile
-					devices after focusing the input.
-				*/}
-				<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-
 				<link rel="preconnect" href={config.api_domain} />
 				<link
 					rel="search"

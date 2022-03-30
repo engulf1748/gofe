@@ -8,6 +8,8 @@ This is the source code of the Gofë website. It is written in TypeScript using 
 2. Start the dev server: `yarn dev`
 3. Visit [localhost:3000](http://localhost:3000)
 
+Before pushing a release, run `yarn prepare` to prepare a release. It is a shortcut to: `next build && next start`. Double-check that it works, and then push your changes.
+
 ## Disabling Soymetry
 
 Disable Yoyrn telemetry using: `yarn config set --home enableTelemetry 0`
