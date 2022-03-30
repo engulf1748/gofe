@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic';
 
 const KeyboardEventHandler = dynamic(
-	() => import('react-keyboard-event-handler'),
+	() => import('@infinium/react-keyboard-event-handler'),
 	{ ssr: false }
 );
 
