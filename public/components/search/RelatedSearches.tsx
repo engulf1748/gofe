@@ -12,7 +12,7 @@ const RelatedSearches = () => {
 		push(`/search?q=${suggestion}`);
 	}
 
-	if (!suggestions) {
+	if (!suggestions || suggestions.filter((suggestion: string) => suggestion !== query).length == 0) {
 		return <></>;
 	}
 
