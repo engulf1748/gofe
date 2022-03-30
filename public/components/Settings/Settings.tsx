@@ -17,6 +17,8 @@ const Settings = () => {
 				color='transparent'
 				onClick={() => setModal(!modal)}
 				mods='settings-button'
+
+				// @ts-ignore
 				name='Settings'
 			>
 				<i className="j-icon">{icons.cog}</i>
