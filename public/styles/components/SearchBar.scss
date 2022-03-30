@@ -72,6 +72,7 @@ $max-width: 25rem;
 	cursor: pointer;
 	border-top-right-radius: $radius;
 	border-bottom-right-radius: $radius;
+	transition: background-color var(--d-m-1) var(--e-s);
 
 	nav & {
 		height: calc($height-sm - 2px);
@@ -82,8 +83,12 @@ $max-width: 25rem;
 		}
 	}
 
-	&:focus {
-		background-color: var(--background-1);
+	&:focus, &:hover {
+		background-color: var(--input-complimentary);
+	}
+
+	.showing-suggestions & {
+		border-bottom-right-radius: 0;
 	}
 }
 
