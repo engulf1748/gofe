@@ -1,5 +1,9 @@
 .h-button.settings-button {
 	color: var(--foreground) !important;
+
+	&:hover, &:focus {
+		background-color: var(--background-1) !important;
+	}
 }
 
 .setting-block {
