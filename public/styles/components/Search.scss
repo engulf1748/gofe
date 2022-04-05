@@ -92,6 +92,7 @@ $gutter: 0.6rem;
 .search-panel {
 	width: 100%;
 	padding: 4rem var(--result-gutter);
+	padding-top: 2rem !important;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-column-gap: 5rem;

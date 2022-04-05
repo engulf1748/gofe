@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import classNames from 'classnames';
 
 import { usePrevious } from '../hooks/usePrevious';
@@ -16,7 +17,7 @@ import RelatedSearches from '../components/search/RelatedSearches';
 import searchAPI from '../services/search';
 
 import type { Result } from '../types/Search';
-import { APIError } from '../services/err';
+import type { APIError } from '../services/err';
 
 
 interface Props {
@@ -24,9 +25,44 @@ interface Props {
 	page: number;
 }
 
+interface QueryMetaProps {
+	dym: string;
+	srf: string;
+	setQuery(v: string): void;
+}
+
+const QueryMeta = ({ dym, srf, setQuery }: QueryMetaProps) => {
+	const { push } = useRouter();
+
+	const searchFor = (newQuery: string) => {
+		setQuery(newQuery);
+		push(`/search?q=${newQuery}`);
+	}
+
+	if (dym) {
+		return (
+			<div className="mb-2r">
+				<p>Did you mean <a className='g-link' onClick={() => searchFor(dym)}>{dym.trim()}?</a></p>
+			</div>
+		);
+	}
+
+	if (srf) {
+		return (
+			<div className="mb-2r">
+				<p>Showing results for <span className='fw-600'>{srf.trim()}</span></p>
+			</div>
+		);
+	}
+
+	return <div className='h-3r'></div>;
+}
+
 const SearchPage = ({ query, page }: Props) => {
 	const [results, setResults] = useState<Result[] | undefined>(undefined);
 	const [err, setErr] = useState<APIError | false>(false);
+	const [dym, setDym] = useState('');
+	const [srf, setSrf] = useState('');
 
 	const previousQuery = usePrevious(query);
 	const previousPage = usePrevious(page);
@@ -48,11 +84,12 @@ const SearchPage = ({ query, page }: Props) => {
 			searchAPI
 				.getSearchResults(query, page || 1)
 				.then(data => {
-					if (data.type === 'success' && data.data && Array.isArray(data.data)) {
-						setResults(data.data);
+					if (data.type === 'success' && data.data && Array.isArray(data.data.Links)) {
+						setResults(data.data.Links);
+						setDym(data.data?.DYM);
+						setSrf(data.data?.SRF);
 					} else {
 						setResults([]);
-						console.log({data})
 						setErr(data.errorType);
 					}
 				});
@@ -77,6 +114,12 @@ const SearchPage = ({ query, page }: Props) => {
 
 			<div className="search-panel">
 				<div className="results">
+					<QueryMeta
+						dym={dym}
+						srf={srf}
+						setQuery={setQuery}
+					/>
+
 					{results.map(result => <TextResult key={result.URL} {...result} />)}
 				</div>
 
