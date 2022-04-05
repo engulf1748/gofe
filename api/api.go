@@ -43,6 +43,7 @@ func (l *Link) sanitize() {
 type Result struct {
 	Links []*Link
 	DYM   string // 'did you mean'
+	SRF   string // 'showing results for'
 }
 
 func (rs Result) sanitize() {
@@ -125,11 +126,11 @@ func findURLs(n *html.Node) Result {
 	return rs
 }
 
-func findDYM(n *html.Node) string {
+// finds 'did you mean' or 'showing results for'
+func findExtra(n *html.Node) (dym string, srf string) {
 	var f func(n *html.Node)
-	dym := ""
 	f = func(n *html.Node) {
-		if dym != "" {
+		if dym != "" && srf != "" {
 			return
 		}
 		if n.Type == html.TextNode && strings.Contains(n.Data, "Did you mean:") {
@@ -137,15 +138,20 @@ func findDYM(n *html.Node) string {
 				dym = getContent(n.NextSibling)
 			}
 		}
-		if n.NextSibling != nil {
-			f(n.NextSibling)
+		if n.Type == html.TextNode && strings.Contains(n.Data, "Showing results for") {
+			if n.NextSibling != nil {
+				srf = getContent(n.NextSibling)
+			}
 		}
 		if n.FirstChild != nil {
 			f(n.FirstChild)
 		}
+		if n.NextSibling != nil {
+			f(n.NextSibling)
+		}
 	}
 	f(n)
-	return dym
+	return dym, srf
 }
 
 // we don't want to wait on a request forever, do we?
@@ -191,7 +197,7 @@ func Search(query string, page int) (Result, error) {
 
 	rs = findURLs(n)
 	rs.sanitize()
-	rs.DYM = findDYM(n)
+	rs.DYM, rs.SRF = findExtra(n)
 	return rs, nil
 }
 
