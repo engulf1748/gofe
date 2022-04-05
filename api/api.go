@@ -19,16 +19,16 @@ const qurl = "https://google.com/search?&q=%s&start=%d"
 // xssi = t seems to be necessary for application/json output
 const surl = "https://www.google.com/complete/search?q=%s&client=firefox&xssi=t"
 
-// Represents a single search result.
-type Result struct {
+// Represents a link with context.
+type Link struct {
 	URL     string
 	Desc    string
 	Context string
 }
 
 // remove's Google's claws
-func (r *Result) sanitize() {
-	v := r.URL
+func (l *Link) sanitize() {
+	v := l.URL
 	// TODO: something less kludgy, perhaps?
 	if strings.HasPrefix(v, "/url?q=") {
 		v = strings.Replace(v, "/url?q=", "", 1)
@@ -36,14 +36,17 @@ func (r *Result) sanitize() {
 		// u, err := url.Parse(v)
 		// if err != nil { continue }
 	}
-	r.URL = v
+	l.URL = v
 }
 
-// A slice of Result pointers.
-type Results []*Result
+// A complete search result.
+type Result struct {
+	Links []*Link
+	DYM   string // 'did you mean'
+}
 
-func (rs Results) sanitize() {
-	for _, v := range rs {
+func (rs Result) sanitize() {
+	for _, v := range rs.Links {
 		v.sanitize()
 	}
 }
@@ -75,8 +78,8 @@ func getContent(n *html.Node) string {
 	return b.String()
 }
 
-func findURLs(n *html.Node) Results {
-	rs := make(Results, 0)
+func findURLs(n *html.Node) Result {
+	rs := Result{Links: make([]*Link, 0)}
 	// main ensures we're only considering links inside <div id="main">
 	var f func(*html.Node, bool)
 	f = func(n *html.Node, main bool) {
@@ -84,14 +87,14 @@ func findURLs(n *html.Node) Results {
 			fc := n.FirstChild
 			var desc string
 			if fc != nil && fc.Data == "h3" {
-				var result Result
+				var link Link
 				if fc.FirstChild != nil {
 					desc = fc.FirstChild.FirstChild.Data
 				}
 				for _, v := range n.Attr {
 					if v.Key == "href" {
-						result.URL = v.Val
-						result.Desc = strings.ToValidUTF8(desc, "")
+						link.URL = v.Val
+						link.Desc = strings.ToValidUTF8(desc, "")
 						break
 					}
 				}
@@ -99,11 +102,11 @@ func findURLs(n *html.Node) Results {
 				if p := n.Parent; p.NextSibling != nil {
 					p = p.NextSibling
 					s := getContent(p)
-					result.Context = strings.ToValidUTF8(s, "")
+					link.Context = strings.ToValidUTF8(s, "")
 				}
 				// my sincerest apologies
-				if result.URL != "" {
-					rs = append(rs, &result)
+				if link.URL != "" {
+					rs.Links = append(rs.Links, &link)
 				}
 			}
 		}
@@ -122,6 +125,29 @@ func findURLs(n *html.Node) Results {
 	return rs
 }
 
+func findDYM(n *html.Node) string {
+	var f func(n *html.Node)
+	dym := ""
+	f = func(n *html.Node) {
+		if dym != "" {
+			return
+		}
+		if n.Type == html.TextNode && strings.Contains(n.Data, "Did you mean:") {
+			if n.NextSibling != nil {
+				dym = getContent(n.NextSibling)
+			}
+		}
+		if n.NextSibling != nil {
+			f(n.NextSibling)
+		}
+		if n.FirstChild != nil {
+			f(n.FirstChild)
+		}
+	}
+	f(n)
+	return dym
+}
+
 // we don't want to wait on a request forever, do we?
 func timeoutClient() *http.Client {
 	return &http.Client{
@@ -129,27 +155,43 @@ func timeoutClient() *http.Client {
 	}
 }
 
-// Queries Google Search for `query` and returns a `Results`. Note that `page`
+// Queries Google Search for `query` and returns a `Result`. Note that `page`
 // is 0-indexed. There might be an error, so do check for it before using the
-// returned `Results`.
-func Search(query string, page int) (Results, error) {
+// returned `Result`.
+func Search(query string, page int) (Result, error) {
+	var rs Result
+
 	page *= 10 // I do not know why—ask Google
 	query = url.QueryEscape(query)
-	client := timeoutClient()
-	resp, err := client.Get(fmt.Sprintf(qurl, query, page))
+
+	u, err := url.Parse(fmt.Sprintf(qurl, query, page))
 	if err != nil {
-		return nil, err
+		panic(err)
+	}
+
+	r := &http.Request{
+		URL:    u,
+		Header: make(http.Header),
+	}
+
+	client := timeoutClient()
+	resp, err := client.Do(r)
+	if err != nil {
+		return rs, err
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
-		return nil, fmt.Errorf("Search: http.Get returned non-200 status code: %v", resp.StatusCode)
+		return rs, fmt.Errorf("Search: http.Get returned non-200 status code: %v", resp.StatusCode)
 	}
+
 	n, err := html.Parse(resp.Body)
 	if err != nil {
-		return nil, err
+		return rs, err
 	}
-	rs := findURLs(n)
+
+	rs = findURLs(n)
 	rs.sanitize()
+	rs.DYM = findDYM(n)
 	return rs, nil
 }
 
@@ -177,7 +219,7 @@ func Suggest(query string) (Suggestions, error) {
 	}
 	b, err := io.ReadAll(resp.Body)
 	b = b[4:] // )]}' is needlessly prefixed to the response. any idea why?
-	 // response is ISO-8859-1 encoded
+	// response is ISO-8859-1 encoded
 	// []byte -> []rune -> string -> []byte
 	// there is of course a better way, I'm just too lazy at the moment
 	rb := []byte(iso8859ToUTF8(b))

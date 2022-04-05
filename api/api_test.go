@@ -5,13 +5,14 @@ import (
 )
 
 func TestSearch(t *testing.T) {
-	q := "golang is the best"
+	q := "why no me meaning"
 	rs, err := Search(q, 0)
 	if err != nil {
 		t.Fatalf("err: %v", err)
 	}
 	t.Logf("Query: %q\n", q)
-	for _, v := range rs {
+	t.Logf("Did you mean: %q\n", rs.DYM)
+	for _, v := range rs.Links {
 		t.Logf("URL: %q\nDescription: %q\nContext: %q\n\n", v.URL, v.Desc, v.Context)
 	}
 }
