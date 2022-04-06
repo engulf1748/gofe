@@ -55,7 +55,7 @@ const QueryMeta = ({ dym, srf, setQuery }: QueryMetaProps) => {
 		);
 	}
 
-	return <div className='h-3r'></div>;
+	return <div className='h-1r'></div>;
 }
 
 const SearchPage = ({ query, page }: Props) => {
