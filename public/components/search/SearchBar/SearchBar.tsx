@@ -15,6 +15,11 @@ const SearchBar = ({ inNav }: Props) => {
 
 	const close = () => {
 		setShowSuggestions(false);
+		
+		try {
+			// @ts-ignore
+			inputRef.current.blur();
+		} catch {}
 	};
 
 	useEffect(() => {
