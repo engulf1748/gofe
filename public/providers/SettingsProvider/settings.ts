@@ -37,6 +37,9 @@ const settingsSchema: Schema = {
 	openLinksInNewTab: {
 		allowedValues: bool,
 	},
+	suggestionsView: {
+		allowedValues: ['view-list', 'view-grid'],
+	}
 }
 
 export {

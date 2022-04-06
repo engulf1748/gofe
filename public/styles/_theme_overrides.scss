@@ -43,4 +43,12 @@ body.brutal-light {
 			}
 		}
 	}
+
+	& .sb-suggestions-view button.selected, & .sb-suggestions-view button:hover {
+		background-color: var(--background-1) !important;
+	}
+
+	& .sb-suggestions-view.view-grid button.selected, & .sb-suggestions-view.view-grid button:hover {
+		background-color: var(--background-2) !important;
+	}
 }
