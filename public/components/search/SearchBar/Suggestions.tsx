@@ -8,6 +8,7 @@ import Suggestion from "./Suggestion";
 
 import { icons } from "../../../data/icons";
 import Keyboard from "../../Keyboard";
+import MiniButton from "../../MiniButton";
 
 
 interface Props {
@@ -63,12 +64,18 @@ const Suggestions = ({ close }: Props) => {
 				)}
 
 				<div className='buttons'>
-					<button onClick={() => setView('view-grid')} title='View as bubbles'>
-						<i className="j-icon xs">{icons.viewGrid}</i>
-					</button>
-					<button onClick={() => setView('view-list')} title='View as list'>
-						<i className="j-icon xs">{icons.viewList}</i>
-					</button>
+					<MiniButton
+						onClick={() => setView('view-grid')}
+						title='View as bubbles'
+						icon='viewGrid'
+						active={settings.suggestionsView === 'view-grid'}
+					/>
+					<MiniButton
+						onClick={() => setView('view-list')}
+						title='View as list'
+						icon='viewList'
+						active={settings.suggestionsView === 'view-list'}
+					/>
 				</div>
 			</div>
 
