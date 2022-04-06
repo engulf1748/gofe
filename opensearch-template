@@ -6,5 +6,5 @@
   <InputEncoding>UTF-8</InputEncoding>
   <Image width="48" height="48" type="image/x-icon">%s/favicon.ico</Image>
   <Url type="text/html" method="get" template="%s/search?q={searchTerms}"/>
-  <Url type="application/x-suggestions+json" method="get" template="%s/opensuggest?q={searchTerms}"/>
+  <Url type="application/x-suggestions+json" template="%s/opensuggest?q={searchTerms}"/>
 </OpenSearchDescription>
