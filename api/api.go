@@ -67,7 +67,6 @@ func getContent(n *html.Node) string {
 		}
 		if n.Type == html.TextNode {
 			b.WriteString(n.Data)
-			b.WriteString(" ")
 			return
 		}
 		// depth-first search
