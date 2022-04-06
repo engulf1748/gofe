@@ -64,10 +64,10 @@ const Suggestions = ({ close }: Props) => {
 				)}
 
 				<div className='buttons'>
-					<button onClick={() => setView('view-grid')}>
+					<button onClick={() => setView('view-grid')} title='View as bubbles'>
 						<i className="j-icon xs">{icons.viewGrid}</i>
 					</button>
-					<button onClick={() => setView('view-list')}>
+					<button onClick={() => setView('view-list')} title='View as list'>
 						<i className="j-icon xs">{icons.viewList}</i>
 					</button>
 				</div>

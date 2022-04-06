@@ -40,7 +40,8 @@ const Input = ({ inputRef, setShowSuggestions }: Props) => {
 				onClick={onInputClick}
 			/>
 
-			<button className='sb-button' onClick={submit}>
+			<button className='sb-button' onClick={submit} title={`Search for "${query}"`}>
+				<span className="sr-only">Search for {query}</span>
 				<i className="j-icon">{icons.search}</i>
 			</button>
 		</div>

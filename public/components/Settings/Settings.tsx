@@ -17,10 +17,9 @@ const Settings = () => {
 				color='transparent'
 				onClick={() => setModal(!modal)}
 				mods='settings-button'
-
-				// @ts-ignore
-				name='Settings'
+				title='Modify your preferences'
 			>
+				<span className="sr-only">Modify your preferences</span>
 				<i className="j-icon">{icons.cog}</i>
 				<span className="sr-only">Click to open settings</span>
 			</Button>
