@@ -15,18 +15,14 @@ interface Props {
 }
 
 const Suggestions = ({ close }: Props) => {
-	const { suggestions } = useQuery();
+	const { query, suggestions } = useQuery();
 	const settings = useSettings();
 
-	const [selected, setSelected] = useState(0);
+	const [selected, setSelected] = useState(-1);
 	
 	const setView = (v: 'view-list' | 'view-grid') => {
 		settings.set('suggestionsView', v);
 	}
-
-	useEffect(() => {
-		console.log(selected)
-	}, [selected])
 
 	if (!suggestions) {
 		return <></>;
@@ -40,14 +36,17 @@ const Suggestions = ({ close }: Props) => {
 					'sb-suggestions-view',
 					settings.suggestionsView || 'view-list',
 				)}>
-					{suggestions.map((suggestion: string, index: number) => (
-						<Suggestion
-							key={suggestion}
-							suggestion={suggestion}
-							selected={selected + 1 === index}
-							close={close}
-						/>
-					))}
+					{suggestions
+						.filter((s: string) => s !== query)
+						.map((suggestion: string, index: number) => (
+							<Suggestion
+								key={suggestion}
+								suggestion={suggestion}
+								selected={selected === index}
+								close={close}
+							/>
+						)
+					)}
 				</div>	
 			)}
 
@@ -85,10 +84,17 @@ const Suggestions = ({ close }: Props) => {
 					ev.preventDefault();
 
 					const relativeIndex = suggestions.length - 2;
+					const isUp = (key === 'up' || key === 'left');
 
-					if (key === 'up' || key === 'left') {
+					if (isUp) {
+						// If going UP and:
+						// 	- Selected is FIRST item, return last item
+						//	- Selected is not FIRST item, return selected - 1
 						setSelected(s => selected === 0 ? relativeIndex : s - 1);
 					} else {
+						// If going DOWN and:
+						// 	- Selected is LAST item, return FIRST item
+						//	- Selected is not LAST item, return selected + 1
 						setSelected(s => selected === relativeIndex ? 0 : s + 1);
 					}
 				}}

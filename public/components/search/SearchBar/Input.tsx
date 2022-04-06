@@ -5,14 +5,16 @@ import { useQuery } from "../../../providers/QueryProvider";
 
 import { getSearchPageURL } from "../../../logic/query";
 import { icons } from "../../../data/icons";
+import Keyboard from "../../Keyboard";
 
 interface Props {
 	inputRef: MutableRefObject<any>;
 	setShowSuggestions(v: boolean): void;
+	close(): void;
 }
 
-const Input = ({ inputRef, setShowSuggestions }: Props) => {
-	const { query, setQuery } = useQuery();
+const Input = ({ inputRef, setShowSuggestions, close }: Props) => {
+	const { query, setQuery, previousQuery } = useQuery();
 	const { push } = useRouter();
 
 	const onChange = (ev: any) => {
@@ -25,7 +27,10 @@ const Input = ({ inputRef, setShowSuggestions }: Props) => {
 	}
 
 	const submit = useCallback(() => {
-		push(getSearchPageURL(query, 1));
+		if (query !== previousQuery) {
+			push(getSearchPageURL(query, 1));
+			close();
+		}
 	}, [query]);
 
 	return (
@@ -44,6 +49,14 @@ const Input = ({ inputRef, setShowSuggestions }: Props) => {
 				<span className="sr-only">Search for {query}</span>
 				<i className="j-icon">{icons.search}</i>
 			</button>
+
+			<Keyboard
+				keys={['enter']}
+				callback={() => {
+					submit();
+				}}
+				handleFocusableElements
+			/>
 		</div>
 	);
 };
