@@ -23,7 +23,7 @@ const RelatedSearches = () => {
 
 				<div className="suggestion-pills">
 					{suggestions
-						.filter((suggestion: string) => suggestion !== query)
+						.filter((suggestion: string) => suggestion !== query.trim())
 						.map((suggestion: string) => {
 						return (
 							<div>
