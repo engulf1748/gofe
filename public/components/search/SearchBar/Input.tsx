@@ -11,9 +11,10 @@ interface Props {
 	inputRef: MutableRefObject<any>;
 	setShowSuggestions(v: boolean): void;
 	close(): void;
+	inNav?: boolean;
 }
 
-const Input = ({ inputRef, setShowSuggestions, close }: Props) => {
+const Input = ({ inputRef, setShowSuggestions, close, inNav }: Props) => {
 	const { query, setQuery, previousQuery } = useQuery();
 	const { push } = useRouter();
 
@@ -43,6 +44,7 @@ const Input = ({ inputRef, setShowSuggestions, close }: Props) => {
 				value={query}
 				onChange={onChange}
 				onClick={onInputClick}
+				autoFocus={!inNav}
 			/>
 
 			<button className='sb-button' onClick={submit} title={`Search for "${query}"`}>

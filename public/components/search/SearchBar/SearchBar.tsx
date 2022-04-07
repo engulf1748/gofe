@@ -41,6 +41,7 @@ const SearchBar = ({ inNav }: Props) => {
 				inputRef={inputRef}
 				setShowSuggestions={setShowSuggestions}
 				close={close}
+				inNav={inNav}
 			/>
 			
 			{showSuggestions && <Suggestions close={close} />}
