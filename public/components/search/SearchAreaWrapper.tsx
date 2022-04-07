@@ -7,8 +7,8 @@ interface Props {
 
 const SearchAreaWrapper = ({ pageTitle, children }: Props) => {
 	return (
-		<div className={'flex align-c dark-ui'}>
-		<PageTitle>Gofë - {pageTitle}</PageTitle>
+		<div className={'flex align-c dark-ui mnh-screen'}>
+			<PageTitle>Gofë - {pageTitle}</PageTitle>
 
 			<div className="search-panel no-grid">
 				{children}
