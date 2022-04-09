@@ -9,6 +9,7 @@ const themes = [
 	'modern-dark',
 	'modern-light',
 	'monokai-sweet-dark',
+	'reader',
 ];
 
 export {

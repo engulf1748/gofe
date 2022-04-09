@@ -1,0 +1,33 @@
+body.reader {
+	--background: #f4ece2;
+	--background-1: #eee2d3;
+	--background-2: #e9d8c4;
+	--background-3: #e3ceb5;
+	--foreground: #161616;
+
+	--input-background: #f4ece2;
+	--input-complimentary: #eee2d3;
+
+	--primary: #ff841f;
+	--primary-light: #{lighten(#ff841f, 30%)};
+
+	--button: #ff841f;
+	--button-hover: #F56E00;
+
+	--secondary: #3794D2;
+	--secondary-light: #{lighten(#3794D2, 30%)};
+
+	--tertiary: #660099;
+	--tertiary-light: #{lighten(#660099, 40%)};
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: #f4ece2;
+	--ui-1: #eee2d3;
+	--ui-2: #e9d8c4;
+	--ui-3: #e3ceb5;
+	--text-color: #161616;
+	--accent: #ff841f;
+	--accent-500: #ff841f;
+	--accent-hover: #F56E00;
+	--accent-600: #F56E00;
+}
