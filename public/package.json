@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "prepare": "next build && next start",
+    "pre-commit": "next build && next start",
     "lint": "next lint"
   },
   "dependencies": {
