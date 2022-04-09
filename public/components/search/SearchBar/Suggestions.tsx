@@ -6,7 +6,6 @@ import { useSettings } from "../../../providers/SettingsProvider";
 
 import Suggestion from "./Suggestion";
 
-import { icons } from "../../../data/icons";
 import Keyboard from "../../Keyboard";
 import MiniButton from "../../MiniButton";
 
@@ -16,10 +15,17 @@ interface Props {
 }
 
 const Suggestions = ({ close }: Props) => {
-	const { query, suggestions } = useQuery();
+	const { query, previousQuery, suggestions } = useQuery();
 	const settings = useSettings();
 
 	const [selected, setSelected] = useState(-1);
+	const [emptyMessage, setEmptyMessage] = useState('Type to get suggestions');
+
+	useEffect(() => {
+		if (suggestions.length === 0 && query !== previousQuery) {
+			setEmptyMessage('No suggestions');
+		}
+	}, [suggestions, query])
 	
 	const setView = (v: 'view-list' | 'view-grid') => {
 		settings.set('suggestionsView', v);
@@ -58,7 +64,7 @@ const Suggestions = ({ close }: Props) => {
 				}}
 			>
 				{suggestions.length === 0 ? (
-					<p>No suggestions</p>
+					<p>{emptyMessage}</p>
 				) : (
 					<p>{suggestions.length} suggestion{suggestions.length > 1 && 's'}</p>
 				)}

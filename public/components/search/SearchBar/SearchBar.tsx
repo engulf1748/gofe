@@ -10,7 +10,7 @@ interface Props {
 }
 
 const SearchBar = ({ inNav }: Props) => {
-	const [showSuggestions, setShowSuggestions] = useState(false);
+	const [showSuggestions, setShowSuggestions] = useState(!inNav);
 	const inputRef = useRef();
 
 	const close = () => {
