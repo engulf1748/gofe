@@ -3,7 +3,7 @@
 // TODO:
 // Does this make a big difference?
 const parseQuery = (query: string) => {
-	return query.split(' ').join('+');
+	return encodeURIComponent(query);
 }
 
 const getPageQueryString = (page: number): string => {
