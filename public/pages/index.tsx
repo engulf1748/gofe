@@ -28,7 +28,9 @@ const Home = () => {
 // Layout object here, on this one page.
 Home.layout = ({ children }: ChildrenOnly) => (
 	<div className='layout'>
-		{children}
+		<div className="content-wrapper">
+			{children}
+		</div>
 		<Footer />
 	</div>
 );

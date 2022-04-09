@@ -9,7 +9,9 @@ const Layout = ({ children }: ChildrenOnly) => {
 		<div className="layout">
 			<Navigation />
 
-			{children}
+			<div className='content-wrapper'>
+				{children}
+			</div>
 			
 			<Footer />
 		</div>
