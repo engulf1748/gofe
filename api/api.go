@@ -166,6 +166,10 @@ func timeoutClient() *http.Client {
 func Search(query string, page int) (Result, error) {
 	var rs Result
 
+	if strings.TrimSpace(query) == "" {
+		return rs, nil
+	}
+
 	page *= 10 // I do not know why—ask Google
 	query = url.QueryEscape(query)
 
@@ -212,6 +216,10 @@ func iso8859ToUTF8(b []byte) string {
 // Suggests queries based on `query` and returns a `Suggestions`. There might be
 // an error, so do check for it before using the returned `Suggestions`.
 func Suggest(query string) (Suggestions, error) {
+	if strings.TrimSpace(query) == "" {
+		return Suggestions{}, nil
+	}
+
 	query = url.QueryEscape(query)
 	client := timeoutClient()
 	resp, err := client.Get(fmt.Sprintf(surl, query))
