@@ -1,15 +1,34 @@
 $gutter: 0.6rem;
 
-.text-result {
-	width: 100%;
+@mixin tl() {
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
 	flex-direction: column;
+}
+
+.text-result {
+	width: 100%;
 	margin-bottom: 2rem;
 
-	& .link-area:hover .description {
-		text-decoration: underline;
+	&, & .link-area, & .text-link {
+		@include tl();
+	}
+
+	& .link-area {
+		width: auto;
+
+		&:hover .description {
+			text-decoration: underline;
+		}
+	}
+
+	& .text-link:focus {
+		outline: none;
+	}
+
+	& .text-link:focus .link-area {
+		outline: var(--primary) solid 2px;
 	}
 
 	& .text-link:visited .description {

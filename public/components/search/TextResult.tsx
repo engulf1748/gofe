@@ -12,7 +12,7 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 
 	return (
 		<div className='text-result'>
-			<div className="w-100p mw-35r">
+			<div className="w-100p mw-35r flex">
 				<ExternalLink href={URL} newTab={shouldOpenNewTab} className='text-link'>
 					<div className="link-area">
 						{/* TODO: Separate URL parts and display them better. */}

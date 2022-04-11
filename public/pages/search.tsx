@@ -20,11 +20,6 @@ import type { Result } from '../types/Search';
 import type { APIError } from '../services/err';
 
 
-interface Props {
-	query: string;
-	page: number;
-}
-
 interface QueryMetaProps {
 	dym: string;
 	srf: string;
@@ -58,11 +53,20 @@ const QueryMeta = ({ dym, srf, setQuery }: QueryMetaProps) => {
 	return <div className='h-1r'></div>;
 }
 
-const SearchPage = ({ query, page }: Props) => {
+const SearchPage = () => {
 	const [results, setResults] = useState<Result[] | undefined>(undefined);
 	const [err, setErr] = useState<APIError | false>(false);
 	const [dym, setDym] = useState('');
 	const [srf, setSrf] = useState('');
+
+	const params = new URLSearchParams(window.location.search);
+
+	if (!params.has('q') || params.get('q')?.trim() === '') {
+		console.error('No query');
+	}
+
+	const query = params.get('q') || '';
+	const page = Number(params.get('p')) || 1;
 
 	const previousQuery = usePrevious(query);
 	const previousPage = usePrevious(page);
@@ -82,7 +86,7 @@ const SearchPage = ({ query, page }: Props) => {
 			setResults(undefined);
 
 			searchAPI
-				.getSearchResults(query, page || 1)
+				.getSearchResults(query, page)
 				.then(data => {
 					if (data.type === 'success' && data.data && Array.isArray(data.data.Links)) {
 						setResults(data.data.Links);
@@ -135,24 +139,6 @@ const SearchPage = ({ query, page }: Props) => {
 	);
 };
 
-const getServerSideProps = async (context: any) => {
-	const query = context?.query?.q;
-	const page = context?.query?.p || 1;
-
-	if (!query || !Boolean(query)) return { props: { query: null, page: 1 } };
-
-	return {
-		props: {
-			query,
-			page: Number(page) || 1,
-		}
-	}
-}
-
 SearchPage.layout = Layout;
 
 export default SearchPage;
-
-export {
-	getServerSideProps,
-}
