@@ -28,9 +28,13 @@ const Input = ({ inputRef, setShowSuggestions, close, inNav }: Props) => {
 	}
 
 	const submit = useCallback(() => {
-		if (query !== previousQuery) {
+		if (query !== previousQuery && query.trim() !== "") {
 			push(getSearchPageURL(query, 1));
 			close();
+		} else {
+			try {
+				inputRef.current.focus();
+			} catch {}
 		}
 	}, [query]);
 
