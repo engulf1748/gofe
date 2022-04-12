@@ -27,9 +27,10 @@ the relevant source code can be found in `public/`.
 
 ## Screenshots
 
-|                       |                          |                           |
-|-----------------------|--------------------------|---------------------------|
-| ![](/images/home.png) | ![](/images/results.png) | ![](/images/skeleton.png) |
+|                          |                                |
+|--------------------------|--------------------------------|
+| ![](/images/home.png)    | ![](/images/results-theme.png) |
+| ![](/images/results.png) | ![](/images/skeleton.png)      |
 
 ## License
 
