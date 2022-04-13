@@ -33,8 +33,11 @@ func (l *Link) sanitize() {
 	if strings.HasPrefix(v, "/url?q=") {
 		v = strings.Replace(v, "/url?q=", "", 1)
 		v = strings.Split(v, "&sa")[0]
-		// u, err := url.Parse(v)
-		// if err != nil { continue }
+		u, err := url.PathUnescape(v)
+		if err != nil {
+			// TODO
+		}
+		v = u
 	}
 	l.URL = v
 }
