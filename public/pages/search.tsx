@@ -13,6 +13,7 @@ import ResultsLoading from '../components/search/states/ResultsLoading';
 import Pagination from '../components/search/Pagination';
 import SearchError from '../components/search/states/SearchError';
 import RelatedSearches from '../components/search/RelatedSearches';
+import EmptyQuery from '../components/search/states/EmptyQuery';
 
 import searchAPI from '../services/search';
 
@@ -106,6 +107,10 @@ const SearchPage = () => {
 
 	if (!results) {
 		return <ResultsLoading />;
+	}
+
+	if (query.trim().length === 0) {
+		return <EmptyQuery />;
 	}
 
 	if (results.length === 0) {
