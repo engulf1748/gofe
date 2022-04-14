@@ -125,7 +125,7 @@ $gutter: 0.6rem;
 }
 
 @media only screen and (max-width: 1050px) {
-	.search-panel {
+	.search-panel:not(.no-grid) {
 		grid-template-columns: 1fr;
 		grid-template-rows: auto auto;
 		grid-row-gap: 3rem;
