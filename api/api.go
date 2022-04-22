@@ -44,9 +44,10 @@ func (l *Link) sanitize() {
 
 // A complete search result.
 type Result struct {
-	Links []*Link
-	DYM   string // 'did you mean'
-	SRF   string // 'showing results for'
+	Links       []*Link
+	RateLimited bool
+	DYM         string // 'did you mean'
+	SRF         string // 'showing results for'
 }
 
 func (rs Result) sanitize() {
@@ -163,6 +164,15 @@ func timeoutClient() *http.Client {
 	}
 }
 
+func checkRateLimit(sc int) bool {
+	rlMap := map[int]bool{
+		301: true,
+		302: true,
+		429: true,
+	}
+	return rlMap[sc]
+}
+
 // Queries Google Search for `query` and returns a `Result`. Note that `page`
 // is 0-indexed. There might be an error, so do check for it before using the
 // returned `Result`.
@@ -193,6 +203,10 @@ func Search(query string, page int) (Result, error) {
 	}
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
+		if checkRateLimit(resp.StatusCode) {
+			rs.RateLimited = true
+			return rs, nil
+		}
 		return rs, fmt.Errorf("Search: http.Get returned non-200 status code: %v", resp.StatusCode)
 	}
 
