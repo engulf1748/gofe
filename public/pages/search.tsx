@@ -14,6 +14,7 @@ import Pagination from '../components/search/Pagination';
 import SearchError from '../components/search/states/SearchError';
 import RelatedSearches from '../components/search/RelatedSearches';
 import EmptyQuery from '../components/search/states/EmptyQuery';
+import RateLimited from '../components/search/states/RateLimited';
 
 import searchAPI from '../services/search';
 
@@ -59,6 +60,7 @@ const SearchPage = () => {
 	const [err, setErr] = useState<APIError | false>(false);
 	const [dym, setDym] = useState('');
 	const [srf, setSrf] = useState('');
+	const [rateLimited, setRateLimited] = useState(false);
 
 	const params = new URLSearchParams(window.location.search);
 
@@ -89,8 +91,14 @@ const SearchPage = () => {
 			searchAPI
 				.getSearchResults(query, page)
 				.then(data => {
-					if (data.type === 'success' && data.data && Array.isArray(data.data.Links)) {
-						setResults(data.data.Links);
+					if (data.type === 'success' && data.data) {
+						if (Array.isArray(data.data.Links)) {
+							setResults(data.data.Links);
+						} else {
+							setResults([]);
+						}
+
+						setRateLimited(data.data.RateLimited);
 						setDym(data.data?.DYM);
 						setSrf(data.data?.SRF);
 					} else {
@@ -103,6 +111,10 @@ const SearchPage = () => {
 
 	if (err) {
 		return <SearchError err={err} />;
+	}
+
+	if (rateLimited) {
+		return <RateLimited />;
 	}
 
 	if (!results) {
