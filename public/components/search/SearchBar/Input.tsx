@@ -51,10 +51,19 @@ const Input = ({ inputRef, setShowSuggestions, close, inNav }: Props) => {
 				autoFocus={!inNav}
 			/>
 
-			<button className='sb-button' onClick={submit} title={`Search for "${query}"`}>
-				<span className="sr-only">Search for {query}</span>
-				<i className="j-icon">{icons.search}</i>
-			</button>
+			<div className="input-actions">
+				{query !== '' && (
+					<button className='sb-button' onClick={() => setQuery('')} title='Clear query'>
+						<span className="sr-only">Clear query</span>
+						<i className="j-icon">{icons.x}</i>
+					</button>
+				)}
+
+				<button className='sb-button' onClick={submit} title={`Search for "${query}"`}>
+					<span className="sr-only">Search for {query}</span>
+					<i className="j-icon">{icons.search}</i>
+				</button>
+			</div>
 
 			<Keyboard
 				keys={['enter']}
