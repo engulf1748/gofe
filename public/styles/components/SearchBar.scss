@@ -91,13 +91,14 @@ $radius: 0.5rem;
 
 			& button {
 				width: 100%;
-				height: 38px;
-				padding: 0 1rem;
+				min-height: 38px;
+				padding: 0.5rem 1rem;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 				flex-direction: row;
 				background-color: transparent;
+				text-align: left;
 				transition: var(--d-f-2) var(--e-s);
 			}
 		}
