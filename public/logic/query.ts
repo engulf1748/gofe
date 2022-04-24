@@ -1,7 +1,3 @@
-// Returns the query but with spaces replaced
-// with the plus sign.
-// TODO:
-// Does this make a big difference?
 const parseQuery = (query: string) => {
 	return encodeURIComponent(query);
 }
