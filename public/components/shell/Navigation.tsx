@@ -7,15 +7,14 @@ const Navigation = () => {
 	return (
 		<nav>
 			<div className="wrapper flex-c">
-				<div className='w-100p h-100p grid grid-3 gap-0 nav-grid'>
-					<div className='primary-grid-block grid-block justify-s align-c flex-row'>
+				<div className='w-100p h-100p flex-sb nav-desktop'>
+					<div className='w-100p flex justify-s align-c flex-row'>
 						<Logo clearQueryOnClick />
-						<div className="searchbar-container w-100p mw-20r flex-c">
+						<div className="searchbar-container w-100p mw-25r flex-c">
 							<SearchBar inNav />
 						</div>
 					</div>
-					<div className="grid-block"></div>
-					<div className="grid-block align-e">
+					<div className="">
 						<div className="settings-wrapper">
 							<Settings />
 						</div>
