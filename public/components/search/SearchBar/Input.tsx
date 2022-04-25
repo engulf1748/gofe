@@ -1,4 +1,4 @@
-import { MutableRefObject, useCallback } from "react";
+import { MutableRefObject, useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 
 import { useQuery } from "../../../providers/QueryProvider";
@@ -17,6 +17,22 @@ interface Props {
 const Input = ({ inputRef, setShowSuggestions, close, inNav }: Props) => {
 	const { query, setQuery, previousQuery } = useQuery();
 	const { push } = useRouter();
+	const [hasFocus, setHasFocus] = useState(!inNav);
+
+	const focus = () => setHasFocus(true);
+	const blur = () => setHasFocus(false);
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.addEventListener('focus', focus);
+			inputRef.current.addEventListener('blur', blur);
+		}
+
+		return () => {
+			inputRef.current?.removeEventListener('focus', focus);
+			inputRef.current?.removeEventListener('blur', blur);
+		}
+	})
 
 	const onChange = (ev: any) => {
 		setQuery(ev.target?.value);
@@ -65,13 +81,15 @@ const Input = ({ inputRef, setShowSuggestions, close, inNav }: Props) => {
 				</button>
 			</div>
 
-			<Keyboard
-				keys={['enter']}
-				callback={() => {
-					submit();
-				}}
-				handleFocusableElements
-			/>
+			{hasFocus && (
+				<Keyboard
+					keys={['enter']}
+					callback={() => {
+						submit();
+					}}
+					handleFocusableElements
+				/>
+			)}
 		</div>
 	);
 };

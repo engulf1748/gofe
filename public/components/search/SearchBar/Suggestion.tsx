@@ -15,7 +15,9 @@ const Suggestion = ({ suggestion, selected, close }: Props) => {
 	const { query, setQuery, previousQuery } = useQuery();
 	const { push } = useRouter();
 
-	const onClick = () => {
+	const onClick = (ev: any) => {
+		ev.preventDefault();
+
 		if (suggestion !== previousQuery) {
 			setQuery(suggestion);
 			push(getSearchPageURL(suggestion, 1));
@@ -33,16 +35,16 @@ const Suggestion = ({ suggestion, selected, close }: Props) => {
 				className={selected ? 'selected' : ''}
 			>{suggestion}</button>
 
-			{selected && (
-				<Keyboard
-					keys={['enter']}
-					callback={() => {
-						onClick();
+			<Keyboard
+				keys={['enter']}
+				callback={(key, ev) => {
+					if (selected) {
+						onClick(ev);
 						close();
-					}}
-					handleFocusableElements
-				/>
-			)}
+					}
+				}}
+				handleFocusableElements
+			/>
 		</>
 	);
 }

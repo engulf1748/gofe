@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { MutableRefObject, useEffect, useState } from "react";
 import classNames from "classnames";
 
 import { useQuery } from "../../../providers/QueryProvider";
@@ -11,10 +11,11 @@ import MiniButton from "../../MiniButton";
 
 
 interface Props {
+	inputRef: MutableRefObject<HTMLInputElement | undefined>;
 	close(): void;
 }
 
-const Suggestions = ({ close }: Props) => {
+const Suggestions = ({ inputRef, close }: Props) => {
 	const { query, previousQuery, suggestions } = useQuery();
 	const settings = useSettings();
 
@@ -95,6 +96,10 @@ const Suggestions = ({ close }: Props) => {
 
 					// Prevent scrolling when this is open.
 					ev.preventDefault();
+
+					// Blur the input to disable the <input>s
+					// Keyboard events
+					inputRef.current?.blur();
 
 					const relativeIndex = suggestions.length - 2;
 					const isUp = (key === 'up' || key === 'left');
