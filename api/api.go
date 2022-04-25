@@ -12,12 +12,14 @@ import (
 	"golang.org/x/net/html"
 )
 
+//TODO: pass region as parameter
+// reference: https://github.com/benbusby/whoogle-search/issues/544
 // query URL
-const qurl = "https://google.com/search?&q=%s&start=%d"
+const qurl = "https://google.com/search?&q=%s&start=%d&gl=US"
 
 // suggestions URL
 // xssi = t seems to be necessary for application/json output
-const surl = "https://www.google.com/complete/search?q=%s&client=firefox&xssi=t"
+const surl = "https://www.google.com/complete/search?q=%s&client=firefox&xssi=t&gl=US"
 
 // Represents a link with context.
 type Link struct {
