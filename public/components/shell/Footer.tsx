@@ -2,6 +2,7 @@ import ExternalLink from '../ExternalLink';
 import InternalLink from '../InternalLink';
 
 import { icons } from '../../data/icons';
+import pkg from '../../package.json';
 
 const Divider = () => <p className='mb-0 mx-1r opacity-4 tp-hide'>|</p>;
 
@@ -12,11 +13,11 @@ const Footer = () => {
 				<div className='w-100p h-100p grid grid-12 tl-grid-1'>
 					<div className='grid-block align-s grid-span-column-3 tl-grid-span-column-1 tl-align-c'>
 						<ExternalLink
-								href='https://codeberg.org/ar324/gofe/src/branch/main/LICENSE'
-								className='link'
-							>
-								Copyright &copy; 2022
-							</ExternalLink>
+							href='https://codeberg.org/ar324/gofe/'
+							className='link'
+						>
+							v{pkg.version}
+						</ExternalLink>
 					</div>
 					<div className='grid-block align-c grid-span-column-6 tl-grid-span-column-1 tl-py-1r'>
 						<div className='flex align-c justify-c flex-row tp-flex-c h-100p'>
