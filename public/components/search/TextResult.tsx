@@ -3,9 +3,10 @@ import { useSettings } from "../../providers/SettingsProvider";
 import ExternalLink from "../ExternalLink";
 
 import { decodeURL, trim } from "../../logic/query";
+import { icons } from "../../data/icons";
 
 import type { Result } from "../../types/Search";
-import { icons } from "../../data/icons";
+import type { ChildrenOnly } from "../../types/util";
 
 
 interface URLObject {
@@ -61,6 +62,18 @@ const determinePathTrimLength = ({ host, paths, index }: URLObject): number => {
 	return defaultLength;
 }
 
+// I love this trick.
+// Since I don't want to create a wrapper element within the
+// DOM just to add a key={} value, we create an indentity for
+// a component that allows React to track it.
+//
+// I don't know how much of a difference it makes to declare
+// this var at the module-level as opposed to the component-
+// level, but I assume it improves rendering performance 
+// (albeit unnoticeably) as it won't have to be re-created
+// for every result.
+const KeyGiver = ({ children }: ChildrenOnly) => <>{children}</>;
+
 const TextResult = ({ URL, Desc, Context }: Result) => {
 	const settings = useSettings();
 
@@ -84,14 +97,16 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 			<>
 				<span>{protocol}{'//'}{trim(host, HOST_MAX_LENGTH)}</span>
 				{paths.length > 0 && paths.map((path, index) => (
-					<>
+					// Certain paths can be the same, but probably
+					// not with the index value, haha.
+					<KeyGiver key={`${path}${index}`}>
 						<i className="icon sm opacity-6 mx-0-125r">{icons.chevronRight}</i>
 						<span>{trim(path, determinePathTrimLength({
 							host,
 							paths,
 							index,
 						}))}</span>
-					</>
+					</KeyGiver>
 				))}
 			</>
 		);
