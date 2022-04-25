@@ -74,6 +74,7 @@ const SearchPage = () => {
 	const previousQuery = usePrevious(query);
 	const previousPage = usePrevious(page);
 	const { query: savedQuery, setQuery } = useQuery();
+	const [staticQuery, setStaticQuery] = useState(query);
 
 	useEffect(() => {
 		// Manually update the query state interally
@@ -87,6 +88,7 @@ const SearchPage = () => {
 	useEffect(() => {
 		if (query !== previousQuery || page !== previousPage) {
 			setResults(undefined);
+			setStaticQuery(query);
 
 			searchAPI
 				.getSearchResults(query, page)
@@ -149,7 +151,7 @@ const SearchPage = () => {
 				</div>
 
 				<div className="grid-block">
-					<Pagination page={Number(page) || 1} />
+					<Pagination page={Number(page) || 1} staticQuery={staticQuery} />
 				</div>
 			</div>
 		</div>
