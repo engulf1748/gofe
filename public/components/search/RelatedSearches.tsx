@@ -2,9 +2,13 @@ import { useRouter } from "next/router";
 
 import { useQuery } from "../../providers/QueryProvider";
 
+interface Props {
+	staticQuery: string;
+	staticSuggestions: string[];
+}
 
-const RelatedSearches = () => {
-	const { query, setQuery, suggestions } = useQuery();
+const RelatedSearches = ({ staticQuery, staticSuggestions }: Props) => {
+	const { setQuery } = useQuery();
 	const { push } = useRouter();
 
 	const onSuggestionClick = (suggestion: string) => {
@@ -12,18 +16,18 @@ const RelatedSearches = () => {
 		push(`/search?q=${suggestion}`);
 	}
 
-	if (!suggestions || suggestions.filter((suggestion: string) => suggestion !== query).length == 0) {
+	if (!staticSuggestions || staticSuggestions.filter((suggestion: string) => suggestion !== staticQuery).length == 0) {
 		return <></>;
 	}
 
 	return (
-		(suggestions.length === 0) ? <></> : (
+		(staticSuggestions.length === 0) ? <></> : (
 			<div className="w-100p mt-3r">
 				<h4>Related searches</h4>
 
 				<div className="suggestion-pills">
-					{suggestions
-						.filter((suggestion: string) => suggestion !== query.trim())
+					{staticSuggestions
+						.filter((suggestion: string) => suggestion !== staticQuery.trim())
 						.map((suggestion: string) => {
 						return (
 							<div key={suggestion}>
