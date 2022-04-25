@@ -27,6 +27,10 @@ const DEFAULT_MAX_LENGTH = 25;
 // the length of the host is greater than HOST_MAX_LENGTH
 const MINIMIZED_LENGTH = 8;
 
+// The total number of characters within the URL string
+// that should be tolerated. Loosely enforced right now.
+const ABSOLUTE_MAX = 65;
+
 // This determines the length a part of a pathname
 // should be based on the length of the previous item.
 // Basically, given a URL object with a host having a 
@@ -50,16 +54,27 @@ const MINIMIZED_LENGTH = 8;
 // shooting for something that would work for the edge-cases
 // with super long URLs. This works fine for that.
 const determinePathTrimLength = ({ host, paths, index }: URLObject): number => {
-	let defaultLength = DEFAULT_MAX_LENGTH;
-
+	const numItems = paths.length + 1; // +1 for host
 	const lengths = paths.map(path => path.length);
 	const previousItem = index === 0 ? host.length : lengths[index - 1]; 
 
 	if (previousItem > DEFAULT_MAX_LENGTH) {
-		defaultLength = MINIMIZED_LENGTH;
+		return MINIMIZED_LENGTH;
 	}
 
-	return defaultLength;
+	// If there's only one path, allow it to be the
+	// full length minus the length of the host.
+	if (numItems === 2) {
+		return ABSOLUTE_MAX - host.length;
+	}
+
+	// If there are two paths, allow each one to be
+	// half ABSOLUTE_MAX minus the host length
+	if (numItems === 3) {
+		return (ABSOLUTE_MAX - host.length) / 2;
+	}
+
+	return DEFAULT_MAX_LENGTH;
 }
 
 // I love this trick.
