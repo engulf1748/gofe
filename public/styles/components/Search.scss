@@ -23,6 +23,10 @@ $gutter: 0.6rem;
 		}
 	}
 
+	& .text-link {
+		user-select: all !important;
+	}
+
 	& .text-link:focus {
 		outline: none;
 	}
