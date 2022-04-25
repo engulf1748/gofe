@@ -15,7 +15,7 @@ const Home = () => {
 
 			<h1 className={styles.header}>Gofë Search</h1>
 			
-			<div className="w-100p flex-c mw-25r px-2r">
+			<div className="w-100p flex-c mw-30r px-2r">
 				<SearchBar />
 			</div>
 		</div>
