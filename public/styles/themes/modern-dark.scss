@@ -8,8 +8,8 @@ body.modern-dark {
 	--input-background: #27272a;
 	--input-complimentary: #3f3f46;
 
-	--primary: #60a5fa;
-	--primary-light: #60a5fa;
+	--primary: var(--blue-500);
+	--primary-light: var(--blue-400);
 
 	--button: var(--blue-600);
 	--button-hover: var(--blue-700);
@@ -17,8 +17,8 @@ body.modern-dark {
 	--secondary: #4ade80;
 	--secondary-light: #4ade80;
 
-	--tertiary: #c084fc;
-	--tertiary-light: #c084fc;
+	--tertiary: var(--pink-400);
+	--tertiary-light: var(--pink-300);
 
 	// Reset the default Jupiter UI values just in case.
 	--ui: #18181b;
