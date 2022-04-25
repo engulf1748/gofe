@@ -1,5 +1,6 @@
 import PageTitle from '../components/util/PageTitle';
 import Layout from '../components/layout/Layout';
+import ExternalLink from '../components/ExternalLink';
 
 const Privacy = () => {
 	return (
@@ -35,7 +36,10 @@ const Privacy = () => {
 
 					<ul>
 						<li>
-							<p>We <strong>do not</strong> store or collect any personally identifiable information.</p>
+							<p>
+								We <strong>do not</strong> store or collect any
+								personally identifiable information.
+							</p>
 						</li>
 						<li>
 							<p>
@@ -97,6 +101,29 @@ const Privacy = () => {
 							</p>
 						</li>
 					</ul>
+
+					<h3>Third-Party Instances</h3>
+					<p>
+						As Gofë is an open-source project, that allows anyone
+						with the knowledge to spin up their own instance and
+						share it with you. While many of these people's
+						intentions may be admirable, the authenticity of
+						third-party instances is impossible to verify. The
+						official instance that the developers run is{' '}
+						<ExternalLink href='https://gofe.app'>
+							gofe.app
+						</ExternalLink>
+						.
+					</p>
+					<p>
+						The offical instance at the above web address abides by
+						this Privacy Policy, but third-party instances may not.
+					</p>
+					<p>
+						In short, make sure you trust the people who run a
+						third-party instance, as we have no way to verify the
+						authenticity of the files they serve to you.
+					</p>
 
 					<h3>Cookies {'&'} Local Storage</h3>
 
