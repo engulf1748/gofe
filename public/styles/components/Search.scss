@@ -57,12 +57,14 @@ $gutter: 0.6rem;
 		line-height: 1.3;
 		letter-spacing: -0.02rem;
 		margin-bottom: $gutter;
+		word-break: break-all;
 	}
 
 	& .context {
 		font-size: 0.875rem;
 		opacity: 0.75;
 		margin-bottom: 0;
+		word-break: break-all;
 	}
 }
 

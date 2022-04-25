@@ -1,4 +1,4 @@
-interface Props {
+interface Props extends React.AnchorHTMLAttributes<any> {
 	href: string;
 	className?: string;
 	newTab?: boolean;
