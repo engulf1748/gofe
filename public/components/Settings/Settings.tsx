@@ -11,18 +11,14 @@ const Settings = () => {
 
 	return (
 		<>
-			<Button
-				variant='icon'
-				size='sm'
-				color='transparent'
+			<button
 				onClick={() => setModal(!modal)}
-				mods='settings-button'
-				title='Modify your preferences'
+				className='settings-button'
+				title='Modify settings'
 			>
-				<span className="sr-only">Modify your preferences</span>
+				<p className="mb-0 mr-0-5r">Settings</p>
 				<i className="j-icon">{icons.cog}</i>
-				<span className="sr-only">Click to open settings</span>
-			</Button>
+			</button>
 
 			<SettingsModal
 				modal={modal}

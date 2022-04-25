@@ -1,8 +1,22 @@
-.h-button.settings-button {
-	color: var(--foreground) !important;
+.settings-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	background-color: var(--background);
+	color: var(--foreground);
+	cursor: pointer;
+	border-radius: 0.5rem;
+	padding: 0.35rem 0.75rem;
+	transition: var(--d-m-1) var(--e-s);
+
+	& p {
+		font-size: 0.875rem;
+		font-weight: 500;
+	}
 
 	&:hover, &:focus {
-		background-color: var(--background-1) !important;
+		background-color: var(--background-1);
 	}
 }
 
