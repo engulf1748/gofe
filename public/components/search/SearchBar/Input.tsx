@@ -69,7 +69,7 @@ const Input = ({ inputRef, setShowSuggestions, close, inNav }: Props) => {
 
 			<div className="input-actions">
 				{query !== '' && (
-					<button className='sb-button' onClick={() => setQuery('')} title='Clear query'>
+					<button className='sb-button clear' onClick={() => setQuery('')} title='Clear query'>
 						<span className="sr-only">Clear query</span>
 						<i className="j-icon">{icons.x}</i>
 					</button>
