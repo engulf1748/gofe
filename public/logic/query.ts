@@ -13,6 +13,27 @@ const getSearchPageURL = (query: string, page: number) => {
 	return `/search?q=${parseQuery(query)}${getPageQueryString(page)}`;
 }
 
+const trim = (str: string, max: number = 30) => {
+	return str.length > max ? `${str.substring(0, max)}...` : str;
+}
+
+const decodeURL = (_url: string) => {
+	const { protocol, host, pathname } = new URL(_url);
+
+	// The URL object doesn't have a method for splitting
+	// the pathname, I guess.
+	const paths = pathname.split('/');
+
+	return {
+		protocol,
+		host,
+		pathname,
+		paths,
+	};
+}
+
 export {
 	getSearchPageURL,
+	decodeURL,
+	trim,
 }
