@@ -58,10 +58,6 @@ const determinePathTrimLength = ({ host, paths, index }: URLObject): number => {
 	const lengths = paths.map(path => path.length);
 	const previousItem = index === 0 ? host.length : lengths[index - 1]; 
 
-	if (previousItem > DEFAULT_MAX_LENGTH) {
-		return MINIMIZED_LENGTH;
-	}
-
 	// If there's only one path, allow it to be the
 	// full length minus the length of the host.
 	if (numItems === 2) {
@@ -72,6 +68,10 @@ const determinePathTrimLength = ({ host, paths, index }: URLObject): number => {
 	// half ABSOLUTE_MAX minus the host length
 	if (numItems === 3) {
 		return (ABSOLUTE_MAX - host.length) / 2;
+	}
+
+	if (previousItem > DEFAULT_MAX_LENGTH) {
+		return MINIMIZED_LENGTH;
 	}
 
 	return DEFAULT_MAX_LENGTH;
