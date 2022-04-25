@@ -26,7 +26,7 @@ const RelatedSearches = () => {
 						.filter((suggestion: string) => suggestion !== query.trim())
 						.map((suggestion: string) => {
 						return (
-							<div>
+							<div key={suggestion}>
 								<button className="suggestion-pill" onClick={() => onSuggestionClick(suggestion)}>
 									<span>{suggestion}</span>
 								</button>
