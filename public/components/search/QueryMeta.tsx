@@ -17,7 +17,7 @@ const QueryMeta = ({ dym, srf, setQuery }: QueryMetaProps) => {
 	if (dym) {
 		return (
 			<div className="mb-2r">
-				<p>Did you mean <a className='g-link' onClick={() => searchFor(dym)}>{dym.trim()}?</a></p>
+				<p>Did you mean <a className='g-link' onClick={() => searchFor(dym)}>{dym.trim()}</a>?</p>
 			</div>
 		);
 	}
