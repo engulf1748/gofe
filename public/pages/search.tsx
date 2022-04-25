@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import classNames from 'classnames';
 
 import { usePrevious } from '../hooks/usePrevious';
@@ -7,12 +6,17 @@ import { useQuery } from '../providers/QueryProvider';
 
 import Layout from '../components/layout/Layout';
 import PageTitle from '../components/util/PageTitle';
+
+// Search components
 import TextResult from '../components/search/TextResult';
+import Pagination from '../components/search/Pagination';
+import RelatedSearches from '../components/search/RelatedSearches';
+import QueryMeta from '../components/search/QueryMeta';
+
+// Search states
 import NoSearchResults from '../components/search/states/NoSearchResults';
 import ResultsLoading from '../components/search/states/ResultsLoading';
-import Pagination from '../components/search/Pagination';
 import SearchError from '../components/search/states/SearchError';
-import RelatedSearches from '../components/search/RelatedSearches';
 import EmptyQuery from '../components/search/states/EmptyQuery';
 import RateLimited from '../components/search/states/RateLimited';
 
@@ -20,40 +24,6 @@ import searchAPI from '../services/search';
 
 import type { Result } from '../types/Search';
 import type { APIError } from '../services/err';
-
-
-interface QueryMetaProps {
-	dym: string;
-	srf: string;
-	setQuery(v: string): void;
-}
-
-const QueryMeta = ({ dym, srf, setQuery }: QueryMetaProps) => {
-	const { push } = useRouter();
-
-	const searchFor = (newQuery: string) => {
-		setQuery(newQuery);
-		push(`/search?q=${newQuery}`);
-	}
-
-	if (dym) {
-		return (
-			<div className="mb-2r">
-				<p>Did you mean <a className='g-link' onClick={() => searchFor(dym)}>{dym.trim()}?</a></p>
-			</div>
-		);
-	}
-
-	if (srf) {
-		return (
-			<div className="mb-2r">
-				<p>Showing results for <span className='fw-600'>{srf.trim()}</span></p>
-			</div>
-		);
-	}
-
-	return <div className='h-1r'></div>;
-}
 
 const SearchPage = () => {
 	const [results, setResults] = useState<Result[] | undefined>(undefined);
