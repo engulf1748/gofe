@@ -2,8 +2,9 @@ import { useRouter } from "next/router";
 
 import { useQuery } from "../../../providers/QueryProvider";
 
-import { getSearchPageURL } from "../../../logic/query";
 import Keyboard from "../../Keyboard";
+
+import { getSearchPageURL } from "../../../logic/query";
 
 interface Props {
 	suggestion: string;

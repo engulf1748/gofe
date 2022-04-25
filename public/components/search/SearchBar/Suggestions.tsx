@@ -5,7 +5,6 @@ import { useQuery } from "../../../providers/QueryProvider";
 import { useSettings } from "../../../providers/SettingsProvider";
 
 import Suggestion from "./Suggestion";
-
 import Keyboard from "../../Keyboard";
 import MiniButton from "../../MiniButton";
 

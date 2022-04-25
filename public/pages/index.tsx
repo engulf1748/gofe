@@ -2,11 +2,11 @@ import classNames from 'classnames';
 
 import PageTitle from '../components/util/PageTitle';
 import SearchBar from '../components/search/SearchBar';
-
-import type { ChildrenOnly } from '../types/util';
+import Footer from '../components/shell/Footer';
 
 import styles from '../styles/modules/Home.module.scss';
-import Footer from '../components/shell/Footer';
+
+import type { ChildrenOnly } from '../types/util';
 
 const Home = () => {
 	return (

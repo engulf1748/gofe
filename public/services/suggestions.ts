@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-import { handleRequestError, wrapResponse } from './err';
-
 import config from '../../config.json';
+import { handleRequestError, wrapResponse } from './err';
 
 const getSuggestions = async (query: string) => {
 	return axios.get(`${config.api_domain}/opensuggest?q=${query}`)

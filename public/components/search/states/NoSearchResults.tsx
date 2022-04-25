@@ -9,7 +9,6 @@ const MAX_QUERY_LENGTH = 40;
 const NoSearchResults = ({ query }: Props) => {
 	const trimQuery = (query: string) => {
 		if (query.length < MAX_QUERY_LENGTH) return query;
-
 		return `${query.trim().substring(0, MAX_QUERY_LENGTH)}...`;
 	}
 

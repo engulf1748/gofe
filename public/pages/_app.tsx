@@ -1,17 +1,17 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { Notifications } from '@infinium/hydro';
-import type { AppProps } from 'next/app';
 
 import SettingsProvider from '../providers/SettingsProvider';
 import QueryProvider from '../providers/QueryProvider';
-
-import type { ChildrenOnly } from '../types/util';
 
 import '../styles/jupiterui.css';
 import '../styles/global.scss';
 import '../assets/fonts/inter.css';
 import '@infinium/hydro/dist/style.css';
+
+import type { AppProps } from 'next/app';
+import type { ChildrenOnly } from '../types/util';
 
 //////////
 

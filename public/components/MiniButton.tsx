@@ -1,6 +1,5 @@
 import { icons } from "../data/icons";
 
-
 interface Props {
 	title: string;
 	onClick(ev: any): void;

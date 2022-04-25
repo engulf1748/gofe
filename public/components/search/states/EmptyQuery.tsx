@@ -9,6 +9,6 @@ const EmptyQuery = () => {
 			</div>
 		</div>
 	);
-}
+};
 
 export default EmptyQuery;

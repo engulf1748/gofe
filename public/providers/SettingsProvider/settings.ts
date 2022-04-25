@@ -1,6 +1,5 @@
 import { themes } from "../../data/themes";
 
-
 interface Schema {
 	[key: string]: SettingSchema;
 }

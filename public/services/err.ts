@@ -64,11 +64,10 @@ const handleRequestError = (id: string, err: AxiosError): Response => {
 // (when an error occurs), we'll wrap the response
 // of all API requests and check specific error values.
 const wrapResponse = (data: any): APIResponse => {
-
 	// errorType is only given from an AxiosError,
 	// so we always know that, if this is defined,
-	// something went wrong. Therefore, we can pass
-	// the static error value.
+	// something for-sure went wrong. Therefore,
+	// we can pass a static error value.
 
 	if (data.errorType) {
 		return {

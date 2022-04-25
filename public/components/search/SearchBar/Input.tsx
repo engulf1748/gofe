@@ -1,11 +1,12 @@
-import { MutableRefObject, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, MutableRefObject } from "react";
 import { useRouter } from "next/router";
 
 import { useQuery } from "../../../providers/QueryProvider";
 
+import Keyboard from "../../Keyboard";
+
 import { getSearchPageURL } from "../../../logic/query";
 import { icons } from "../../../data/icons";
-import Keyboard from "../../Keyboard";
 
 interface Props {
 	inputRef: MutableRefObject<any>;

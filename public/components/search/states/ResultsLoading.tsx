@@ -1,7 +1,6 @@
 import SearchAreaWrapper from "../SearchAreaWrapper";
 import TextResultSkeleton from "../TextResultSkeleton";
 
-
 const ResultsLoading = () => {
 	return (
 		<SearchAreaWrapper pageTitle='Fetching results...'>
