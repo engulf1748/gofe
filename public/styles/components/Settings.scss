@@ -18,6 +18,10 @@
 	&:hover, &:focus {
 		background-color: var(--background-1);
 	}
+
+	&.icon-only {
+		padding: 0.35rem;
+	}
 }
 
 .setting-block {

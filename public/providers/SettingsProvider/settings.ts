@@ -17,6 +17,8 @@ interface Settings {
 const defaultSettings: Settings = {
 	theme: 'auto',
 	openLinksInNewTab: 'no',
+	suggestionsView: 'list',
+	preferIcons: 'yes',
 };
 
 // We use 'yes' and 'no' because the SelectSetting
@@ -37,8 +39,11 @@ const settingsSchema: Schema = {
 		allowedValues: bool,
 	},
 	suggestionsView: {
-		allowedValues: ['view-list', 'view-grid'],
-	}
+		allowedValues: ['list', 'grid'],
+	},
+	preferIcons: {
+		allowedValues: bool,
+	},
 }
 
 export {

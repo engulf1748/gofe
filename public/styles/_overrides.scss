@@ -71,6 +71,15 @@
 	.h-select-trigger {
 		background-color: var(--background-1) !important;
 	}
+
+	& .buttons-container {
+		display: none;
+		visibility: hidden;
+		pointer-events: none;
+		opacity: 0;
+		height: 0;
+		width: 0;
+	}
 	
 	& .h-button {
 		color: var(--foreground) !important;

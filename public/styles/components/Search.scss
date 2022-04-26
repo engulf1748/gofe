@@ -210,6 +210,14 @@ $gutter: 0.6rem;
 	max-width: 40rem;
 	display: block;
 
+	&.view-grid {
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-wrap: wrap;
+		gap: 0;
+	}
+
 	& .suggestion-pill {
 		appearance: none;
 		background-color: var(--background-1);

@@ -1,24 +1,32 @@
 import { useState } from "react";
-import { Button } from "@infinium/hydro";
+
+import { useSettings } from "../../providers/SettingsProvider";
 
 import SettingsModal from "./SettingsModal";
 
 import { icons } from "../../data/icons";
-
+import classNames from "classnames";
 
 const Settings = () => {
 	const [modal, setModal] = useState(false);
+	const settings = useSettings();
 
 	return (
 		<>
-			<button
+			<a
 				onClick={() => setModal(!modal)}
-				className='settings-button'
+				className={classNames('settings-button', settings.preferIcons === 'yes' && 'icon-only')}
 				title='Modify settings'
 			>
-				<p className="mb-0 mr-0-5r">Settings</p>
-				<i className="j-icon">{icons.cog}</i>
-			</button>
+				{settings.preferIcons === 'yes' ? (
+					<>
+						<i className="j-icon">{icons.cog}</i>
+						<span className="sr-only">Modify settings</span>
+					</>
+				) : (
+					<p className="mb-0">Settings</p>
+				)}
+			</a>
 
 			<SettingsModal
 				modal={modal}

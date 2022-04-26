@@ -27,7 +27,7 @@ const Suggestions = ({ inputRef, close }: Props) => {
 		}
 	}, [suggestions, query])
 	
-	const setView = (v: 'view-list' | 'view-grid') => {
+	const setView = (v: 'list' | 'grid') => {
 		settings.set('suggestionsView', v);
 	}
 
@@ -41,7 +41,7 @@ const Suggestions = ({ inputRef, close }: Props) => {
 			{suggestions.length > 0 && (
 				<div className={classNames(
 					'sb-suggestions-view',
-					settings.suggestionsView || 'view-list',
+					`view-${settings.suggestionsView || 'list'}`,
 				)}>
 					{suggestions
 						.filter((s: string) => s !== query)
@@ -71,16 +71,16 @@ const Suggestions = ({ inputRef, close }: Props) => {
 
 				<div className='buttons'>
 					<MiniButton
-						onClick={() => setView('view-grid')}
+						onClick={() => setView('grid')}
 						title='View as bubbles'
 						icon='viewGrid'
-						active={settings.suggestionsView === 'view-grid'}
+						active={settings.suggestionsView === 'grid'}
 					/>
 					<MiniButton
-						onClick={() => setView('view-list')}
+						onClick={() => setView('list')}
 						title='View as list'
 						icon='viewList'
-						active={settings.suggestionsView === 'view-list'}
+						active={settings.suggestionsView === 'list'}
 					/>
 				</div>
 			</div>
