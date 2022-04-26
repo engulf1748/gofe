@@ -1,7 +1,7 @@
 import { MutableRefObject, useEffect, useState } from "react";
 import classNames from "classnames";
 
-import { useQuery } from "../../../providers/QueryProvider";
+import { useSearch } from "../../../providers/SearchProvider";
 import { useSettings } from "../../../providers/SettingsProvider";
 
 import Suggestion from "./Suggestion";
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Suggestions = ({ inputRef, close }: Props) => {
-	const { query, previousQuery, suggestions } = useQuery();
+	const { query, previousQuery, suggestions } = useSearch();
 	const settings = useSettings();
 
 	const [selected, setSelected] = useState(-1);

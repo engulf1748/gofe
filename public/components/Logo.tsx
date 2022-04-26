@@ -1,4 +1,4 @@
-import { useQuery } from '../providers/QueryProvider';
+import { useSearch } from '../providers/SearchProvider';
 
 import InternalLink from './InternalLink';
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Logo = ({ clearQueryOnClick }: Props) => {
-	const { query, setQuery } = useQuery();
+	const { query, setQuery } = useSearch();
 
 	const onClick = () => {
 		if (clearQueryOnClick && query.trim() !== '') {

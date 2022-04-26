@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Notifications } from '@infinium/hydro';
 
 import SettingsProvider from '../providers/SettingsProvider';
-import QueryProvider from '../providers/QueryProvider';
+import SearchProvider from '../providers/SearchProvider';
 
 import '../styles/jupiterui.css';
 import '../styles/global.scss';
@@ -48,7 +48,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 			</Head>
 
 			<SettingsProvider>
-				<QueryProvider>
+				<SearchProvider>
 					<RootLayout>
 						<Notifications />
 
@@ -56,7 +56,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 							<Component {...pageProps} />
 						</View>
 					</RootLayout>
-				</QueryProvider>
+				</SearchProvider>
 			</SettingsProvider>
 		</>
 	);

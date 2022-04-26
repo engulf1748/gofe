@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 
 import { usePrevious } from '../hooks/usePrevious';
-import { useQuery } from '../providers/QueryProvider';
+import { useSearch } from '../providers/SearchProvider';
 
 import Layout from '../components/layout/Layout';
 import PageTitle from '../components/util/PageTitle';
@@ -44,9 +44,8 @@ const SearchPage = () => {
 	const previousQuery = usePrevious(query);
 	const previousPage = usePrevious(page);
 	
-	const { query: savedQuery, setQuery, suggestions } = useQuery();
+	const { query: savedQuery, setQuery, suggestions } = useSearch();
 	const [staticQuery, setStaticQuery] = useState(query);
-	const [staticSuggestions, setStaticSuggestions] = useState(suggestions);
 
 	useEffect(() => {
 		// Manually update the query state interally
@@ -61,7 +60,6 @@ const SearchPage = () => {
 		if (query !== previousQuery || page !== previousPage) {
 			setResults(undefined);
 			setStaticQuery(query);
-			setStaticSuggestions(suggestions);
 
 			searchAPI
 				.getSearchResults(query, page)
@@ -120,7 +118,7 @@ const SearchPage = () => {
 				</div>
 
 				<div className="grid-block">
-					<RelatedSearches staticQuery={staticQuery} staticSuggestions={staticSuggestions} />
+					<RelatedSearches staticQuery={staticQuery} />
 				</div>
 
 				<div className="grid-block">

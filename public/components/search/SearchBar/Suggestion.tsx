@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { useQuery } from "../../../providers/QueryProvider";
+import { useSearch } from "../../../providers/SearchProvider";
 
 import Keyboard from "../../Keyboard";
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Suggestion = ({ suggestion, selected, close }: Props) => {
-	const { query, setQuery, previousQuery } = useQuery();
+	const { query, setQuery, previousQuery } = useSearch();
 	const { push } = useRouter();
 
 	const onClick = (ev: any) => {

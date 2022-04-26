@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState, MutableRefObject } from "react";
 import { useRouter } from "next/router";
 
-import { useQuery } from "../../../providers/QueryProvider";
+import { useSearch } from "../../../providers/SearchProvider";
 
 import Keyboard from "../../Keyboard";
 
@@ -16,7 +16,7 @@ interface Props {
 }
 
 const Input = ({ inputRef, setShowSuggestions, close, inNav }: Props) => {
-	const { query, setQuery, previousQuery } = useQuery();
+	const { query, setQuery, previousQuery } = useSearch();
 	const { push } = useRouter();
 	const [hasFocus, setHasFocus] = useState(!inNav);
 
