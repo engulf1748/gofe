@@ -110,6 +110,18 @@ const Privacy = () => {
 						sent to our server and can be deleted at any time by
 						clearing your browser cache and site data.
 					</p>
+					<p>
+						If you'd like to clear your preferences on this website, <a className='g-link' onClick={() => {
+							// This function does not return an indicator
+							// if it actually works. Since Safari on iOS
+							// gave me problems, I'm wrapping it in a try-
+							// catch just in case.
+							try {
+								localStorage.clear();
+							} catch {}
+							window.location.reload();
+						}}>click here.</a>
+					</p>
 
 					<h2>Contacting us</h2>
 					<p>
