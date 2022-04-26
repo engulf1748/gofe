@@ -31,6 +31,10 @@ const MINIMIZED_LENGTH = 8;
 // that should be tolerated. Loosely enforced right now.
 const ABSOLUTE_MAX = 65;
 
+// If none of the conditions are handled and it's the
+// last item, use this length.
+const LAST_ITEM_EDGE_CASE_LENGTH = 14;
+
 // This determines the length a part of a pathname
 // should be based on the length of the previous item.
 // Basically, given a URL object with a host having a 
@@ -56,7 +60,8 @@ const ABSOLUTE_MAX = 65;
 const determinePathTrimLength = ({ host, paths, index }: URLObject): number => {
 	const numItems = paths.length + 1; // +1 for host
 	const lengths = paths.map(path => path.length);
-	const previousItem = index === 0 ? host.length : lengths[index - 1]; 
+	const previousItem = index === 0 ? host.length : lengths[index - 1];
+	const isLastItem = index === paths.length - 1;
 
 	// If there's only one path, allow it to be the
 	// full length minus the length of the host.
@@ -72,6 +77,11 @@ const determinePathTrimLength = ({ host, paths, index }: URLObject): number => {
 
 	if (previousItem > DEFAULT_MAX_LENGTH) {
 		return MINIMIZED_LENGTH;
+	}
+
+	// If none of the above and last item, make it shorter.
+	if (isLastItem) {
+		return LAST_ITEM_EDGE_CASE_LENGTH;
 	}
 
 	return DEFAULT_MAX_LENGTH;

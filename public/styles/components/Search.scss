@@ -52,6 +52,11 @@ $gutter: 0.6rem;
 		opacity: 0.8;
 		margin-bottom: $gutter;
 		color: var(--secondary);
+
+		& span {
+			white-space: nowrap;
+			word-break: keep-all;
+		}
 	}
 
 	& .description {
