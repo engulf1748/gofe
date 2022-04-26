@@ -1,8 +1,13 @@
 #!/bin/sh
 
 killp() {
-        kill -9 $(pgrep gofe) > /dev/null  2>&1
-        kill -9 $(pgrep node) > /dev/null  2>&1 # Not 'strictly', but let us go with it
+	# Caveat: the API server binary must contain 'gofe' and `public/`'s
+	# parent directory must be named 'gofe'
+	# pgrep result:
+	# ./gofe_2022-04-26T00:01:29-05:00
+	# /bin/sh -c /home/neo/gofe/public/node_modules/.bin/next start
+	# /usr/bin/node /home/neo/gofe/public/node_modules/.bin/next start
+	kill -9 $(pgrep -f gofe) > /dev/null  2>&1 # -f looks at the full command line
 }
 
 deploy() {
