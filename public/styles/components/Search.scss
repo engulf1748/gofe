@@ -82,6 +82,15 @@ $gutter: 0.6rem;
 			font-size: 1rem;
 			line-height: 1.4;
 		}
+
+		& .url {
+			& .icon:last-of-type {
+				display: none;
+			}
+			& span:not(:first-child):last-child {
+				display: none;
+			}
+		}
 	}
 }
 
