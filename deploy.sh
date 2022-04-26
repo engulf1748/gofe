@@ -6,7 +6,14 @@ killp() {
 }
 
 deploy() {
-	git pull || return
+	for op in "$@"
+	do
+		case "$op" in
+		"-p")
+			git pull || return
+			;;
+		esac
+	done
 	ls | grep -i "opensearch-template" > /dev/null 2>&1
 	if [ $? -ne 0 ]
 	then
@@ -31,4 +38,4 @@ deploy() {
 	echo "Gofë has been deployed . . ."
 }
 
-deploy
+deploy "$@"
