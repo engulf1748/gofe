@@ -47,12 +47,12 @@ const Privacy = () => {
 							<p>
 								We <strong>do not</strong> attempt to uniquely
 								identify your computer or browser via
-								fingerprinting or any other method.
+								fingerprinting [soyerprinting] or any other method.
 							</p>
 						</li>
 						<li>
 							<p>
-								We <strong>do not</strong> use analytics of any
+								We <strong>do not</strong> use analytics [soylytics] of any
 								kind.
 							</p>
 						</li>
@@ -60,7 +60,7 @@ const Privacy = () => {
 							<p>
 								We <strong>do not</strong> store cookies
 								(although we do use localStorage, but this data
-								is not sent to our servers.)
+								is not sent to our servers).
 							</p>
 						</li>
 					</ul>
