@@ -49,13 +49,12 @@ const App = ({ Component, pageProps }: AppProps) => {
 
 			<SettingsProvider>
 				<SearchProvider>
-					<RootLayout>
-						<Notifications />
-
-						<View>
+					<View>
+						<RootLayout>
+							<Notifications />
 							<Component {...pageProps} />
-						</View>
-					</RootLayout>
+						</RootLayout>
+					</View>
 				</SearchProvider>
 			</SettingsProvider>
 		</>
