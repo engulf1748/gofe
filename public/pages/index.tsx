@@ -10,7 +10,7 @@ import type { ChildrenOnly } from '../types/util';
 
 const Home = () => {
 	return (
-		<div className={classNames(styles.wrapper, 'flex align-c dark-ui')}>
+		<div className={classNames(styles.wrapper, 'flex align-c')}>
 			<PageTitle>Gofë - Home</PageTitle>
 
 			<h1 className={styles.header}>Gofë Search</h1>
