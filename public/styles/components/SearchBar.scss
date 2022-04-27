@@ -36,6 +36,14 @@ $radius-inner: calc(0.5rem - 1px);
 			color: var(--foreground);
 			opacity: 0.5;
 		}
+
+		&:not(.has-x-button) {
+			padding-right: 36px;
+		}
+
+		&.has-x-button {
+			padding-right: 58px;
+		}
 	}
 
 	&.in-nav .sb-input {
@@ -80,6 +88,7 @@ $radius-inner: calc(0.5rem - 1px);
 
 		&.clear {
 			padding: 0 0.05rem;
+			width: 22px;
 		}
 	}
 

@@ -7,6 +7,7 @@ import Keyboard from "../../Keyboard";
 
 import { getSearchPageURL } from "../../../logic/query";
 import { icons } from "../../../data/icons";
+import classNames from "classnames";
 
 interface Props {
 	inputRef: MutableRefObject<any>;
@@ -61,7 +62,7 @@ const Input = ({ inputRef, setShowSuggestions, close, inNav }: Props) => {
 				ref={inputRef}
 				type='text'
 				placeholder='Search privately...'
-				className='sb-input'
+				className={classNames('sb-input', query !== '' && 'has-x-button')}
 				value={query}
 				onChange={onChange}
 				onClick={onInputClick}
