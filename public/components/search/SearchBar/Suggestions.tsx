@@ -86,7 +86,7 @@ const Suggestions = ({ inputRef, close }: Props) => {
 			</div>
 
 			<Keyboard
-				keys={['esc', 'up', 'down', 'left', 'right']}
+				keys={['esc', 'up', 'down']}
 				callback={(key: string, ev: any) => {
 					if (key === 'esc') {
 						close();
@@ -101,9 +101,8 @@ const Suggestions = ({ inputRef, close }: Props) => {
 					inputRef.current?.blur();
 
 					const relativeIndex = suggestions.length - 2;
-					const isUp = (key === 'up' || key === 'left');
 
-					if (isUp) {
+					if (key === 'up') {
 						// If going UP and:
 						// 	- Selected is FIRST item, return last item
 						//	- Selected is not FIRST item, return selected - 1
