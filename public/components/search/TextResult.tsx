@@ -89,7 +89,7 @@ const determinePathTrimLength = ({ host, paths, index }: URLObject): number => {
 
 // I love this trick.
 // Since I don't want to create a wrapper element within the
-// DOM just to add a key={} value, we create an indentity for
+// DOM just to add a key={} value, we create an identity for
 // a component that allows React to track it.
 //
 // I don't know how much of a difference it makes to declare
