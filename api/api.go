@@ -29,19 +29,25 @@ type Link struct {
 }
 
 // remove's Google's claws
+// makes 'URL' empty if there's any issue parsing it
 func (l *Link) sanitize() {
-	v := l.URL
-	// TODO: something less kludgy, perhaps?
-	if strings.HasPrefix(v, "/url?q=") {
-		v = strings.Replace(v, "/url?q=", "", 1)
-		v = strings.Split(v, "&sa")[0]
-		u, err := url.PathUnescape(v)
-		if err != nil {
-			// TODO
-		}
-		v = u
+	u, err := url.Parse(l.URL) // /url?q= . . .
+	if err != nil {
+		l.URL = ""
+		return // for 'safety'
 	}
-	l.URL = v
+	// if Google has returned an actual link
+	if u.Scheme != "" {
+		u.RawQuery = "" // remove claws
+		l.URL = u.String()
+		return
+	}
+	s, err := url.PathUnescape(u.Query().Get("q")) // 'q' houses the link
+	if err != nil {
+		l.URL = ""
+		return
+	}
+	l.URL = s
 }
 
 // A complete search result.
@@ -52,10 +58,17 @@ type Result struct {
 	SRF         string // 'showing results for'
 }
 
-func (rs Result) sanitize() {
+func (rs *Result) sanitize() {
+	links := make([]*Link, 0)
 	for _, v := range rs.Links {
 		v.sanitize()
+		// ignore 'empty' links
+		if v.URL == "" {
+			continue
+		}
+		links = append(links, v)
 	}
+	rs.Links = links
 }
 
 // A slice of strings to store suggestions in, essentially.

@@ -5,7 +5,7 @@ import (
 )
 
 func TestSearch(t *testing.T) {
-	q := "i didnt mean thta"
+	q := "birds of the same feather flock together thefreedictionary"
 	rs, err := Search(q, 0)
 	if err != nil {
 		t.Fatalf("err: %v", err)
