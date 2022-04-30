@@ -8,7 +8,7 @@ interface Props {
 
 const InternalLink = ({ href, className, children, ...props }: Props) => {
 	return (
-		<Link href={href}>
+		<Link href={href} passHref>
 			{children}
 		</Link>
 	);

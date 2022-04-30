@@ -1,9 +1,12 @@
 .wrapper {
 	width: 100%;
-	min-height: calc(100vh - 5.625rem);
 	background-color: var(--background-1);
 	position: relative;
-	padding-top: 20vh;
+	// padding-top: 20vh;
+
+	& .h-screen-c {
+		height: calc(100vh - 5.625rem) !important;
+	}
 }
 
 @media only screen and (max-width: 767px) {
@@ -15,4 +18,5 @@
 .header {
 	font-family: monospace !important;
 	font-size: 2rem;
+	margin-top: 0;
 }

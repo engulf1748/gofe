@@ -48,12 +48,16 @@ html, body {
 }
 
 .link {
-	color: var(--foreground);
+	color: var(--foreground) !important;
 	opacity: 0.75;
 	font-size: 0.875rem;
 
 	&:hover {
 		text-decoration: underline;
+	}
+
+	&:visited {
+		color: var(--foreground) !important;
 	}
 
 	html.dark & {

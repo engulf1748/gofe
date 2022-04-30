@@ -19,6 +19,7 @@ const defaultSettings: Settings = {
 	openLinksInNewTab: 'no',
 	suggestionsView: 'list',
 	preferIcons: 'yes',
+	isNewUser: 'true',
 };
 
 // We use 'yes' and 'no' because the SelectSetting
@@ -29,21 +30,25 @@ const defaultSettings: Settings = {
 // to work with language-level booleans, but I find
 // this unnecessary; simply using 'yes' and 'no' is
 // rather explicit.
-const bool = ['yes', 'no'];
+const fakeBool = ['yes', 'no'];
+const bool = ['true', 'false'];
 
 const settingsSchema: Schema = {
 	theme: {
 		allowedValues: themes,
 	},
 	openLinksInNewTab: {
-		allowedValues: bool,
+		allowedValues: fakeBool,
 	},
 	suggestionsView: {
 		allowedValues: ['list', 'grid'],
 	},
 	preferIcons: {
-		allowedValues: bool,
+		allowedValues: fakeBool,
 	},
+	isNewUser: {
+		allowedValues: bool,
+	}
 }
 
 export {

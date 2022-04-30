@@ -1,10 +1,10 @@
 import ExternalLink from '../ExternalLink';
 import InternalLink from '../InternalLink';
+import Divider from '../Divider';
 
 import { icons } from '../../data/icons';
 import pkg from '../../package.json';
-
-const Divider = () => <p className='mb-0 mx-1r opacity-4 tp-hide'>|</p>;
+import SponsorLink from '../SponsorLink';
 
 const Footer = () => {
 	return (
@@ -24,14 +24,14 @@ const Footer = () => {
 							<InternalLink href='/privacy'>
 								<a className='link'>Privacy Policy</a>
 							</InternalLink>
-							<Divider />
+							<Divider hideOnTP />
 							<ExternalLink
 								href='https://codeberg.org/ar324/gofe'
 								className='link'
 							>
 								Source code
 							</ExternalLink>
-							<Divider />
+							<Divider hideOnTP />
 							<ExternalLink
 								href='https://codeberg.org/ar324/gofe/issues'
 								className='link'
@@ -41,20 +41,7 @@ const Footer = () => {
 						</div>
 					</div>
 					<div className='grid-block align-e grid-span-column-3 tl-grid-span-column-1 tl-align-c'>
-						<ExternalLink
-							href='https://infinium.earth'
-							className='link'
-						>
-							<p className='flex align-c justify-c flex-row lh-1 fs-sm mb-0'>
-								Backed with{' '}
-								<i className='j-icon sm mx-0-25r'>
-									<span className='text-red-500'>
-										{icons.heart}
-									</span>
-								</i>{' '}
-								by Infinium
-							</p>
-						</ExternalLink>
+						<SponsorLink />
 					</div>
 				</div>
 			</div>
