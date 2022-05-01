@@ -5,8 +5,14 @@ import (
 )
 
 func TestSearch(t *testing.T) {
-	q := "birds of the same feather flock together thefreedictionary"
-	rs, err := Search(q, 0)
+	sc := SearchConfig{
+		Region: "JP",
+	}
+	q := SearchParameters{
+		Query: "birds",
+		Page: 1,
+	}
+	rs, err := sc.Search(q)
 	if err != nil {
 		t.Fatalf("err: %v", err)
 	}
@@ -19,8 +25,11 @@ func TestSearch(t *testing.T) {
 }
 
 func TestSuggest(t *testing.T) {
+	sc := SugConfig{
+		Region: "SA",
+	}
 	q := "soy"
-	rs, err := Suggest(q)
+	rs, err := sc.Suggest(q)
 	if err != nil {
 		t.Fatalf("err: %v", err)
 	}

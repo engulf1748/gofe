@@ -48,26 +48,31 @@ func sendJSON(w http.ResponseWriter, i interface{}) error {
 }
 
 func search(w http.ResponseWriter, r *http.Request) {
-	q := r.URL.Query().Get("q") // search query
-	p := r.URL.Query().Get("p") // page number
+	q := r.URL.Query().Get("q")   // search query
+	p := r.URL.Query().Get("p")   // page number
+	gl := r.URL.Query().Get("gl") // region
 
-	page := 0
+	page := 1
 
 	if p != "" {
 		var err error
 		page, err = strconv.Atoi(p)
-		if err == nil && page < 1 { // while api is 0-indexed, this implementation is not
-			err = fmt.Errorf("`p` is less than 1")
-		}
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
 			return
 		}
-		page--
+	}
+	sc := api.SearchConfig{
+		Region: gl,
+	}
+	scp := api.SearchParameters{
+		Query: q,
+		Page:  page,
 	}
 
-	rs, err := api.Search(q, page)
+	rs, err := sc.Search(scp)
 	if err != nil {
+		// TODO: might have been a bad request; inspect err
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
@@ -76,9 +81,12 @@ func search(w http.ResponseWriter, r *http.Request) {
 }
 
 func openSuggest(w http.ResponseWriter, r *http.Request) {
-	q := r.URL.Query().Get("q") // suggestion query
-
-	rs, err := api.Suggest(q)
+	q := r.URL.Query().Get("q")   // suggestion query
+	gl := r.URL.Query().Get("gl") // region
+	sc := api.SugConfig{
+		Region: gl,
+	}
+	rs, err := sc.Suggest(q)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
 		return

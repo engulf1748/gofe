@@ -2,6 +2,7 @@ package api
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -15,11 +16,18 @@ import (
 //TODO: pass region as parameter
 // reference: https://github.com/benbusby/whoogle-search/issues/544
 // query URL
-const qurl = "https://google.com/search?&q=%s&start=%d&gl=US"
+const qurl = "https://google.com/search?" +
+	"&q=%s" + // query
+	"&start=%d" + // page number
+	"&gl=%s" // Region
 
 // suggestions URL
 // xssi = t seems to be necessary for application/json output
-const surl = "https://www.google.com/complete/search?q=%s&client=firefox&xssi=t&gl=US"
+const surl = "https://www.google.com/complete/search?&client=firefox&xssi=t" +
+	"&q=%s" +
+	"&gl=%s"
+
+const DefaultRegion = "US"
 
 // Represents a link with context.
 type Link struct {
@@ -188,23 +196,50 @@ func checkRateLimit(sc int) bool {
 	return rlMap[sc]
 }
 
+type SearchParameters struct {
+	Query string
+	Page int
+}
+
+func (sp SearchParameters) Valid() bool {
+	if sp.Page < 1 {
+		return false
+	}
+	return true
+}
+
+type SearchConfig struct {
+	Region string
+	// SafeSearch, . . . to come
+}
+
+func (sc SearchConfig) getQueryURL(qp SearchParameters) *url.URL {
+	if sc.Region == "" {
+		sc.Region = DefaultRegion // not a pointer receiver—don't fret
+	}
+	query := url.QueryEscape(qp.Query)
+	u, err := url.Parse(fmt.Sprintf(qurl, query, (qp.Page - 1) * 10, sc.Region))
+	if err != nil {
+		panic(err) // Yeah, I'm certain.
+	}
+	return u
+}
+
 // Queries Google Search for `query` and returns a `Result`. Note that `page`
 // is 0-indexed. There might be an error, so do check for it before using the
 // returned `Result`.
-func Search(query string, page int) (Result, error) {
+func (sc SearchConfig) Search(sp SearchParameters) (Result, error) {
 	var rs Result
 
-	if strings.TrimSpace(query) == "" {
+	if !sp.Valid() {
+		return rs, errors.New("Search: invalid SearchParameters")
+	}
+
+	if strings.TrimSpace(sp.Query) == "" {
 		return rs, nil
 	}
 
-	page *= 10 // I do not know why—ask Google
-	query = url.QueryEscape(query)
-
-	u, err := url.Parse(fmt.Sprintf(qurl, query, page))
-	if err != nil {
-		panic(err)
-	}
+	u := sc.getQueryURL(sp)
 
 	r := &http.Request{
 		URL:    u,
@@ -245,19 +280,42 @@ func iso8859ToUTF8(b []byte) string {
 	return string(buf)
 }
 
+type SugConfig struct {
+	Region string
+}
+
+func (sc SugConfig) getSuggestionsURL(query string) *url.URL {
+	if sc.Region == "" {
+		sc.Region = DefaultRegion // not a pointer receiver—don't fret
+	}
+	// Do we need SugParameters too? I do not think so.
+	query = url.QueryEscape(query)
+	u, err := url.Parse(fmt.Sprintf(surl, query, sc.Region))
+	if err != nil {
+		panic(err)
+	}
+	return u
+}
+
 // Suggests queries based on `query` and returns a `Suggestions`. There might be
 // an error, so do check for it before using the returned `Suggestions`.
-func Suggest(query string) (Suggestions, error) {
+func (sc SugConfig) Suggest(query string) (Suggestions, error) {
 	if strings.TrimSpace(query) == "" {
 		return Suggestions{}, nil
 	}
 
-	query = url.QueryEscape(query)
+	u := sc.getSuggestionsURL(query)
+	req := &http.Request{
+		URL:    u,
+		Header: make(http.Header),
+	}
+
 	client := timeoutClient()
-	resp, err := client.Get(fmt.Sprintf(surl, query))
+	resp, err := client.Do(req)
 	if err != nil {
 		return nil, err
 	}
+
 	defer resp.Body.Close()
 	if resp.StatusCode != 200 {
 		return nil, fmt.Errorf("Suggest: http.Get returned non-200 status code: %v", resp.StatusCode)
