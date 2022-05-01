@@ -1,14 +1,15 @@
-import SearchAreaWrapper from "../SearchAreaWrapper";
+import PageTitle from "../../util/PageTitle";
 import TextResultSkeleton from "../TextResultSkeleton";
 
 const ResultsLoading = () => {
 	return (
-		<SearchAreaWrapper pageTitle='Fetching results...'>
+		<>
+			<PageTitle>Fetching results...</PageTitle>
 			<div className="h-1r"></div>
 			{[1, 2, 3, 4, 5, 6, 7].map(e => (
 				<TextResultSkeleton key={e} />
 			))}
-		</SearchAreaWrapper>
+		</>
 	);
 };
 

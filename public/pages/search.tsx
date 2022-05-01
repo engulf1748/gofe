@@ -31,6 +31,7 @@ const SearchPage = () => {
 	const [dym, setDym] = useState('');
 	const [srf, setSrf] = useState('');
 	const [rateLimited, setRateLimited] = useState(false);
+	const [loaded, setLoaded] = useState(false);
 
 	const params = new URLSearchParams(window.location.search);
 
@@ -60,10 +61,13 @@ const SearchPage = () => {
 		if (query !== previousQuery || page !== previousPage) {
 			setResults(undefined);
 			setStaticQuery(query);
+			setLoaded(false);
 
 			searchAPI
 				.getSearchResults(query, page)
 				.then(data => {
+					setLoaded(true);
+
 					if (data.type === 'success' && data.data) {
 						if (Array.isArray(data.data.Links)) {
 							setResults(data.data.Links);
@@ -90,16 +94,8 @@ const SearchPage = () => {
 		return <RateLimited />;
 	}
 
-	if (!results) {
-		return <ResultsLoading />;
-	}
-
 	if (query.trim().length === 0) {
 		return <EmptyQuery />;
-	}
-
-	if (results.length === 0) {
-		return <NoSearchResults query={query} />;
 	}
 
 	return (
@@ -114,7 +110,15 @@ const SearchPage = () => {
 						setQuery={setQuery}
 					/>
 
-					{results.map(result => <TextResult key={result.URL} {...result} />)}
+					{results ? (
+						results.map(result => <TextResult key={result.URL} {...result} />)
+					) : (
+						<ResultsLoading />
+					)}
+
+					{results?.length === 0 && loaded && (
+						<NoSearchResults query={query} />
+					)}
 				</div>
 
 				<div className="grid-block">
@@ -122,7 +126,9 @@ const SearchPage = () => {
 				</div>
 
 				<div className="grid-block">
-					<Pagination page={Number(page) || 1} staticQuery={staticQuery} />
+					{results && results.length !== 0 && loaded && (
+						<Pagination page={Number(page) || 1} staticQuery={staticQuery} />
+					)}
 				</div>
 			</div>
 		</div>

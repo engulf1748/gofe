@@ -1,4 +1,4 @@
-import SearchAreaWrapper from "../SearchAreaWrapper";
+import PageTitle from "../../util/PageTitle";
 
 interface Props {
 	query: string;
@@ -13,18 +13,18 @@ const NoSearchResults = ({ query }: Props) => {
 	}
 
 	return (
-		<SearchAreaWrapper pageTitle='Gofë - No results'>
-			<div className="w-100p">
-				<p><span className='s-query'>{trimQuery(query)}</span> did not yield any results.</p>
-				<div>
-					Suggestions:
-					<ul>
-						<li>Search for something more general.</li>
-						<li>Try something tangential: you might get lucky.</li>
-					</ul>
-				</div>
+		<div className="w-100p">
+			<PageTitle>No results</PageTitle>
+
+			<p><span className='s-query'>{trimQuery(query)}</span> did not yield any results.</p>
+			<div>
+				Suggestions:
+				<ul>
+					<li>Search for something more general.</li>
+					<li>Try something tangential: you might get lucky.</li>
+				</ul>
 			</div>
-		</SearchAreaWrapper>
+		</div>
 	);
 }
 
