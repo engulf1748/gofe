@@ -9,7 +9,7 @@ body.modern-light {
 	--input-complimentary: #f4f4f5;
 
 	--primary: #1d4ed8;
-	--primary-light: #{lighten(#1d4ed8, 30%)};
+	--primary-light: #{lighten(#1d4ed8, 10%)};
 
 	--button: var(--blue-600);
 	--button-hover: var(--blue-700);
