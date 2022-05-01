@@ -1,3 +1,5 @@
+import { isMobile } from "react-device-detect";
+
 import { useSettings } from "../../providers/SettingsProvider";
 
 import ExternalLink from "../ExternalLink";
@@ -25,11 +27,11 @@ const DEFAULT_MAX_LENGTH = 25;
 // path has a greater length than DEFAULT_MAX_LENGTH.
 // If the path is the first item, this will be used if
 // the length of the host is greater than HOST_MAX_LENGTH
-const MINIMIZED_LENGTH = 8;
+const MINIMIZED_LENGTH = isMobile ? 5 : 8;
 
 // The total number of characters within the URL string
 // that should be tolerated. Loosely enforced right now.
-const ABSOLUTE_MAX = 65;
+const ABSOLUTE_MAX = isMobile ? 50 : 65;
 
 // If none of the conditions are handled and it's the
 // last item, use this length.
@@ -57,11 +59,15 @@ const LAST_ITEM_EDGE_CASE_LENGTH = 14;
 // with the return value, but for now this is suitable. I was
 // shooting for something that would work for the edge-cases
 // with super long URLs. This works fine for that.
-const determinePathTrimLength = ({ host, paths, index }: URLObject): number => {
+const determinePathTrimLength = ({ host, paths, index }: URLObject, totalLength: number | null): number => {
 	const numItems = paths.length + 1; // +1 for host
 	const lengths = paths.map(path => path.length);
 	const previousItem = index === 0 ? host.length : lengths[index - 1];
 	const isLastItem = index === paths.length - 1;
+
+	if (totalLength && totalLength > ABSOLUTE_MAX) {
+		return MINIMIZED_LENGTH;
+	}
 
 	// If there's only one path, allow it to be the
 	// full length minus the length of the host.
@@ -117,6 +123,11 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 		// last items, but I'll wait on this logic until we've used
 		// this for some time.
 		const paths = _paths.filter(e => e !== '' && e !== '/').slice(0, 3);
+		const totalLength = paths.reduce((p, c, i) => determinePathTrimLength({
+			host,
+			paths,
+			index: i
+		}, null) + p, 0);
 
 		return (
 			<>
@@ -130,7 +141,7 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 							host,
 							paths,
 							index,
-						}))}</span>
+						}, totalLength))}</span>
 					</KeyGiver>
 				))}
 			</>

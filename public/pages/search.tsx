@@ -103,22 +103,24 @@ const SearchPage = () => {
 			<PageTitle>{query} - Gofë</PageTitle>
 
 			<div className="search-panel">
-				<div className="results">
-					<QueryMeta
-						dym={dym}
-						srf={srf}
-						setQuery={setQuery}
-					/>
+				<div className="grid-block w-100p flex-c">
+					<div className="results">
+						<QueryMeta
+							dym={dym}
+							srf={srf}
+							setQuery={setQuery}
+						/>
 
-					{results ? (
-						results.map(result => <TextResult key={result.URL} {...result} />)
-					) : (
-						<ResultsLoading />
-					)}
+						{results ? (
+							results.map(result => <TextResult key={result.URL} {...result} />)
+						) : (
+							<ResultsLoading />
+						)}
 
-					{results?.length === 0 && loaded && (
-						<NoSearchResults query={query} />
-					)}
+						{results?.length === 0 && loaded && (
+							<NoSearchResults query={query} />
+						)}
+					</div>
 				</div>
 
 				<div className="grid-block">

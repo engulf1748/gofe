@@ -67,6 +67,7 @@ $gutter: 0.6rem;
 		letter-spacing: -0.02rem;
 		margin-bottom: $gutter;
 		word-break: break-all;
+		max-width: calc(100vw - 4rem);
 	}
 
 	& .context {
@@ -142,11 +143,15 @@ $gutter: 0.6rem;
 		align-items: center;
 		flex-direction: column;
 	}
+
+	& .results {
+		width: 100%;
+	}
 }
 
 @media only screen and (max-width: 1050px) {
 	.search-panel:not(.no-grid) {
-		grid-template-columns: 1fr;
+		grid-template-columns: 100%;
 		grid-template-rows: auto auto;
 		grid-row-gap: 3rem;
 	}
