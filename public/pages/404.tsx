@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Button } from '@infinium/hydro';
 
@@ -13,15 +14,16 @@ const FourOFour = () => {
 			<PageTitle>Gofë - Page not found</PageTitle>
 
 			<div className="mw-25r flex-c text-c mb-1r">
-				<h1 className='fs-10xl fw-600'>
-					<span className='text-primary'>4</span>
-					<span>0</span>
-					<span className='text-primary'>4</span>
-				</h1>
+				<Image
+					src={`https://xplato.dev/images/etc/cat-${Math.max(Math.floor(Math.random() * 6), 1)}.gif`}
+					width={400}
+					height={320}
+				/>
+				<h1 className='fs-4xl fw-600'>404 Page Not Found</h1>
 				<p className='opacity-8'>
 					The page you requested doesn't exist on our website or has
 					been moved. But don't worry, you've got the whole internet
-					ahead of you. All it takes is a search.
+					ahead of you—all it takes is a search.
 				</p>
 			</div>
 			
