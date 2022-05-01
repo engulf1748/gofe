@@ -21,6 +21,7 @@ import EmptyQuery from '../components/search/states/EmptyQuery';
 import RateLimited from '../components/search/states/RateLimited';
 
 import searchAPI from '../services/search';
+import suggestionAPI from '../services/suggestions';
 
 import type { Result } from '../types/Search';
 import type { APIError } from '../services/err';
@@ -45,8 +46,9 @@ const SearchPage = () => {
 	const previousQuery = usePrevious(query);
 	const previousPage = usePrevious(page);
 	
-	const { query: savedQuery, setQuery, suggestions } = useSearch();
+	const { query: savedQuery, setQuery } = useSearch();
 	const [staticQuery, setStaticQuery] = useState(query);
+	const [staticSuggestions, setStaticSuggestions] = useState([]);
 
 	useEffect(() => {
 		// Manually update the query state interally
@@ -60,13 +62,13 @@ const SearchPage = () => {
 	useEffect(() => {
 		if (query !== previousQuery || page !== previousPage) {
 			setResults(undefined);
-			setStaticQuery(query);
 			setLoaded(false);
 
 			searchAPI
 				.getSearchResults(query, page)
 				.then(data => {
 					setLoaded(true);
+					setStaticQuery(query);
 
 					if (data.type === 'success' && data.data) {
 						if (Array.isArray(data.data.Links)) {
@@ -85,6 +87,25 @@ const SearchPage = () => {
 				});
 		}
 	}, [query, page, previousQuery, previousPage]);
+
+	useEffect(() => {
+		suggestionAPI
+			.getSuggestions(staticQuery)
+			.then(data => {
+				if (data.type === 'empty') {
+					setStaticSuggestions([]);
+					return [];
+				}
+	
+				if (data.type === 'success' && data.data && data.data.length  === 2) {
+					setStaticSuggestions(data.data[1]);
+					return data;
+				}
+	
+				setStaticSuggestions([]);
+				return [];
+			})
+	}, [staticQuery]);
 
 	if (err) {
 		return <SearchError err={err} />;
@@ -124,7 +145,7 @@ const SearchPage = () => {
 				</div>
 
 				<div className="grid-block">
-					<RelatedSearches staticQuery={staticQuery} />
+					<RelatedSearches staticQuery={staticQuery} suggestions={staticSuggestions} />
 				</div>
 
 				<div className="grid-block">
