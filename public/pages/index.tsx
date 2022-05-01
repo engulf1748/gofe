@@ -50,7 +50,7 @@ const Home = () => {
 					<div className='h-100p flex-sb flex-column'>
 						<div></div>
 						<div className='flex-c text-c mw-25r'>
-							<h2 className='fs-2xl fw-400'>
+							<h2 className='fs-2xl fw-400 mb-0-5r'>
 								Search privately with Gofë
 							</h2>
 							<p className='opacity-07'>
