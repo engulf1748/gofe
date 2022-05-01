@@ -33,7 +33,7 @@ const Home = () => {
 
 			<div className='w-100p h-screen grid grid-12 tp-grid-1'>
 				<div className='h-100p grid-block flex align-c justify-s flex-column grid-span-column-7 tp-grid-span-column-1 pb-10r relative'>
-					<div className='w-100p flex align-e mt-3r pr-2r mb-6r tl-mb-4r'>
+					<div className='w-100p flex align-e mt-3r pr-2r mb-6r tl-mb-4r home-page'>
 						<Settings />
 					</div>
 					<div className='w-100p flex-c'>

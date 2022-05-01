@@ -25,20 +25,3 @@ body.hacker {
 		text-decoration: underline;
 	}
 }
-
-body.modern-light {
-	& .h-dropdown-menu {
-		background-color: var(--background) !important;
-
-		& button.gray {
-			&:hover, &:focus {
-				background-color: var(--background-1) !important;
-				color: white !important;
-			}
-
-			&.selected {
-				background-color: var(--background-2);
-			}
-		}
-	}
-}

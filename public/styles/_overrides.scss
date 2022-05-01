@@ -47,83 +47,25 @@
 	}
 }
 
-.h-modal .inner-container {
-	background-color: var(--background) !important;
-	padding: 0.5rem;
-
-	& .close {
-		top: 1.5rem !important;
-		right: 1.5rem !important;
-	}
+.h-select-trigger {
+	background-color: var(--background-1) !important;
 }
 
-.h-modal .inner-container, .h-modal .inner {
-	width: 100%;
-	overflow: visible !important;
-}
+.h-dropdown-menu {
+	background-color: var(--background-1);
+	border: 1px solid var(--background-2);
 
-.h-modal .content-area {
-	width: 100%;
-}
-
-.h-modal.medium {
-	padding-top: 10rem;
-	align-items: flex-start !important;
-
-	& .content-area .grid-2 {
-		grid-template-columns: 1fr 1fr !important;
-	}
-
-	.h-select-trigger {
-		background-color: var(--background-1) !important;
-	}
-
-	& .buttons-container {
-		display: none;
-		visibility: hidden;
-		pointer-events: none;
-		opacity: 0;
-		height: 0;
-		width: 0;
-	}
-	
-	& .h-button {
-		color: var(--foreground) !important;
-
-		&:last-child {
-			background-color: var(--button);
-			color: white !important;
-
-			&:hover {
-				background-color: var(--button-hover);
-			}
-
-			&:focus {
-				@include mixins.ring-shadow(var(--background-1), var(--button));
-			}
-		}
-	}
-}
-
-.h-modal .inner-container.sm {
-	max-width: 25rem !important;
-
-	& .buttons {
-		grid-gap: 1rem !important;
-	}
-
-	& .h-dropdown-menu {
-		background-color: var(--background-1);
-
-		& button.gray {
-			&:hover, &:focus {
-				background-color: var(--button) !important;
+	& button.gray {
+		&:hover, &:focus {
+			background-color: var(--button) !important;
+			
+			&:not(.selected), &:not(.selected) div span {
 				color: white !important;
 			}
+		}
 
-			&.selected {
-				background-color: var(--background-2);
-			}
+		&.selected {
+			background-color: var(--background-2);
 		}
 	}
 }
@@ -141,21 +83,6 @@
 
 	&:hover {
 		background-color: var(--background-2) !important;
-	}
-}
-
-// Let's apply an overflow to this to make sure that
-// mobile users can see the whole modal, including
-// all overflowing elements within the .inner.
-.h-modal {
-	overflow-y: scroll;
-	padding-bottom: 4rem;
-}
-
-@media only screen and (max-width: 550px) {
-	.h-modal.medium {
-		padding: 0 1rem !important;
-		align-items: center !important;
 	}
 }
 

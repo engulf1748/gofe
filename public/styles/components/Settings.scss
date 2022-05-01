@@ -22,6 +22,14 @@
 	&.icon-only {
 		padding: 0.35rem;
 	}
+
+	& .icon {
+		transition: var(--d-m-2) var(--e-s);
+	}
+
+	&.open .icon {
+		transform: rotate(-45deg);
+	}
 }
 
 .setting-block {
@@ -41,4 +49,41 @@
 
 .settings-modal-grid {
 	row-gap: 1.5rem;
+}
+
+.settings-panel {
+	position: absolute;
+	top: 3.5rem;
+	right: 2rem;
+	background-color: var(--background);
+	border: 1px solid var(--background-2);
+	box-shadow: var(--shadow-sm);
+	border-radius: 0.5rem;
+	padding: 1.5rem;
+	padding-bottom: 1rem;
+	will-change: transform;
+	transition: var(--d-m-1) var(--e-s);
+	z-index: 99;
+	
+	opacity: 0;
+	pointer-events: none;
+	transform: translateY(-16px);
+
+	&.open {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+}
+
+@media only screen and (max-width: 428px) {
+	.settings-panel {
+		top: 3.65rem;
+		right: 1rem;
+		left: 1rem;
+	}
+}
+
+.home-page .settings-panel {
+	top: 5.5rem;
 }
