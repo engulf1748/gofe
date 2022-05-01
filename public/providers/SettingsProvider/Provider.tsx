@@ -43,6 +43,10 @@ const SettingsProvider = ({ children }: ChildrenOnly) => {
 
 	const previousSettings = usePrevious(settings);
 
+	const truthy = (v: string) => {
+		return v === 'yes' || v === 'Yes' || v === 'true';
+	}
+
 	useEffect(() => {
 		const keys = Object.keys(settings);
 		keys.forEach(key => {
@@ -76,6 +80,7 @@ const SettingsProvider = ({ children }: ChildrenOnly) => {
 	const value = {
 		...settings,
 		set,
+		truthy,
 	};
 
 	return (

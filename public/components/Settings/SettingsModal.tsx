@@ -3,6 +3,7 @@ import { Modal } from "@infinium/hydro";
 import SelectSetting from "./SelectSetting";
 
 import { themes } from "../../data/themes";
+import CheckboxSetting from "./CheckboxSetting";
 
 
 interface Props {
@@ -23,11 +24,11 @@ const SettingsModal = ({ modal, setModal }: Props) => {
 			background='medium'
 		>
 			<div className='w-100p mt-1r'>
-				<div className="w-100p grid grid-2">
+				<div className="w-100p grid grid-2 settings-modal-grid">
 					<SelectSetting id='theme' label='Theme' options={themes} />
-					<SelectSetting id='openLinksInNewTab' label='Open links in new tab?' options={['yes', 'no']} />
-					<SelectSetting id='preferIcons' label='Prefer icons over text?' options={['yes', 'no']} />
 					<SelectSetting id='suggestionsView' label='View suggestions as' options={['list', 'grid']} />
+					<CheckboxSetting id='openLinksInNewTab' label='Open links in new tab?' options={['Yes', 'No']} />
+					<CheckboxSetting id='preferIcons' label='Prefer icons over text?' options={['Yes', 'No']} />
 				</div>
 			</div>
 		</Modal>

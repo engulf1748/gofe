@@ -158,3 +158,24 @@
 		align-items: center !important;
 	}
 }
+
+.h-box-label {
+	color: var(--foreground) !important;
+	opacity: 0.7;
+}
+
+.h-checkbox.accent {
+	&.active {
+		background-color: var(--button) !important;
+		border-color: var(--button) !important;
+	}
+
+	&:focus {
+		box-shadow: 
+			var(--ui) 0px 0px 0px 2px, 
+			var(--button) 0px 0px 0px 4px,
+			rgba(0, 0, 0, .1) 0px 4px 6px -1px,
+			rgba(0, 0, 0, .06) 0px 2px 4px -1px
+		!important;
+	}
+}
