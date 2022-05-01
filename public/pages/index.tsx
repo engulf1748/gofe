@@ -66,14 +66,14 @@ const Home = () => {
 
 							<img src='/search-promo.png' className='w-100p' />
 						</div>
-						<div className='w-100p flex justify-c align-c flex-row'>
+						<div className='w-100p flex justify-c align-c flex-row ml-flex-c'>
 							<ExternalLink
 								href='https://codeberg.org/ar324/gofe'
-								className='link'
+								className='link mp-mb-1r'
 							>
 								Source code (v{pkg.version})
 							</ExternalLink>
-							<Divider />
+							<div className="ml-hide"><Divider /></div>
 							<SponsorLink />
 						</div>
 					</div>
