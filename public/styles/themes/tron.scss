@@ -1,0 +1,33 @@
+body.tron {
+	--background: #011113;
+	--background-1: #002329;
+	--background-2: #043239;
+	--background-3: #52525b;
+	--foreground: #fbfbfb;
+
+	--input-background: #002329;
+	--input-complimentary: #043239;
+
+	--primary: var(--cyan-500);
+	--primary-light: var(--cyan-600);
+
+	--button: var(--cyan-600);
+	--button-hover: var(--cyan-700);
+
+	--secondary: var(--sky-500);
+	--secondary-light: var(--sky-600);
+
+	--tertiary:var(--purple-500);
+	--tertiary-light: var(--purple-500);
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: #011113;
+	--ui-1: #002329;
+	--ui-2: #043239;
+	--ui-3: #52525b;
+	--text-color: #fbfbfb;
+	--accent: var(--cyan-500);
+	--accent-500: var(--cyan-500);
+	--accent-hover: var(--cyan-600);
+	--accent-600: var(--cyan-600);
+}

@@ -14,8 +14,6 @@
 
 // Themes
 @use './themes/atlantis';
-@use './themes/brutal-dark';
-@use './themes/brutal-light';
 @use './themes/dracula';
 @use './themes/hacker';
 @use './themes/joker';
@@ -23,6 +21,7 @@
 @use './themes/modern-light';
 @use './themes/monokai-sweet-dark';
 @use './themes/reader';
+@use './themes/tron';
 
 html,
 body,

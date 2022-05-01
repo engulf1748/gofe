@@ -15,7 +15,7 @@ interface Settings {
 // Settings added here will be automatically applied
 // to localStorage.
 const defaultSettings: Settings = {
-	theme: 'auto',
+	theme: 'modern-auto',
 	openLinksInNewTab: 'no',
 	suggestionsView: 'list',
 	preferIcons: 'yes',

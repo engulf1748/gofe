@@ -32,11 +32,11 @@ const View = ({ children }: ChildrenOnly) => {
 		const body = document.querySelector('body');
 
 		if (!settings || !settings.theme) {
-			settings.set('theme', 'auto');
+			settings.set('theme', 'modern-auto');
 		}
 		
 		if (settings) {
-			if (settings.theme === 'auto') {
+			if (settings.theme === 'modern-auto') {
 				window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', onThemeChange);
 				body?.classList.add(getAutoTheme());
 			} else {

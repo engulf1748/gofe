@@ -1,8 +1,6 @@
 const themes = [
-	'auto',
+	'modern-auto',
 	'atlantis',
-	'brutal-dark',
-	'brutal-light',
 	'dracula',
 	'hacker',
 	'joker',
@@ -10,6 +8,7 @@ const themes = [
 	'modern-light',
 	'monokai-sweet-dark',
 	'reader',
+	'tron',
 ];
 
 export {
