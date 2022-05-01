@@ -5,7 +5,7 @@ interface Schema {
 }
 
 interface SettingSchema {
-	allowedValues: string[];
+	allowedValues: string[] | '*';
 }
 
 interface Settings {
@@ -20,6 +20,7 @@ const defaultSettings: Settings = {
 	suggestionsView: 'list',
 	preferIcons: 'yes',
 	isNewUser: 'true',
+	customTheme: '',
 };
 
 // We use 'yes' and 'no' because the SelectSetting
@@ -48,6 +49,9 @@ const settingsSchema: Schema = {
 	},
 	isNewUser: {
 		allowedValues: bool,
+	},
+	customTheme: {
+		allowedValues: '*',
 	}
 }
 

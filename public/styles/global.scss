@@ -1,5 +1,8 @@
+@use './defaults';
+
 @use './components/Button';
 @use './components/Footer';
+@use './components/Input';
 
 // This must go above Navigation because it
 // depends on some CSS vars.

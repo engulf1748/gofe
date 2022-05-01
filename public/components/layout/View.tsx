@@ -53,6 +53,10 @@ const View = ({ children }: ChildrenOnly) => {
 	return (
 		<div className="view">
 			{children}
+
+			{settings.customTheme !== '' && settings.theme === 'custom' && (
+				<link rel='stylesheet' type='text/css' href={settings.customTheme} />
+			)}
 		</div>
 	);
 };

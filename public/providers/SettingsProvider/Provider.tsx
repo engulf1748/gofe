@@ -60,6 +60,11 @@ const SettingsProvider = ({ children }: ChildrenOnly) => {
 				return;
 			}
 
+			// If it can be anything, skip it.
+			if (allowedValues === '*') {
+				return;
+			}
+
 			// If the saved value of this key is not in the specified
 			// values, set it to the default.
 			if (!allowedValues.includes(currentValue)) {

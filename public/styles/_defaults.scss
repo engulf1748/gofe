@@ -1,0 +1,42 @@
+body:not(.atlantis),
+body:not(.dracula),
+body:not(.hacker),
+body:not(.joker),
+body:not(.modern-auto),
+body:not(.modern-dark),
+body:not(.modern-light),
+body:not(.monokai-sweet-dark),
+body:not(.reader),
+body:not(.tron) {
+	--background: white;
+	--background-1: #f4f4f5;
+	--background-2: #e4e4e7;
+	--background-3: #d4d4d8;
+	--foreground: #161616;
+
+	--input-background: white;
+	--input-complimentary: #f4f4f5;
+
+	--primary: #1d4ed8;
+	--primary-light: #{lighten(#1d4ed8, 10%)};
+
+	--button: var(--blue-600);
+	--button-hover: var(--blue-700);
+
+	--secondary: #166534;
+	--secondary-light: #{lighten(#166534, 60%)};
+
+	--tertiary: #660099;
+	--tertiary-light: #{lighten(#660099, 40%)};
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: white;
+	--ui-1: #f4f4f5;
+	--ui-2: #e4e4e7;
+	--ui-3: #d4d4d8;
+	--text-color: #161616;
+	--accent: var(--blue-600);
+	--accent-500: var(--blue-600);
+	--accent-hover: var(--blue-700);
+	--accent-600: var(--blue-700);
+ }

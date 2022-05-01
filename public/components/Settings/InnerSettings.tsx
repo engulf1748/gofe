@@ -1,3 +1,5 @@
+import { useSettings } from "../../providers/SettingsProvider";
+
 import SelectSetting from "./SelectSetting";
 import CheckboxSetting from "./CheckboxSetting";
 import ExternalLink from "../ExternalLink";
@@ -7,6 +9,8 @@ import { themes } from "../../data/themes";
 import { resetLocalStorage } from "../../logic/utils";
 
 const InnerSettings = () => {
+	const settings = useSettings();
+	
 	return (
 		<div className='w-100p'>
 			<div className='w-100p grid grid-2 settings-modal-grid mp-grid-1'>
@@ -16,6 +20,27 @@ const InnerSettings = () => {
 					label='View suggestions as'
 					options={['list', 'grid']}
 				/>
+				{settings.theme === 'custom' && (
+					<div className="grid-block grid-span-column-2 mp-grid-span-column-1">
+						<div className='h-label-container w-100p'>
+							<div className='h-label flex flex-row align-c justify-s'>
+								<span className="lh-1">CSS file URL</span>
+								<ExternalLink
+									href="https://codeberg.org/ar324/gofe/wiki/Custom-themes"
+									className="link sm lh-1 ml-0-25r"
+								>
+									(What's this?)
+								</ExternalLink>
+							</div>
+							<input
+								className="input"
+								placeholder="https://www.example.com/gofe-theme.css"
+								onChange={(ev) => settings.set('customTheme', ev.target.value)}
+								value={settings.customTheme}
+							/>
+						</div>
+					</div>
+				)}
 				<CheckboxSetting
 					id='openLinksInNewTab'
 					label='Open links in new tab?'
