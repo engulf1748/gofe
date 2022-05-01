@@ -8,6 +8,7 @@ killp() {
 	# /bin/sh -c /home/neo/gofe/public/node_modules/.bin/next start
 	# /usr/bin/node /home/neo/gofe/public/node_modules/.bin/next start
 	kill -9 $(pgrep -f gofe) > /dev/null  2>&1 # -f looks at the full command line
+	pm2 delete 0
 }
 
 deploy() {
@@ -35,7 +36,7 @@ deploy() {
 	echo "public/ build successful . . ."
 	killp
 	echo "Killed previous build's processes, if any . . ."
-	yarn next start & # || return does not seem to work after '&'
+	pm2 --name GOFE-FRONT-END start yarn -- start & # || return does not seem to work after '&'
 	echo "Front-end server launched . . ."
 	cd ../
 	./"$gd" &
