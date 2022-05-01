@@ -17,12 +17,12 @@ const InnerSettings = () => {
 				<SelectSetting id='theme' label='Theme' options={themes} />
 				<SelectSetting
 					id='suggestionsView'
-					label='View suggestions as'
+					label='View suggestions as:'
 					options={['list', 'grid']}
 				/>
 				{settings.theme === 'custom' && (
 					<div className="grid-block grid-span-column-2 mp-grid-span-column-1">
-						<div className='h-label-container w-100p'>
+						<div className='h-label-container'>
 							<div className='h-label flex flex-row align-c justify-s'>
 								<span className="lh-1">CSS file URL</span>
 								<ExternalLink
