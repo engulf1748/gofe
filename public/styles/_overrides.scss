@@ -49,6 +49,12 @@
 
 .h-modal .inner-container {
 	background-color: var(--background) !important;
+	padding: 0.5rem;
+
+	& .close {
+		top: 1.5rem !important;
+		right: 1.5rem !important;
+	}
 }
 
 .h-modal .inner-container, .h-modal .inner {
