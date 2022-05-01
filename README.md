@@ -29,7 +29,7 @@ the relevant source code can be found in `public/`.
 
 |                          |                                |
 |--------------------------|--------------------------------|
-| ![](/images/home.png)    | ![](/images/results-theme.png) |
+| ![](/images/home.png)    | ![](/images/settings.png)      |
 | ![](/images/results.png) | ![](/images/skeleton.png)      |
 
 ## License
