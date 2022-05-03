@@ -54,7 +54,7 @@ const InnerSettings = () => {
 					/>
 				</div>
 			</div>
-			<div className='p-1-5r border-top-ui-2 flex-sb'>
+			<div className='px-1-5r py-1-25r border-top-ui-2 flex-sb'>
 				<ExternalLink href='https://codeberg.org/ar324/gofe/releases' className='link sm'>
 					Gofë — v{pkg.version}
 				</ExternalLink>
