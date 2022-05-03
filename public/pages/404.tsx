@@ -15,8 +15,9 @@ const FourOFour = () => {
 
 			<div className="mw-25r flex-c text-c mb-1r">
 				<Image
-					src={`https://xplato.dev/images/etc/cat-${Math.max(Math.floor(Math.random() * 6), 1)}.gif`}
-					width={400}
+					src='/cat.svg'
+					alt='A gray cat sleeping near some vibrant green plants.'
+					width={440}
 					height={320}
 				/>
 				<h1 className='fs-4xl fw-600'>404 Page Not Found</h1>
