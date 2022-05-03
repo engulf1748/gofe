@@ -55,7 +55,7 @@ const InnerSettings = () => {
 				</div>
 			</div>
 			<div className='p-1-5r border-top-ui-2 flex-sb'>
-				<ExternalLink href='https://codeberg.org/ar324/gofe' className='link sm'>
+				<ExternalLink href='https://codeberg.org/ar324/gofe/releases' className='link sm'>
 					Gofë — v{pkg.version}
 				</ExternalLink>
 				<a onClick={resetLocalStorage} className='link sm'>
