@@ -77,7 +77,7 @@ const Input = ({ inputRef, setShowSuggestions, close, inNav }: Props) => {
 					</button>
 				)}
 
-				<button className='sb-button' onClick={submit} title={`Search for "${query}"`}>
+				<button className='sb-button' onClick={submit} title={query.trim() !== '' ? `Search for "${query}"` : 'Type something to search for'}>
 					<span className="sr-only">Search for {query}</span>
 					<i className="j-icon">{icons.search}</i>
 				</button>
