@@ -1,0 +1,33 @@
+body.blood {
+	--background: #140000;
+	--background-1: #3D0000;
+	--background-2: #660000;
+	--background-3: #8F0000;
+	--foreground: #fff;
+
+	--input-background: #3D0000;
+	--input-complimentary: #660000;
+
+	--primary: #E00000;
+	--primary-light: #{lighten(#E00000, 10%)};
+
+	--button: #E00000;
+	--button-hover: #B80000;
+
+	--secondary: #0FFF95;
+	--secondary-light: #{lighten(#0FFF95, 10%)};
+
+	--tertiary: #1BE7FF;
+	--tertiary-light: #{lighten(#1BE7FF, 10%)};
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: #140000;
+	--ui-1: #3D0000;
+	--ui-2: #660000;
+	--ui-3: #8F0000;
+	--text-color: white;
+	--accent: #E00000;
+	--accent-500: #E00000;
+	--accent-hover: #B80000;
+	--accent-600: #B80000;
+}
