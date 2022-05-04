@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { Button } from '@infinium/hydro';
 
 import Layout from '../components/layout/Layout';
 import PageTitle from '../components/util/PageTitle';
@@ -29,9 +28,9 @@ const FourOFour = () => {
 			</div>
 			
 			<div className="w-100p flex-c mw-25r px-2r">
-				<Button onClick={() => push('/')} mods='accent-button'>
+				<button onClick={() => push('/')} className='button lg'>
 					Explore it all
-				</Button>
+				</button>
 			</div>
 		</div>
 	);
