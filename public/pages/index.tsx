@@ -32,7 +32,7 @@ const Home = () => {
 			<PageTitle>Gofë - Home</PageTitle>
 
 			<div className='w-100p h-screen grid grid-12 tp-grid-1'>
-				<div className='h-100p grid-block flex align-c justify-s flex-column grid-span-column-7 tp-grid-span-column-1 pb-10r relative'>
+				<div className='h-100p grid-block flex align-c justify-s flex-column gsc-7 ds-gsc-6 tp-gsc-1 pb-10r relative'>
 					<div className='w-100p flex align-e mt-3r pr-2r mb-6r tl-mb-4r home-page'>
 						<Settings />
 					</div>
@@ -44,7 +44,7 @@ const Home = () => {
 					</div>
 				</div>
 				<div
-					className='grid-block flex-c p-2r grid-span-column-5 tp-grid-span-column-1 border-left-ui-2 bg-1 h-100p tp-py-10r'
+					className='grid-block flex-c p-2r gsc-5 ds-gsc-6 tp-gsc-1 border-left-ui-2 bg-1 h-100p tp-py-10r'
 					onClick={didInteract}
 				>
 					<div className='h-100p flex-sb flex-column'>
@@ -66,14 +66,14 @@ const Home = () => {
 
 							<img src='/search-promo.png' className='w-100p' />
 						</div>
-						<div className='w-100p flex justify-c align-c flex-row ml-flex-c'>
+						<div className='w-100p flex justify-c align-c flex-row tl-flex-c'>
 							<ExternalLink
 								href='https://codeberg.org/ar324/gofe'
-								className='link mp-mb-1r'
+								className='link tl-mb-1r'
 							>
 								Source code (v{pkg.version})
 							</ExternalLink>
-							<div className="ml-hide"><Divider /></div>
+							<div className="tl-hide"><Divider /></div>
 							<SponsorLink />
 						</div>
 					</div>
