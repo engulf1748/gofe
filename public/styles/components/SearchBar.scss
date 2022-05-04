@@ -197,7 +197,8 @@ $radius-inner: calc(0.5rem - 1px);
 					transition: var(--d-f-2) var(--e-s);
 
 					&:hover {
-						background-color: var(--button);
+						background-color: var(--button); 
+						color: white !important;
 					}
 
 					&:last-child {
