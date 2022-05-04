@@ -5,5 +5,8 @@ server.log
 config.json
 
 .DS_Store
+.yarn_integrity
+node_modules/
+.next
 
 gofe*
