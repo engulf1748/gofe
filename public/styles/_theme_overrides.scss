@@ -50,4 +50,12 @@ body.modern-auto, body.modern-light, body.custom {
 			background-color: var(--background-2) !important;
 		}
 	}
+
+	& .sb-suggestions {
+		background-color: var(--background);
+
+		& .view-grid button {
+			background-color: var(--background-1) !important;
+		}
+	}
 }

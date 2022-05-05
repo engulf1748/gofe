@@ -101,9 +101,10 @@ $radius-inner: calc(0.5rem - 1px);
 		border-radius: $radius;
 		position: absolute;
 		top: 3.25rem;
-		background-color: var(--background);
+		background-color: var(--background-1);
 		border: 1px solid var(--background-2);
 		overflow: hidden;
+		box-shadow: 0 0px 7px -1px rgba(0, 0, 0, 0.11);
 		z-index: 2;
 
 		& .sb-suggestions-view.view-list button,
@@ -113,7 +114,7 @@ $radius-inner: calc(0.5rem - 1px);
 			cursor: pointer;
 
 			&:hover, &.selected {
-				background-color: var(--button);
+				background-color: var(--button) !important;
 				color: white;
 			}
 		}
@@ -123,17 +124,23 @@ $radius-inner: calc(0.5rem - 1px);
 			justify-content: center;
 			align-items: center;
 			flex-direction: column;
+			padding: 0.5rem;
 
 			& button {
 				width: 100%;
-				min-height: 38px;
-				padding: 0.5rem 1rem;
+				padding: 0.65rem 0.75rem;
+				font-size: 0.875rem;
+				border-radius: 0.5rem;
 				display: flex;
 				justify-content: space-between;
 				align-items: center;
 				flex-direction: row;
 				background-color: transparent;
 				text-align: left;
+
+				&:not(:last-child) {
+					margin-bottom: 2px;
+				}
 			}
 		}
 
@@ -148,7 +155,7 @@ $radius-inner: calc(0.5rem - 1px);
 			& button {
 				height: auto !important;
 				border-radius: 90px;
-				background-color: var(--background-1);
+				background-color: var(--background-2);
 				padding: 0.5rem 0.75rem;
 				line-height: 1;
 				text-align: left;
@@ -190,7 +197,7 @@ $radius-inner: calc(0.5rem - 1px);
 					justify-content: center;
 					align-items: center;
 					border-radius: $radius;
-					background-color: var(--background-1);
+					background-color: var(--background-2);
 					color: var(--foreground);
 					cursor: pointer;
 					transition: var(--d-f-2) var(--e-s);
@@ -205,7 +212,7 @@ $radius-inner: calc(0.5rem - 1px);
 					}
 
 					&.active {
-						color: var(--button);
+						color: var(--primary);
 					}
 				}
 			}
