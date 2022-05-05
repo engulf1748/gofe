@@ -47,13 +47,8 @@
 	}
 }
 
-.h-select-trigger {
-	background-color: var(--background-1) !important;
-}
-
 .h-dropdown-menu {
-	background-color: var(--background-1);
-	border: 1px solid var(--background-2);
+	background-color: var(--background-2) !important;
 
 	& button.gray {
 		&:hover, &:focus {
@@ -65,7 +60,11 @@
 		}
 
 		&.selected {
-			background-color: var(--background-2);
+			background-color: var(--background-3);
+
+			&:hover {
+				background-color: var(--button) !important;
+			}
 		}
 	}
 }
@@ -80,9 +79,10 @@
 	display: flex !important;
 	justify-content: space-between !important;
 	align-items: center !important;
+	background-color: var(--background-2) !important;
 
 	&:hover {
-		background-color: var(--background-2) !important;
+		background-color: var(--background-3) !important;
 	}
 }
 

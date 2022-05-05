@@ -25,3 +25,29 @@ body.hacker {
 		text-decoration: underline;
 	}
 }
+
+body.modern-auto, body.modern-light, body.custom {
+	& .settings-panel {
+		background-color: var(--background) !important;
+	}
+
+	& .h-dropdown-menu {
+		background: var(--background) !important;
+
+		& button.gray.selected {
+			background-color: var(--background-1);
+
+			&:hover {
+				color: white !important;
+			}
+		}
+	}
+
+	& .h-select-trigger {
+		background-color: var(--background-1) !important;
+
+		&:hover {
+			background-color: var(--background-2) !important;
+		}
+	}
+}
