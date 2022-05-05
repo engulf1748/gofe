@@ -18,24 +18,28 @@ interface URLObject {
 }
 
 // The max trim length of the hostname in the URL.
-const HOST_MAX_LENGTH = 25;
+const HOST_MAX_LENGTH = isMobile ? 18 : 25;
 
 // The default length used for paths within the URL.
-const DEFAULT_MAX_LENGTH = 25;
+const DEFAULT_MAX_LENGTH = isMobile ? 15 : 25;
 
 // The trim length of any given path if the previous
 // path has a greater length than DEFAULT_MAX_LENGTH.
 // If the path is the first item, this will be used if
 // the length of the host is greater than HOST_MAX_LENGTH
-const MINIMIZED_LENGTH = isMobile ? 5 : 8;
+const MINIMIZED_LENGTH = isMobile ? 4 : 8;
 
 // The total number of characters within the URL string
 // that should be tolerated. Loosely enforced right now.
-const ABSOLUTE_MAX = isMobile ? 50 : 65;
+const ABSOLUTE_MAX = isMobile ? 45 : 65;
 
-// If none of the conditions are handled and it's the
-// last item, use this length.
-const LAST_ITEM_EDGE_CASE_LENGTH = 14;
+// Returns the current length of the URL up until index.
+const getCurrentLength = ({ host, paths, index }: URLObject) => {
+	return host.length + paths.reduce((p, c, i) => {
+		if (i >= index) return p;
+		return p + c.length;
+	}, 0);
+};
 
 // This determines the length a part of a pathname
 // should be based on the length of the previous item.
@@ -64,9 +68,18 @@ const determinePathTrimLength = ({ host, paths, index }: URLObject, totalLength:
 	const lengths = paths.map(path => path.length);
 	const previousItem = index === 0 ? host.length : lengths[index - 1];
 	const isLastItem = index === paths.length - 1;
+	const isTooLong = totalLength && totalLength > ABSOLUTE_MAX;
+	const currentLength = getCurrentLength({ host, paths, index });
 
-	if (totalLength && totalLength > ABSOLUTE_MAX) {
-		return MINIMIZED_LENGTH;
+	// If the whole thing can fit within ABSOLUTE_MAX,
+	// don't set constraints.
+	if (!isTooLong) {
+		return ABSOLUTE_MAX;
+	}
+
+	// If it's only the host, let it be the full width
+	if (numItems === 1) {
+		return ABSOLUTE_MAX;
 	}
 
 	// If there's only one path, allow it to be the
@@ -77,17 +90,24 @@ const determinePathTrimLength = ({ host, paths, index }: URLObject, totalLength:
 
 	// If there are two paths, allow each one to be
 	// half ABSOLUTE_MAX minus the host length
-	if (numItems === 3) {
-		return (ABSOLUTE_MAX - host.length) / 2;
+	// if (numItems === 3) {
+	// 	return index === 0 ? ABSOLUTE_MAX - previousItem
+	// }
+
+	// If there are three paths, make the first one
+	// zero length
+	if (numItems === 4 && index === 0) {
+		return 0;
 	}
 
 	if (previousItem > DEFAULT_MAX_LENGTH) {
 		return MINIMIZED_LENGTH;
 	}
 
-	// If none of the above and last item, make it shorter.
+	// If none of the above and last item, allow it to
+	// be the full length minus the current length
 	if (isLastItem) {
-		return LAST_ITEM_EDGE_CASE_LENGTH;
+		return ABSOLUTE_MAX - currentLength;
 	}
 
 	return DEFAULT_MAX_LENGTH;
@@ -127,11 +147,6 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 		// last items, but I'll wait on this logic until we've used
 		// this for some time.
 		const paths = _paths.filter(e => e !== '' && e !== '/').slice(0, 3);
-		const totalLength = paths.reduce((p, c, i) => determinePathTrimLength({
-			host,
-			paths,
-			index: i
-		}, null) + p, 0);
 
 		return (
 			<>
@@ -145,7 +160,7 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 							host,
 							paths,
 							index,
-						}, totalLength))}</span>
+						}, URL.length))}</span>
 					</KeyGiver>
 				))}
 			</>
