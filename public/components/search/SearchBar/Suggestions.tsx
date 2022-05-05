@@ -71,16 +71,16 @@ const Suggestions = ({ inputRef, close }: Props) => {
 
 				<div className='buttons'>
 					<MiniButton
-						onClick={() => setView('grid')}
-						title='View as bubbles'
-						icon='viewGrid'
-						active={settings.suggestionsView === 'grid'}
-					/>
-					<MiniButton
 						onClick={() => setView('list')}
 						title='View as list'
 						icon='viewList'
 						active={settings.suggestionsView === 'list'}
+					/>
+					<MiniButton
+						onClick={() => setView('grid')}
+						title='View as bubbles'
+						icon='viewGrid'
+						active={settings.suggestionsView === 'grid'}
 					/>
 				</div>
 			</div>
