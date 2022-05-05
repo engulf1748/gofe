@@ -26,7 +26,7 @@ const Settings = () => {
 
 	return (
 		<div>
-			<a
+			<button
 				onClick={() => setModal(!modal)}
 				className={classNames(
 					'settings-button',
@@ -43,7 +43,7 @@ const Settings = () => {
 				) : (
 					<p className="mb-0">Settings</p>
 				)}
-			</a>
+			</button>
 
 			<div
 				className={classNames(

@@ -1,3 +1,5 @@
+@use '../mixins';
+
 .settings-button {
 	display: flex;
 	justify-content: center;
@@ -17,6 +19,10 @@
 
 	&:hover, &:focus {
 		background-color: var(--background-1);
+	}
+
+	&:focus {
+		@include mixins.ring-shadow(var(--background), var(--button));
 	}
 
 	&.icon-only {
