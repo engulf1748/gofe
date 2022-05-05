@@ -110,6 +110,10 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 
 	const shouldOpenNewTab = settings?.openLinksInNewTab === 'yes';
 
+	const getProtocol = (protocol: string) => {
+		return protocol === 'https:' ? '' : `${protocol}//`;
+	}
+
 	const getInnerURLMarkup = () => {
 		const { protocol, host, paths: _paths } = decodeURL(URL);
 
@@ -131,7 +135,7 @@ const TextResult = ({ URL, Desc, Context }: Result) => {
 
 		return (
 			<>
-				<span>{protocol}{'//'}{trim(host, HOST_MAX_LENGTH)}</span>
+				<span>{getProtocol(protocol)}{trim(host, HOST_MAX_LENGTH)}</span>
 				{paths.length > 0 && paths.map((path, index) => (
 					// Certain paths can be the same, but probably
 					// not with the index value, haha.
