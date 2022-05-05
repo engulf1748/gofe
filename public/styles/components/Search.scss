@@ -1,3 +1,5 @@
+@use '../mixins';
+
 $gutter: 0.6rem;
 
 @mixin tl() {
@@ -252,6 +254,10 @@ $gutter: 0.6rem;
 		&:hover {
 			background-color: var(--button);
 			color: white;
+		}
+
+		&:focus {
+			@include mixins.ring-shadow(var(--background), var(--button));
 		}
 	}
 }
