@@ -5,7 +5,7 @@ body:not(.joker),
 body:not(.modern-auto),
 body:not(.modern-dark),
 body:not(.modern-light),
-body:not(.monokai-sweet-dark),
+body:not(.blood),
 body:not(.reader),
 body:not(.tron) {
 	--background: white;
@@ -13,9 +13,6 @@ body:not(.tron) {
 	--background-2: #e4e4e7;
 	--background-3: #d4d4d8;
 	--foreground: #161616;
-
-	--input-background: white;
-	--input-complimentary: #f4f4f5;
 
 	--primary: #1d4ed8;
 	--primary-light: #{lighten(#1d4ed8, 10%)};
