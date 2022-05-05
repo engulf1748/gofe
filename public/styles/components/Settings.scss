@@ -71,12 +71,14 @@
 	
 	opacity: 0;
 	pointer-events: none;
+	visibility: hidden;
 	transform: translateY(-16px);
 
 	&.open {
 		opacity: 1;
-		transform: translateY(0);
 		pointer-events: auto;
+		visibility: visible;
+		transform: translateY(0);
 	}
 }
 
