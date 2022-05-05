@@ -113,7 +113,7 @@ const Privacy = () => {
 						clearing your browser cache and site data.
 					</p>
 					<p>
-						If you'd like to clear your preferences on this website, <a className='g-link' onClick={resetLocalStorage}>click here.</a>
+						If you'd like to clear your preferences on this website, <a className='g-link' onClick={() => resetLocalStorage(false)}>click here.</a>
 					</p>
 
 					<h2>Contacting us</h2>
