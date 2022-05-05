@@ -24,7 +24,7 @@ const RelatedSearches = ({ staticQuery, suggestions }: Props) => {
 	}
 
 	return (
-		<div className="w-100p mt-3r">
+		<div className="w-100p mt-0-25r">
 			<h4>Related searches</h4>
 
 			<div className={classNames('suggestion-pills', `view-${settings.suggestionsView || 'list'}`)}>

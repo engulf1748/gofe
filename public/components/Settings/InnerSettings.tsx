@@ -60,7 +60,7 @@ const InnerSettings = () => {
 						v{pkg.version}
 					</ExternalLink>
 				</div>
-				<a onClick={resetLocalStorage} className='link sm'>
+				<a onClick={() => resetLocalStorage(true)} className='link sm'>
 					Reset to default
 				</a>
 			</div>

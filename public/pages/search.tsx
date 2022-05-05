@@ -20,9 +20,17 @@ import SearchError from '../components/search/states/SearchError';
 import EmptyQuery from '../components/search/states/EmptyQuery';
 import RateLimited from '../components/search/states/RateLimited';
 
+// Extra components
+import Notice from '../components/Notice';
+
+// Services
 import searchAPI from '../services/search';
 import suggestionAPI from '../services/suggestions';
 
+// Data
+import { notices } from '../data/notices';
+
+// Types
 import type { Result } from '../types/Search';
 import type { APIError } from '../services/err';
 
@@ -133,7 +141,9 @@ const SearchPage = () => {
 						/>
 
 						{results ? (
-							results.map(result => <TextResult key={result.URL} {...result} />)
+							<>
+								{results.map(result => <TextResult key={result.URL} {...result} />)}
+							</>
 						) : (
 							<ResultsLoading />
 						)}
@@ -145,6 +155,14 @@ const SearchPage = () => {
 				</div>
 
 				<div className="grid-block">
+					<div className="mb-2r">
+						{
+							notices &&
+							notices
+							.filter(e => e.type === 'search')
+							.map(e => <Notice key={e.id} {...e} />)
+						}
+					</div>
 					<RelatedSearches staticQuery={staticQuery} suggestions={staticSuggestions} />
 				</div>
 
