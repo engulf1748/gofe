@@ -63,12 +63,12 @@ const SearchPage = () => {
 		if (query !== previousQuery || page !== previousPage) {
 			setResults(undefined);
 			setLoaded(false);
+			setStaticQuery(query);
 
 			searchAPI
-				.getSearchResults(query, page)
-				.then(data => {
+			.getSearchResults(query, page)
+			.then(data => {
 					setLoaded(true);
-					setStaticQuery(query);
 
 					if (data.type === 'success' && data.data) {
 						if (Array.isArray(data.data.Links)) {
