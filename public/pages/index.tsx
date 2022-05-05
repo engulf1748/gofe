@@ -44,7 +44,10 @@ const Home = () => {
 					</div>
 				</div>
 				<div
-					className='grid-block flex-c p-2r gsc-5 ds-gsc-6 tp-gsc-1 border-left-ui-2 bg-1 h-100p tp-py-10r'
+					className={classNames(
+						'grid-block flex-c p-2r gsc-5 ds-gsc-6 tp-gsc-1 border-left-ui-2 h-100p tp-py-10r',
+						styles.homeSpecialBG,
+					)}
 					onClick={didInteract}
 				>
 					<div className='h-100p flex-sb flex-column'>

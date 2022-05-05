@@ -20,3 +20,8 @@
 	font-size: 2rem;
 	margin-top: 0;
 }
+
+.homeSpecialBG {
+	background-color: var(--background-1);
+	background-image: linear-gradient(to bottom left, var(--background-1), var(--background-3));
+}
