@@ -1,12 +1,14 @@
 import BaseNotice from "../components/BaseNotice";
+import ExternalLink from "../components/ExternalLink";
 import Notice from "../components/Notice";
+import { icons } from "./icons";
 
 interface Notice {
 	id: string;
 	PhantomNotice: any;
 
 	// 'search' notices show up on the Search page
-	type: 'search';
+	type: 'search' | 'home';
 }
 
 interface PhantomNoticeProps {
@@ -16,19 +18,46 @@ interface PhantomNoticeProps {
 const notices: Notice[] = [
 	{
 		id: 'can-customize',
+		type: 'search',
 		PhantomNotice: ({ dontShowAgain }: PhantomNoticeProps) => (
 			<BaseNotice title='You can customize Gofë!'>
 				<>
 					<p className='fs-sm opacity-08 lh-1-6'>
-						Gofë is equipped with a variety of themes and preferences.
-						Tailor your experience via the settings button found in the
-						top-right!
+						Gofë is equipped with a variety of themes and
+						preferences. Tailor your experience via the settings
+						button found in the top-right!
 					</p>
-					<button className="button sm" onClick={() => dontShowAgain()}>Thanks, got it</button>
+					<button
+						className='button sm'
+						onClick={() => dontShowAgain()}
+					>
+						Thanks, got it
+					</button>
 				</>
 			</BaseNotice>
 		),
-		type: 'search',
+	},
+	{
+		id: 'is-in-alpha',
+		type: 'home',
+		PhantomNotice: ({ dontShowAgain }: PhantomNoticeProps) => (
+			<div className='mw-30r bg radius-8 pl-1r pr-0-5r py-0-5r flex-r inline-notice'>
+				<p className='fs-sm mb-0'>
+					Gofë is currently in alpha. If you notice any bugs,{' '}
+					<ExternalLink href='https://codeberg.org/ar324/gofe/issues' className='obvious-link'>
+						let us know!
+					</ExternalLink>
+				</p>
+				<button
+					className='transparent-button complete ml-0-5r'
+					onClick={() => dontShowAgain()}
+					title="Close and don't show again"
+				>
+					<span className="sr-only">Don't show again</span>
+					<i className='icon'>{icons.x}</i>
+				</button>
+			</div>
+		),
 	},
 ];
 

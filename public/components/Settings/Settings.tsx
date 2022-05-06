@@ -29,7 +29,7 @@ const Settings = () => {
 			<button
 				onClick={() => setModal(!modal)}
 				className={classNames(
-					'settings-button',
+					'transparent-button',
 					settings.preferIcons === 'yes' && 'icon-only',
 					modal && 'open',
 				)}

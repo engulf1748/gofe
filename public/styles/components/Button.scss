@@ -46,3 +46,60 @@
 		}
 	}
 }
+
+.transparent-button {
+	width: 2rem;
+	height: 2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	background-color: var(--background);
+	color: var(--foreground);
+	cursor: pointer;
+	border-radius: 0.5rem;
+	transition: var(--d-m-1) var(--e-s);
+
+	&.complete {
+		background-color: transparent;
+		color: white;
+
+		&:hover, &:focus {
+			background-color: var(--button-hover);
+		}
+	}
+
+	& p {
+		font-size: 0.875rem;
+		font-weight: 500;
+	}
+
+	&:hover, &:focus {
+		background-color: var(--background-1);
+	}
+
+	&:focus {
+		@include mixins.ring-shadow(var(--background), var(--button));
+	}
+
+	&.icon-only {
+		padding: 0.35rem;
+	}
+
+	& .icon {
+		transition: var(--d-m-2) var(--e-s);
+	}
+
+	&.open .icon {
+		transform: rotate(-45deg);
+	}
+}
+
+.obvious-link {
+	color: currentColor;
+	text-decoration: underline;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}

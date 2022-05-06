@@ -14,6 +14,8 @@ import pkg from '../package.json';
 
 import type { ChildrenOnly } from '../types/util';
 import Settings from '../components/Settings';
+import { notices } from '../data/notices';
+import Notice from '../components/Notice';
 
 const Home = () => {
 	const settings = useSettings();
@@ -41,6 +43,13 @@ const Home = () => {
 						<div className='w-100p flex-c mw-30r px-2r'>
 							<SearchBar />
 						</div>
+					</div>
+					<div className="w-100p flex-c absolute bottom-30 z-1">
+						{
+							notices
+								.filter(e => e.type === 'home')
+								.map(e => <Notice key={e.id} {...e} />)
+						}
 					</div>
 				</div>
 				<div
