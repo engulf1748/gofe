@@ -1,0 +1,30 @@
+body.amethyst {
+	--background: #161529;
+	--background-1: #242343;
+	--background-2: #33315e;
+	--background-3: #413f78;
+	--foreground: #A599E9;
+
+	--primary: #B362FF;
+	--primary-light: #{lighten(#B362FF, 10%)};
+
+	--button: #931FFF;
+	--button-hover: #7E00F5;
+
+	--secondary: #A5FF90;
+	--secondary-light: #{lighten(#A5FF90, 10%)};
+
+	--tertiary: #FAD000;
+	--tertiary-light: #{lighten(#FAD000, 10%)};
+
+	// Reset the default Jupiter UI values just in case.
+	--ui: #161529;
+	--ui-1: #242343;
+	--ui-2: #33315e;
+	--ui-3: #413f78;
+	--text-color: #A599E9;
+	--accent: #B362FF;
+	--accent-500: #B362FF;
+	--accent-hover: #931FFF;
+	--accent-600: #931FFF;
+}

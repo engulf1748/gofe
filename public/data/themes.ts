@@ -1,8 +1,8 @@
 const themes = [
 	'modern-auto',
 	'custom',
+	'amethyst',
 	'atlantis',
-	'blood',
 	'dracula',
 	'hacker',
 	'joker',
