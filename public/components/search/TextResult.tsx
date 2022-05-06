@@ -94,12 +94,6 @@ const determinePathTrimLength = ({ host, paths, index }: URLObject, totalLength:
 	// 	return index === 0 ? ABSOLUTE_MAX - previousItem
 	// }
 
-	// If there are three paths, make the first one
-	// zero length
-	if (numItems === 4 && index === 0) {
-		return 0;
-	}
-
 	if (previousItem > DEFAULT_MAX_LENGTH) {
 		return MINIMIZED_LENGTH;
 	}
