@@ -43,6 +43,8 @@ func loggingHandler(out io.Writer, next http.Handler) http.Handler {
 			// 2022/03/27 03:03:50 /invliad/path 404
 			// 2022/03/27 03:04:00 /search 200
 			go logger.Printf("%s %d\n", r.URL.Path, lw.statusCode)
+			// for debugging
+			log.Printf("%s %d\n", r.URL.Path, lw.statusCode)
 		}
 	})
 }
